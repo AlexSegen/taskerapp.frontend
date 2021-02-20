@@ -1,14 +1,11 @@
 import React from 'react';
-import { UserOutlineIcon, TrashOutlineIcon, TagOutlineIcon, CheckIcon } from '../Icons';
-
-
-const Tool = ({children, onClick}) => {
+export const Tool = ({children, onClick}) => {
     return (
         <button type="button" className="p-2 mr-3 text-blue-500 bg-blue-100 rounded-full hover:bg-blue-200 focus:outline-none" onClick={onClick} >{children}</button>
     )
 }
 
-const TaskToolbar = ({task}) => {
+const TaskToolbar = ({task, children}) => {
     return ( 
         <div className="flex items-center justify-between px-5 py-4 bg-white border-b-2 border-gray-300">
             <div className="flex items-center justify-start p-2">
@@ -22,17 +19,14 @@ const TaskToolbar = ({task}) => {
                         ) : (
                             <>
                             <img className="block w-10 mr-3 rounded-full" src="/avatar.jpg" alt=""/>
-                            <span className="font-bold text-gray-700">Sin asignar</span>
+                            <span className="font-bold text-gray-700">Unassigned</span>
                             </>
                         )
                 }
 
             </div>
             <div className="flex items-center justify-end p-2 px-4">
-                <Tool><UserOutlineIcon className="w-8"/></Tool>
-                <Tool><TrashOutlineIcon className="w-8"/></Tool>
-                <Tool><TagOutlineIcon className="w-8"/></Tool>
-                <Tool><CheckIcon className="w-8"/></Tool>
+                {children}
             </div>
         </div>
      );

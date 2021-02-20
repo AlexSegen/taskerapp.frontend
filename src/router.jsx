@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import Tasks from './containers/Tasks';
+import Tasks from './containers/tasks/Tasks';
 import Projects from './containers/Projects';
 
 

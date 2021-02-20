@@ -6,11 +6,12 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { tasks } = useContext(TasksContext)
+    const { tasks, setComposing } = useContext(TasksContext)
 
     return (
-        <div className="relative min-h-screen bg-white">
-            <div className="w-full max-h-screen overflow-y-auto " >
+        <div className="relative bg-white">
+  
+            <div className="w-full overflow-y-auto " style={{maxHeight: "70vh"}}>
 
                 {
                     tasks && tasks.map(task => <TaskItem key={task.id} task={task}/>)
@@ -18,7 +19,7 @@ const TasksList = () => {
  
             </div>
             <div className="p-4 text-center">
-                <button className="px-10 py-3 text-white bg-blue-600 rounded-full hover:bg-blue-700">Add task</button>
+                <button onClick={() => setComposing(true)} type="button" className="button focus:outline-none bg-blue-600  hover:bg-blue-700">Add task</button>
             </div>
         </div>
      );

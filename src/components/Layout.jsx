@@ -8,10 +8,8 @@ const Layout = ({children}) => {
         <>
             <Header/>
             <div className="flex pt-4">
-                <div className="w-1/4 min-h-screen pt-16">
-                    <Sidebar/>
-                </div>
-                <div className="w-full min-h-screen pt-16 bg-gray-200">
+                <Sidebar/>
+                <div className="w-full min-h-screen pt-16 bg-white">
                     {children}
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { BellIcon, SettingsIcon, EnvelopeIcon, ChevronRightIcon} from './Icons';
 
 const Sidebar = () => {
     return ( 
-        <div className="w-full min-h-screen px-10 py-10 bg-white border-r-2 border-gray-200">
+        <div className="w-1/4 min-h-screen pt-16 px-10 py-10 bg-white border-r-2 border-gray-200">
 
             <div>
                 <img src="https://randomuser.me/api/portraits/women/9.jpg" className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
@@ -11,14 +11,14 @@ const Sidebar = () => {
                 <span className="block text-sm text-center text-gray-600">natalie.smith@gmail.com</span>
 
                 <div className="flex items-center justify-center mt-4">
-                    <button type="button" className="relative px-2 py-2 mx-2 bg-gray-300 rounded-full hover:bg-gray-200">
+                    <button type="button" className="button-sidebar hover:bg-gray-200 focus:outline-none">
                         <SettingsIcon className="w-6 text-blue-600"/>
                     </button>
-                    <button type="button" className="relative px-2 py-2 mx-2 bg-gray-300 rounded-full hover:bg-gray-200">
+                    <button type="button" className="button-sidebar hover:bg-gray-200 focus:outline-none">
                         <span className="absolute top-0 right-0 block w-5 h-5 text-sm text-white bg-red-600 rounded-full">2</span>
                         <EnvelopeIcon className="w-6 text-blue-600"/>
                     </button>
-                    <button type="button" className="relative px-2 py-2 mx-2 bg-gray-300 rounded-full hover:bg-gray-200">
+                    <button type="button" className="button-sidebar hover:bg-gray-200 focus:outline-none">
                         <span className="absolute top-0 right-0 block w-5 h-5 text-sm text-white bg-red-600 rounded-full">5</span>
                         <BellIcon className="w-6 text-blue-600"/>
                     </button>

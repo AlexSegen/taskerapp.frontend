@@ -13,15 +13,28 @@ const TasksContextProvider = ({children}) => {
 
     const [users, setUsers] = useState([])
 
+    const [composing, setComposing] = useState(false);
+
     useEffect(() => {
         setTasks(Tasks)
         setComments(Comments)
         setUsers(Users)
     }, [])
 
+    useEffect(() => {
+        if(selected)
+            setComposing(false)
+
+    }, [selected])
+
+    useEffect(() => {
+        if(composing)
+            setSelected(null)
+    }, [composing])
+
 
     return (
-        <TasksContext.Provider value={{tasks, comments, users, selected, setSelected}}>
+        <TasksContext.Provider value={{tasks, comments, users, selected, setSelected, composing, setComposing}}>
             {children}
         </TasksContext.Provider>
     )
