@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { TasksContext} from '../../context/TasksContext'
 
@@ -6,7 +7,18 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { tasks, setComposing } = useContext(TasksContext)
+    const { getTasks, tasks, setComposing } = useContext(TasksContext)
+
+    const history = useHistory()
+
+    const handleAddTask = () => {
+        setComposing(true);
+        history.push("/")
+    }
+
+    useEffect(() => {
+        getTasks()
+    }, [])
 
     return (
         <div className="relative bg-white">
@@ -19,7 +31,7 @@ const TasksList = () => {
  
             </div>
             <div className="p-4 text-center">
-                <button onClick={() => setComposing(true)} type="button" className="button focus:outline-none bg-blue-600  hover:bg-blue-700">Add task</button>
+                <button onClick={() => handleAddTask()} type="button" className="button focus:outline-none bg-blue-600  hover:bg-blue-700">Add task</button>
             </div>
         </div>
      );

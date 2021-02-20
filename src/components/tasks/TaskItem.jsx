@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { TasksContext } from '../../context/TasksContext';
-import { formatDate } from '../../helpers/utils'
+import { useHistory } from 'react-router-dom';
 
 import { CheckIcon } from '../Icons';
+import { formatDate } from '../../helpers/utils'
+import { TasksContext } from '../../context/TasksContext';
 
 
 const TaskItem = ({task}) => {
+
+    let history = useHistory();
 
     const {selected, setSelected } = useContext(TasksContext);
 
@@ -19,7 +22,7 @@ const TaskItem = ({task}) => {
                 </button>
             </div>
             <div className="w-full p-2 ">
-                <button onClick={() => setSelected(task)} type="button" className="block w-full font-bold text-left text-gray-700 hover:text-gray-600 focus:outline-none">
+                <button onClick={() => history.push("/task/" + task.id)} type="button" className="block w-full font-bold text-left text-gray-700 hover:text-gray-600 focus:outline-none">
                     {task.title}
                     <span className="block font-normal text-gray-500">{formatDate(task.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                 </button>

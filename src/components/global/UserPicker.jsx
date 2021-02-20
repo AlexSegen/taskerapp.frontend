@@ -15,8 +15,8 @@ const UserPicker = ({onSelect, selected }) => {
     }
 
     useEffect(() => {
-        onSelect(user);
-    }, [user])
+        setUser(selected)
+    }, [selected])
 
     return (
         <div className="relative max-w-sm">
@@ -26,12 +26,12 @@ const UserPicker = ({onSelect, selected }) => {
                         (
                             <>
                             <img className="block w-8 mr-3 rounded-full" src={user.avatar} alt=""/> 
-                            <span> {user.first_name} {user.last_name} </span> <span onClick={() => setUser(null)} role="button" className="text-sm ml-2 text-gray-500 font-normal">(remove)</span>
+                            <span> {user.first_name} {user.last_name} </span> <span onClick={() => handleSelect(null)} role="button" className="text-sm ml-2 text-gray-500 font-normal">(remove)</span>
                             </>
                         ) : (
                             <>
                             <img className="block w-8 mr-3 rounded-full" src="/avatar.jpg" alt=""/>
-                            <span>Asign user</span>
+                            <span>Unassigned</span>
                             </>
                         )
                 }

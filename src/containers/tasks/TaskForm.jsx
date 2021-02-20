@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { useForm } from '../../hooks/useForm';
+import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon } from '../../components/Icons';
-import UserPicker from '../../components/global/UserPicker';
-import { TasksContext } from '../../context/TasksContext';
 
 const initialState = {
     "id": 0,
@@ -17,11 +16,11 @@ const initialState = {
     "tags": []
 }
 
-const TaskForm = () => {
+const TaskForm = ({id}) => {
 
-    const { setComposing } = useContext(TasksContext);
+    const { setTask, setComposing, selected } = useContext(TasksContext);
 
-    const { form, title, content, setForm, handleChange } = useForm(initialState);
+    const { form, project, title, content, setForm, handleChange } = useForm(initialState);
 
     const [tag, setTag] = useState("");
 
@@ -48,15 +47,16 @@ const TaskForm = () => {
         setTag("")
     }
 
-
     const handleProject = (e) => {
         const { value } = e.target;
-        setForm({...form, project: {...form.project, id: value}})
+        form.project.id = value;
+        setForm({...form})
     }
 
     const submit = e => {
         e.preventDefault();
         console.log("form", form)
+        setTask(form);
     }
 
     const onSelect = data => {
@@ -68,9 +68,17 @@ const TaskForm = () => {
         setComposing(false);
     }
 
+    useEffect(() => {
+        if (selected) { setForm({...selected}) }
+    }, [selected])
+
+    useEffect(() => {
+        if (!id) { setForm(initialState) }
+    }, [id])
+
     return ( 
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
-            <TaskToolbar task={form}>
+            <TaskToolbar task={form} onSelect={onSelect}>
                 <Tool onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
                 <Tool onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
             </TaskToolbar>
@@ -79,8 +87,6 @@ const TaskForm = () => {
                 <h1 className="text-gray-700 text-2xl font-bold mb-5">Create new task</h1>
 
                 <form className="w-full max-w-xl" onSubmit={submit}>
-
-                    <UserPicker onSelect={onSelect} selected={form.assigned} />
 
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Title</label>
@@ -98,9 +104,10 @@ const TaskForm = () => {
                         <span className="text-sm text-red-400 block px-4"></span>
                     </div>
 
+
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Select project</label>
-                        <select value={form.project.id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
+                        <select value={project.id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
                             <option value="0">--</option>
                             <option value="1">Marketing</option>
                             <option value="2">Design</option>
@@ -110,6 +117,8 @@ const TaskForm = () => {
                         </select>
                         <span className="text-sm text-red-400 block px-4"></span>
                     </div>
+
+       
 
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Tags</label>

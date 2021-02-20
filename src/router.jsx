@@ -17,6 +17,9 @@ const RouterRoot = () => {
                 <Route exact path="/">
                     <Tasks />
                 </Route>
+                <Route path="/task/:id">
+                    <Tasks />
+                </Route>
                 <Route exact path="/projects">
                     <Projects />
                 </Route>

@@ -8,7 +8,7 @@
 /* General */
 
 .button {
-  @apply px-10 py-3 text-white rounded-full
+  @apply px-10 py-3 text-white rounded-full font-bold
 }
 
 

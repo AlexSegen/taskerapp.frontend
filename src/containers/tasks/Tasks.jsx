@@ -1,14 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
+import TaskForm from './TaskForm';
 import Layout from '../../components/Layout';
-import TaskDetails from '../../components/tasks/TaskDetails';
-import TasksFilter from '../../components/tasks/TasksFilter';
 import TasksList from '../../components/tasks/TasksList';
 import { TasksContext } from '../../context/TasksContext';
-import TaskForm from './TaskForm';
+import TaskDetails from '../../components/tasks/TaskDetails';
+import TasksFilter from '../../components/tasks/TasksFilter';
 
 const Tasks = () => {
-    const { selected, composing } = useContext(TasksContext);
+
+    let { id } = useParams();
+
+    const { getTask, selected, composing } = useContext(TasksContext);
+
+    useEffect(() => {
+        if (id) { getTask(id) }
+    }, [id])
 
     return ( 
         <Layout>
@@ -22,12 +30,10 @@ const Tasks = () => {
                 </div>
                 <div className="w-full  bg-white">
 
-                    { composing && <TaskForm/> }
-
-                    
+                    { composing && <TaskForm id={id}/> }
 
                     {!composing && selected && (
-                        <TaskDetails task={selected} />
+                        <TaskDetails />
                     )}
                     
                     {!composing && !selected && (

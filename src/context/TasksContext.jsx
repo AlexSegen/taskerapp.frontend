@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Comments, Tasks, Users } from '../services/mockup';
+import { Comments, Users } from '../services/mockup';
+import { getAll, getSingle, createTask, removeTask } from '../services/task.services';
 
 export const TasksContext = createContext()
 
@@ -15,8 +16,33 @@ const TasksContextProvider = ({children}) => {
 
     const [composing, setComposing] = useState(false);
 
+    const setTask = task => {
+        createTask(task).then(data => {
+            setSelected(data)
+            setTasks([...tasks, data]);
+        })
+    }
+
+    const getTasks = () => {
+        getAll().then(data => {
+            setTasks(data)
+        })
+    }
+
+    const getTask = id => {
+        getSingle(id).then(data => {
+            setSelected(data)
+        });
+    }
+
+    const deleteTask = id => {
+        removeTask(id).then(() => {
+            setTasks([...tasks.filter(t => t.id != id)]);
+            setSelected(null);
+        });
+    }
+
     useEffect(() => {
-        setTasks(Tasks)
         setComments(Comments)
         setUsers(Users)
     }, [])
@@ -34,7 +60,7 @@ const TasksContextProvider = ({children}) => {
 
 
     return (
-        <TasksContext.Provider value={{tasks, comments, users, selected, setSelected, composing, setComposing}}>
+        <TasksContext.Provider value={{getTasks, setTask, getTask, deleteTask, tasks, comments, users, selected, setSelected, composing, setComposing}}>
             {children}
         </TasksContext.Provider>
     )
