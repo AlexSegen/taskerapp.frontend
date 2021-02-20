@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+
+import AuthContextProvider from './context/AuthContext';
+
 //Services
 import ApiService from './services/api.service'
 import { TokenService } from './services/storage.service'
@@ -15,9 +18,9 @@ if (TokenService.getToken()) {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
+  <AuthContextProvider>
     <App />
-  </React.StrictMode>,
+  </AuthContextProvider>,
   document.getElementById('root')
 );
 

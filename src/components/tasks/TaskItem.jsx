@@ -17,7 +17,7 @@ const TaskItem = ({task}) => {
     return ( 
         <div className={`${baseItem} ${selected && selected._id === task._id ? 'bg-gray-200' : 'bg-white'}`}>
             <div className="w-auto p-2">
-                <button className={`${baseButton} ${task.done ? 'bg-blue-600 border-blue-600 hover:bg-blue-700  hover:border-blue-700' : 'border-gray-500 text-gray-500 hover:text-blue-500 hover:border-blue-500'}`}>
+                <button className={`${baseButton} ${task.completed ? 'bg-blue-600 border-blue-600 hover:bg-blue-700  hover:border-blue-700' : 'border-gray-500 text-gray-500 hover:text-blue-500 hover:border-blue-500'}`}>
                     <CheckIcon className="w-6"/>
                 </button>
             </div>

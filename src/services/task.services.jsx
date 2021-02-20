@@ -49,6 +49,17 @@ export const updateTask = async (task) => {
     }
 }
 
+export const toggleTask = async ({ _id }) => {
+    try {
+        const response = await ApiService.post("/tasks/toggle/" + _id);
+        const data = await response.data
+        return data;
+        
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 export const createTask = async (task) => {
     try {
         

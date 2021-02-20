@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { TasksContext } from '../../context/TasksContext';
 
-const UserPicker = ({onSelect, selected }) => {
+const UserPicker = ({onSelect, selected, disabled }) => {
 
-    const { users } = useContext(TasksContext);
+    const { users, getUsers } = useContext(TasksContext);
     const [user, setUser] = useState(selected);
 
     const [toggle, setToggle] = useState(false);
@@ -18,15 +18,20 @@ const UserPicker = ({onSelect, selected }) => {
         setUser(selected)
     }, [selected])
 
+    useEffect(() =>{
+        getUsers();
+    }, [])
+
     return (
-        <div className="relative max-w-sm">
-            <button type="button" onClick={() => setToggle(!toggle) } className="text-gray-600 hover:text-gray-700 px-5 py-2 font-bold focus:text-gray-700 focus:outline-none text-base flex items-center justify-start">
+        <div className="relative max-w-md">
+            <button disabled={disabled} type="button" onClick={() => setToggle(!toggle) } className="text-gray-600 hover:text-gray-700 px-5 py-2 font-bold focus:text-gray-700 focus:outline-none text-base flex items-center justify-start">
             {
                     user ? 
                         (
                             <>
                             <img className="block w-8 mr-3 rounded-full" src={user.avatar} alt=""/> 
-                            <span> {user.first_name} {user.last_name} </span> <span onClick={() => handleSelect(null)} role="button" className="text-sm ml-2 text-gray-500 font-normal">(remove)</span>
+                            <span> {user.first_name} {user.last_name} </span> 
+                            { !disabled && <span onClick={() => handleSelect(null)} role="button" className="text-sm ml-2 text-gray-500 font-normal">(remove)</span> }
                             </>
                         ) : (
                             <>

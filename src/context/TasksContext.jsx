@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Comments, Users } from '../services/mockup';
-import { getAll, getSingle, createTask, updateTask, removeTask } from '../services/task.services';
+import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
+
+import { getAll as getAllusers } from '../services/user.services';
 
 export const TasksContext = createContext()
 
@@ -15,6 +17,12 @@ const TasksContextProvider = ({children}) => {
     const [users, setUsers] = useState([])
 
     const [composing, setComposing] = useState(false);
+
+    const getUsers = () => {
+        getAllusers().then(data => {
+            setUsers(data)
+        })
+    }
 
     const setTask = task => {
         createTask(task).then(data => {
@@ -46,12 +54,20 @@ const TasksContextProvider = ({children}) => {
         updateTask(task).then(data => {
             tasks[tasks.findIndex(t => t._id == data._id)] = data;
             setTasks([...tasks])
+            setSelected(data);
+        });
+    }
+
+    const toggleTaskStatus = task => {
+        toggleTask(task).then(data => {
+            tasks[tasks.findIndex(t => t._id == data._id)] = data;
+            setTasks([...tasks])
+            setSelected(data);
         });
     }
 
     useEffect(() => {
         setComments(Comments)
-        setUsers(Users)
     }, [])
 
     useEffect(() => {
@@ -67,7 +83,7 @@ const TasksContextProvider = ({children}) => {
 
 
     return (
-        <TasksContext.Provider value={{getTasks, setTask, getTask, editTask, deleteTask, tasks, comments, users, selected, setSelected, composing, setComposing}}>
+        <TasksContext.Provider value={{getUsers, getTasks, setTask, getTask, editTask, toggleTaskStatus, deleteTask, tasks, comments, users, selected, setSelected, composing, setComposing}}>
             {children}
         </TasksContext.Provider>
     )
