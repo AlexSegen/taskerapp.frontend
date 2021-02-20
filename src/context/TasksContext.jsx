@@ -37,16 +37,14 @@ const TasksContextProvider = ({children}) => {
 
     const deleteTask = id => {
         removeTask(id).then(() => {
-            setTasks([...tasks.filter(t => t.id != id)]);
+            setTasks([...tasks.filter(t => t._id != id)]);
             setSelected(null);
         });
     }
 
     const editTask = task => {
         updateTask(task).then(data => {
-            console.log('updateTask', tasks[tasks.findIndex(t => t.id == data.id)])
-            console.log('updateTask', data)
-            tasks[tasks.findIndex(t => t.id == data.id)] = data;
+            tasks[tasks.findIndex(t => t._id == data._id)] = data;
             setTasks([...tasks])
         });
     }

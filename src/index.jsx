@@ -4,6 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+//Services
+import ApiService from './services/api.service'
+import { TokenService } from './services/storage.service'
+
+ApiService.init(process.env.REACT_APP_ROOT_API)
+// If token exists set header
+if (TokenService.getToken()) {
+  ApiService.setHeader()
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

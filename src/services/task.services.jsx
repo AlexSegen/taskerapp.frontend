@@ -1,55 +1,64 @@
-import { Tasks, Projects } from './mockup';
+import ApiService from './api.service';
 
-import { randomString } from '../helpers/utils';
+export const getAll = async () => {
 
-export const getAll = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(Tasks)
-        }, 1000);
-    })
-}
-
-export const getSingle = id => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            
-            const task = Tasks.find(task => task.id == id)
-            resolve(task)
-        }, 1000);
-    })
-}
-
-export const removeTask = id => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({ id })
-        }, 1000);
-    })
-}
-
-
-export const updateTask = task => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(task)
-        }, 1000);
-    })
-}
-
-export const createTask = task => {
-
-    task.id = randomString();
-
-    const project = Projects.find(item => item.id == task.project.id);
-
-    if (project) {
-        task.project = project || Projects.find(item => item.id == 5)
+    try {
+        const response = await ApiService.get("/tasks");
+        const data = await response.data
+        return data;
+        
+    } catch (error) {
+        throw new Error(error)
     }
+    
+}
 
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(task)
-        }, 1000);
-    })
+export const getSingle = async (id) => {
+    try {
+        const response = await ApiService.get("/tasks/" + id);
+        const data = await response.data
+        return data;
+        
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export const removeTask = async (id) => {
+    try {
+        const response = await ApiService.delete("/tasks/" + id);
+        const data = await response.data
+        return { id, ...data };
+        
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+
+export const updateTask = async (task) => {
+    try {
+        task.project = "60313f45bf737265b089ef1b";
+        task.asignated = task.asignated ? task.asignated._id : null;
+        const response = await ApiService.put("/tasks/" + task._id, task);
+        const data = await response.data
+        return data;
+        
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export const createTask = async (task) => {
+    try {
+        
+        task.project = task.project.id;
+
+        const response = await ApiService.post("/tasks", task);
+        const data = await response.data
+        return data;
+        
+    } catch (error) {
+        throw new Error(error)
+    }
 }

@@ -26,7 +26,7 @@ const TasksList = () => {
             <div className="w-full overflow-y-auto " style={{maxHeight: "70vh"}}>
 
                 {
-                    tasks && tasks.map(task => <TaskItem key={task.id} task={task}/>)
+                    tasks && tasks.map(task => <TaskItem key={task._id} task={task}/>)
                 }
  
             </div>

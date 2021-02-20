@@ -1,14 +1,20 @@
 import React from 'react';
+import { useAuth } from '../hooks/useAuth';
 import { BellIcon, SettingsIcon, EnvelopeIcon, ChevronRightIcon} from './Icons';
 
 const Sidebar = () => {
+
+    const { user } = useAuth()
+
+    const { first_name, last_name, email, avatar } = user;
+
     return ( 
         <div className="w-1/4 min-h-screen pt-16 px-10 py-10 bg-white border-r-2 border-gray-200">
 
             <div>
-                <img src="https://randomuser.me/api/portraits/women/9.jpg" className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
-                <span className="block text-base text-xl font-bold text-center">Natalie Smith</span>
-                <span className="block text-sm text-center text-gray-600">natalie.smith@gmail.com</span>
+                <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
+                <span className="block text-base text-xl font-bold text-center">{first_name} {last_name}</span>
+                <span className="block text-sm text-center text-gray-600">{email}</span>
 
                 <div className="flex items-center justify-center mt-4">
                     <button type="button" className="button-sidebar hover:bg-gray-200 focus:outline-none">

@@ -45,7 +45,7 @@ const UserPicker = ({onSelect, selected }) => {
 
                             {
                                 users.map(u => (
-                                    <div key={u.id} className="flex items-center justify-start mb-2 cursor-pointer" onClick={() => handleSelect(u)}>
+                                    <div key={u._id} className="flex items-center justify-start mb-2 cursor-pointer" onClick={() => handleSelect(u)}>
                                         <img className="block w-6 mr-3 rounded-full" src={u.avatar} alt=""/> 
                                         <span className="text-gray-600 text-sm"> {u.first_name} {u.last_name} </span>
                                     </div>

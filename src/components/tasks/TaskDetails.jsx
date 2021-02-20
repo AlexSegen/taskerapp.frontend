@@ -11,7 +11,7 @@ const TaskDetails = () => {
     const { selected, setComposing, editTask, deleteTask } = useContext(TasksContext);
 
     const onSelect = (data) => {
-      selected.author = data;
+      selected.assigned = data;
       editTask(selected);
     }
 
@@ -20,7 +20,7 @@ const TaskDetails = () => {
           <TaskToolbar task={selected} onSelect={onSelect}>
                 <Tool><CheckIcon className="w-8"/></Tool>
                 <Tool onClick={() => setComposing(true)} ><PencilOutlineIcon className="w-8"/></Tool>
-                <Tool onClick={() => deleteTask(selected.id)} ><TrashOutlineIcon className="w-8"/></Tool>
+                <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
           </TaskToolbar>
           <div className="w-full px-10 py-10" >
               <h1 className="text-3xl font-bold text-gray-900">{selected.title}</h1>

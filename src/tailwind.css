@@ -17,3 +17,7 @@
 .button-sidebar {
   @apply relative px-2 py-2 mx-2 bg-gray-300 rounded-full
 }
+
+.alert-danger {
+  @apply text-center py-2 my-2 px-5 text-red-600 bg-red-300
+}
