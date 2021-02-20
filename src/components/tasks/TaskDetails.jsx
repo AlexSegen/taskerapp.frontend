@@ -8,11 +8,16 @@ import { TasksContext } from '../../context/TasksContext';
 
 const TaskDetails = () => {
 
-    const { selected, setComposing, deleteTask } = useContext(TasksContext);
+    const { selected, setComposing, editTask, deleteTask } = useContext(TasksContext);
+
+    const onSelect = (data) => {
+      selected.author = data;
+      editTask(selected);
+    }
 
     return ( 
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
-          <TaskToolbar task={selected}>
+          <TaskToolbar task={selected} onSelect={onSelect}>
                 <Tool><CheckIcon className="w-8"/></Tool>
                 <Tool onClick={() => setComposing(true)} ><PencilOutlineIcon className="w-8"/></Tool>
                 <Tool onClick={() => deleteTask(selected.id)} ><TrashOutlineIcon className="w-8"/></Tool>

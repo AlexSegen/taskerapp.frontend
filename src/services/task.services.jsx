@@ -28,6 +28,15 @@ export const removeTask = id => {
     })
 }
 
+
+export const updateTask = task => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(task)
+        }, 1000);
+    })
+}
+
 export const createTask = task => {
 
     task.id = randomString();

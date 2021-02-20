@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Comments, Users } from '../services/mockup';
-import { getAll, getSingle, createTask, removeTask } from '../services/task.services';
+import { getAll, getSingle, createTask, updateTask, removeTask } from '../services/task.services';
 
 export const TasksContext = createContext()
 
@@ -42,6 +42,15 @@ const TasksContextProvider = ({children}) => {
         });
     }
 
+    const editTask = task => {
+        updateTask(task).then(data => {
+            console.log('updateTask', tasks[tasks.findIndex(t => t.id == data.id)])
+            console.log('updateTask', data)
+            tasks[tasks.findIndex(t => t.id == data.id)] = data;
+            setTasks([...tasks])
+        });
+    }
+
     useEffect(() => {
         setComments(Comments)
         setUsers(Users)
@@ -60,7 +69,7 @@ const TasksContextProvider = ({children}) => {
 
 
     return (
-        <TasksContext.Provider value={{getTasks, setTask, getTask, deleteTask, tasks, comments, users, selected, setSelected, composing, setComposing}}>
+        <TasksContext.Provider value={{getTasks, setTask, getTask, editTask, deleteTask, tasks, comments, users, selected, setSelected, composing, setComposing}}>
             {children}
         </TasksContext.Provider>
     )
