@@ -8,6 +8,15 @@ import { TasksContext } from '../../context/TasksContext';
 import TaskDetails from '../../components/tasks/TaskDetails';
 import TasksFilter from '../../components/tasks/TasksFilter';
 
+
+const SelectTask = () => {
+    return (
+        <div className="flex items-center justify-center" style={{minHeight: "50vh"}}>
+            <p className="text-gray-600">Select one task</p>
+        </div>
+    )
+}
+
 const Tasks = () => {
 
     let { id } = useParams();
@@ -32,15 +41,9 @@ const Tasks = () => {
 
                     { composing && <TaskForm id={id}/> }
 
-                    {!composing && selected && (
-                        <TaskDetails />
-                    )}
-                    
-                    {!composing && !selected && (
-                        <div className="flex items-center justify-center" style={{minHeight: "50vh"}}>
-                            <p className="text-gray-600">Select one task</p>
-                        </div>
-                    )}
+                    { !composing && selected && ( <TaskDetails /> ) }
+
+                    { !composing && !selected && ( <SelectTask/>) }
                     
                 </div>
             </div>

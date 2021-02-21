@@ -4,23 +4,27 @@ import { useForm } from '../../hooks/useForm';
 import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon } from '../../components/Icons';
+import { useHistory } from 'react-router-dom';
 
 const initialState = {
-    "id": 0,
+    "_id": 0,
     "title": "",
     "content": "",
     "project": {
-        "id": 0
+        "_id": 0
     },
+    "completed": false,
     "assigned": null,
     "tags": []
 }
 
 const TaskForm = ({id}) => {
 
-    const { setTask, setComposing, selected } = useContext(TasksContext);
+    const history = useHistory();
 
-    const { form, project, title, content, setForm, handleChange } = useForm(initialState);
+    const { setTask, setComposing, getProjects, projects, selected } = useContext(TasksContext);
+
+    const { form, title, content, setForm, handleChange } = useForm(initialState);
 
     const [tag, setTag] = useState("");
 
@@ -49,13 +53,13 @@ const TaskForm = ({id}) => {
 
     const handleProject = (e) => {
         const { value } = e.target;
-        form.project.id = value;
+        form.project._id = value;
+        console.log("value", value)
         setForm({...form})
     }
 
     const submit = e => {
         e.preventDefault();
-        console.log("form", form)
         setTask(form);
     }
 
@@ -66,15 +70,23 @@ const TaskForm = ({id}) => {
     const handleClose = () => {
         setForm(initialState);
         setComposing(false);
+        history.push("/")
     }
 
     useEffect(() => {
-        if (selected) { setForm({...selected}) }
+        if (selected && selected._id != 0) { 
+            setForm({...selected})
+            history.push("/task/" + selected._id)
+        }
     }, [selected])
 
     useEffect(() => {
         if (!id) { setForm(initialState) }
     }, [id])
+
+    useEffect(() => {
+        getProjects()
+    }, [])
 
     return ( 
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
@@ -105,18 +117,21 @@ const TaskForm = ({id}) => {
                     </div>
 
 
+{
+    form.project && (
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Select project</label>
-                        <select value={project.id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
+                        <select value={form.project._id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
                             <option value="0">--</option>
-                            <option value="1">Marketing</option>
-                            <option value="2">Design</option>
-                            <option value="60313f45bf737265b089ef1b">Development</option>
-                            <option value="4">Management</option>
-                            <option value="5">Other</option>
+                            {
+                                projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
+                            }
                         </select>
                         <span className="text-sm text-red-400 block px-4"></span>
                     </div>
+    )
+}
+
 
        
 

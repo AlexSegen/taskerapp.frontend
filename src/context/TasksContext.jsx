@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Comments, Users } from '../services/mockup';
-import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
+import { Comments } from '../services/mockup';
 
 import { getAll as getAllusers } from '../services/user.services';
+import { getAll as getAllProjects } from '../services/project.services';
+import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
 
 export const TasksContext = createContext()
 
@@ -11,6 +12,8 @@ const TasksContextProvider = ({children}) => {
     const [tasks, setTasks] = useState([]);
 
     const [selected, setSelected] = useState(null);
+
+    const [projects, setProjects] = useState([]);
 
     const [comments, setComments] = useState([]);
 
@@ -24,10 +27,16 @@ const TasksContextProvider = ({children}) => {
         })
     }
 
+    const getProjects = () => {
+        getAllProjects().then(data => {
+            setProjects(data)
+        })
+    }
+
     const setTask = task => {
         createTask(task).then(data => {
             setSelected(data)
-            setTasks([...tasks, data]);
+            setTasks([data, ...tasks]);
         })
     }
 
@@ -52,9 +61,10 @@ const TasksContextProvider = ({children}) => {
 
     const editTask = task => {
         updateTask(task).then(data => {
-            tasks[tasks.findIndex(t => t._id == data._id)] = data;
+            console.log("return", data)
+            /* tasks[tasks.findIndex(t => t._id == data._id)] = data;
             setTasks([...tasks])
-            setSelected(data);
+            setSelected(data); */
         });
     }
 
@@ -81,9 +91,10 @@ const TasksContextProvider = ({children}) => {
             setSelected(null)
     }, [composing])
 
+    const values = {getUsers, getProjects, getTasks, setTask, getTask, editTask, toggleTaskStatus, deleteTask, tasks, comments, projects, users, selected, setSelected, composing, setComposing}
 
     return (
-        <TasksContext.Provider value={{getUsers, getTasks, setTask, getTask, editTask, toggleTaskStatus, deleteTask, tasks, comments, users, selected, setSelected, composing, setComposing}}>
+        <TasksContext.Provider value={values}>
             {children}
         </TasksContext.Provider>
     )

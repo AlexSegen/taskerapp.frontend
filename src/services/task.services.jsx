@@ -3,7 +3,7 @@ import ApiService from './api.service';
 export const getAll = async () => {
 
     try {
-        const response = await ApiService.get("/tasks");
+        const response = await ApiService.get("/tasks?sort=-createdAt");
         const data = await response.data
         return data;
         
@@ -35,11 +35,14 @@ export const removeTask = async (id) => {
     }
 }
 
-
 export const updateTask = async (task) => {
     try {
-        task.project = "60313f45bf737265b089ef1b";
+        console.log('task', task)
+        task.project = task.project._id;
         task.asignated = task.asignated ? task.asignated._id : null;
+
+        console.log(task)
+
         const response = await ApiService.put("/tasks/" + task._id, task);
         const data = await response.data
         return data;

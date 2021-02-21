@@ -1,6 +1,6 @@
 import React from 'react';
 import TasksContextProvider from './context/TasksContext';
-
+import CommentsContextProvider from './context/CommentsContext';
 
 import Router from './router';
 
@@ -8,7 +8,9 @@ function App() {
   return (
     <div>
         <TasksContextProvider>
-          <Router/>
+          <CommentsContextProvider>
+            <Router/>
+          </CommentsContextProvider>
         </TasksContextProvider>
     </div>
   );
