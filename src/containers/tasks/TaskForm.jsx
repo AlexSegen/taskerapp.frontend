@@ -22,7 +22,7 @@ const TaskForm = ({id}) => {
 
     const history = useHistory();
 
-    const { setTask, setComposing, getProjects, projects, selected } = useContext(TasksContext);
+    const { setTask, editTask, setComposing, getProjects, projects, selected } = useContext(TasksContext);
 
     const { form, title, content, setForm, handleChange } = useForm(initialState);
 
@@ -60,7 +60,7 @@ const TaskForm = ({id}) => {
 
     const submit = e => {
         e.preventDefault();
-        setTask(form);
+        form._id != 0 ? editTask(form) : setTask(form);
     }
 
     const onSelect = data => {
@@ -96,7 +96,7 @@ const TaskForm = ({id}) => {
             </TaskToolbar>
             <div className="w-full px-10 py-10">
 
-                <h1 className="text-gray-700 text-2xl font-bold mb-5">Create new task</h1>
+                <h1 className="text-gray-700 text-2xl font-bold mb-5"> { id ? 'Edit':'Create new' } task</h1>
 
                 <form className="w-full max-w-xl" onSubmit={submit}>
 

@@ -7,6 +7,9 @@ export default {
         const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regex.test(String(str).toLowerCase());
     },
+    isEmpty(str) {
+        return str & str.toString().trim().length == 0;
+    },
     password: {
         Length(str) {
             //must contain at least 8 character length

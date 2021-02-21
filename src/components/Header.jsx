@@ -21,7 +21,7 @@ const Header = () => {
                 </div>
             </div>
             <div className="w-full px-8">
-                <select className="px-3 py-2 text-lg font-bold cursor-pointer">
+                <select className="px-3 py-2 text-lg font-bold cursor-pointer border-2 border-white">
                     <option value="">All tasks</option>
                     <option value="">Pending</option>
                     <option value="">Completed</option>

@@ -61,10 +61,9 @@ const TasksContextProvider = ({children}) => {
 
     const editTask = task => {
         updateTask(task).then(data => {
-            console.log("return", data)
-            /* tasks[tasks.findIndex(t => t._id == data._id)] = data;
+            tasks[tasks.findIndex(t => t._id == data._id)] = data;
             setTasks([...tasks])
-            setSelected(data); */
+            setSelected(data);
         });
     }
 

@@ -24,8 +24,8 @@ const LoginPage = () => {
             return;
         }
 
-        if(validators.isEmpty(form.password)) {
-            setInvalidPayload('Your password is empty.');
+        if(!validators.password.Length(form.password)) {
+            setInvalidPayload('Your password must be at least 8 character length.');
             return;
         }
 

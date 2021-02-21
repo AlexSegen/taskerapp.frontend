@@ -12,13 +12,13 @@ const TaskComments = () => {
     const { getComments, comments, postComment, setContent, content }  = useContext(CommentsContext);
 
     const handlePostComment = () => {
-        if (content && content.trim().length > 0)
+        if (content && !content.trim().length)
             return;
         postComment({ content, articleId: id})
     }
 
     useEffect(() => {
-        getComments(id)
+        if(id){ getComments(id) }
         setContent("")
     }, [id])
 

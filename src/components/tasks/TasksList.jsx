@@ -7,11 +7,12 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { getTasks, tasks, setComposing } = useContext(TasksContext)
+    const { getTasks, tasks, setComposing, setSelected } = useContext(TasksContext)
 
     const history = useHistory()
 
     const handleAddTask = () => {
+        setSelected(null);
         setComposing(true);
         history.push("/")
     }
