@@ -20,14 +20,15 @@ const UserPicker = ({onSelect, selected, disabled }) => {
 
     return (
         <div className="relative max-w-md">
-            <button disabled={disabled} type="button" onClick={() => setToggle(!toggle) } className="text-gray-600 hover:text-gray-700 px-5 py-2 font-bold focus:text-gray-700 focus:outline-none text-base flex items-center justify-start">
+            <button disabled={disabled} type="button" onClick={() => setToggle(!toggle) } 
+            className="flex items-center justify-start px-5 py-2 text-base font-bold text-gray-600 hover:text-gray-700 hover:bg-blue-100 focus:text-gray-700 focus:outline-none">
             {
                     user ? 
                         (
                             <>
                             <img className="block w-8 mr-3 rounded-full" src={user.avatar} alt=""/> 
                             <span> {user.first_name} {user.last_name} </span> 
-                            { !disabled && <span onClick={() => handleSelect(null)} role="button" className="text-sm ml-2 text-gray-500 font-normal">(remove)</span> }
+                            { !disabled && <span onClick={() => handleSelect(null)} role="button" className="ml-2 text-sm font-normal text-gray-500">(remove)</span> }
                             </>
                         ) : (
                             <>
@@ -40,15 +41,15 @@ const UserPicker = ({onSelect, selected, disabled }) => {
 
             {
                 toggle && (
-                    <div className="p-4  rounded-lg absolute bg-white z-10 left-0 top-20 shadow-md">
-                        <input className="bg-gray-100 px-5 py-3 w-full mb-4 text-sm" placeholder="Search user..." type="text"/>
+                    <div className="absolute left-0 z-10 p-4 bg-white rounded-lg shadow-md top-20">
+                        <input className="w-full px-5 py-3 mb-4 text-sm bg-gray-100" placeholder="Search user..." type="text"/>
                         <div className="overflow-y-auto" style={{maxHeight: "180px"}}>
 
                             {
                                 users.map(u => (
                                     <div key={u._id} className="flex items-center justify-start mb-2 cursor-pointer" onClick={() => handleSelect(u)}>
                                         <img className="block w-6 mr-3 rounded-full" src={u.avatar} alt=""/> 
-                                        <span className="text-gray-600 text-sm"> {u.first_name} {u.last_name} </span>
+                                        <span className="text-sm text-gray-600"> {u.first_name} {u.last_name} </span>
                                     </div>
                                 ))
                             }
