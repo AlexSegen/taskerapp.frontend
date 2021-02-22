@@ -10,7 +10,7 @@ const TaskComments = () => {
 
     const { id } = useParams();
 
-    const {content, setContent, getComments, comments, postComment, loadingComments, loadingComment, errorComment, errorComments }  = useContext(CommentsContext);
+    const {content, editMode, setContent, getComments, comments, postComment, loadingComments, loadingComment, errorComment, errorComments }  = useContext(CommentsContext);
 
     const handlePostComment = () => {
         if (content && !content.trim().length)
@@ -29,7 +29,7 @@ const TaskComments = () => {
             <div className="flex items-center">
                 
                 <input 
-                disabled={loadingComment || loadingComments}
+                disabled={loadingComment || loadingComments || editMode}
                 onChange={e => setContent(e.target.value)}
                 value={content}
                 className="w-full h-20 px-10 py-4 bg-gray-100 focus:outline-none" 
@@ -38,8 +38,8 @@ const TaskComments = () => {
                 
                 <button 
                 onClick={() => handlePostComment()}
-                disabled={loadingComment || loadingComments}
-                type="button"  className="button h-20 px-6 py-4 focus:outline-none rounded-none bg-blue-500 hover:bg-blue-600">
+                disabled={loadingComment || loadingComments || editMode}
+                type="button"  className="h-20 px-6 py-4 bg-blue-500 rounded-none button focus:outline-none hover:bg-blue-600">
                     <ChevronRightIcon className="w-10"/>
                 
                 </button>

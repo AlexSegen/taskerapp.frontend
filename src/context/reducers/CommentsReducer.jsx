@@ -54,6 +54,29 @@ export const CommentsReducer = (state, action) => {
         loadingComment: false,
       };
 
+    case "UPDATE_COMMENT":
+
+      let tmp = state.comments;
+
+      tmp[tmp.findIndex(t => t._id === action.payload._id)] = action.payload;
+
+      return {
+          ...state,
+          loadingComment: false,
+          selected: null,
+          comments: [...tmp]
+      }
+
+
+    case "DELETE_COMMENT":
+
+      return {
+          ...state,
+          selected: null,
+          loadingComment: false,
+          comments: [...state.comments.filter(t => t._id !== action.payload)]
+      }
+
     default:
       return {
         ...state,

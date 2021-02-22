@@ -132,7 +132,7 @@ export const TasksReducer = (state, action) => {
                 ...state,
                 selected: null,
                 loadingTask: false,
-                tasks: [...state.tasks.filter(t => t._id != action.payload)]
+                tasks: [...state.tasks.filter(t => t._id !== action.payload)]
             }
     
         default:
