@@ -1,6 +1,6 @@
 import React, { createContext, useState, useReducer } from 'react';
 
-import { getAllByArticle as getAll, createComment, updateComment, removeComment } from '../services/comment.services';
+import { getAllByArticle as getAll, createComment, updateComment, removeComment, hitLikeComment } from '../services/comment.services';
 
 import { CommentsReducer, initialState} from './reducers/CommentsReducer';
 
@@ -59,6 +59,15 @@ const CommentsContextProvider = ({children}) => {
         })
     }
 
+    const likeComment = id => {
+        dispatch({ type: "REQUEST_COMMENT"})
+        hitLikeComment(id).then(data => {
+            dispatch({ type: "UPDATE_COMMENT", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_COMMENT_FAILURE", payload: error.message })
+        });
+    }
+
     const values = { 
         comments,
         loadingComments,
@@ -74,7 +83,8 @@ const CommentsContextProvider = ({children}) => {
         postComment,
         editComment,
         deleteComment,
-        setEditMode
+        setEditMode,
+        likeComment
     }
 
     return (

@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 
-import {  TrashIcon } from '../Icons';
 import { useAuth } from '../../hooks/useAuth';
 import { formatDate } from '../../helpers/utils'
+import { TrashIcon, ThumbUpIcon } from '../Icons';
 import { CommentsContext } from '../../context/CommentsContext';
 
 const Comment = ({comment}) => {
 
     const { user } = useAuth();
 
-    const { editComment, editMode, setEditMode, deleteComment, loadingComment, loadingComments } = useContext(CommentsContext);
+    const { editComment, editMode, setEditMode, deleteComment, loadingComment, loadingComments, likeComment } = useContext(CommentsContext);
 
     const handleUpdateComment = (e) => {
         if (e.key === 'Enter') {
@@ -34,6 +34,7 @@ const Comment = ({comment}) => {
                         <span className="ml-2 text-sm font-normal text-gray-600">{formatDate(comment.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                     </div>
                     <div className="flex items-center justify-end w-1/3 p-2">
+
                         {
                             user._id === comment.author._id &&
                             <>
@@ -42,9 +43,15 @@ const Comment = ({comment}) => {
                                  className="px-2" type="button"><PencilOutlineIcon className="w-4 mr-1 text-gray-500 hover:text-gray-700"/></button> */}
                                 <button
                                 onClick={() => deleteComment(comment._id)}
-                                 className="px-2" type="button"><TrashIcon className="w-4 text-gray-500 focus:outline-none hover:text-gray-700"/></button>
+                                 className="px-2 text-gray-500 focus:outline-none hover:text-gray-700" type="button"><TrashIcon className="w-4"/></button>
                             </> 
                         }
+
+                        <button 
+                        onClick={()=> likeComment(comment._id)}
+                        type="button" className="flex items-center justify-center px-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <ThumbUpIcon className="w-4 "/> <span className="ml-1 text-xs">{comment.likes}</span>
+                        </button>
                         
                     </div>
                 </div>

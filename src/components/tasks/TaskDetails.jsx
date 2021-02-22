@@ -24,7 +24,16 @@ const TaskDetails = () => {
           </TaskToolbar>
           <div className="w-full px-10 py-10" >
               <h1 className="text-3xl font-bold text-gray-900">{selected.title}</h1>
-              <p className="flex items-center mb-10 text-gray-600"><ClockOutlineIcon className="inline w-5 mr-2 "/> {formatDate(selected.createdAt, 'MMMM Do, h:mm:ss a')}</p>
+              
+              <p className="flex items-center mb-5 text-gray-600">
+                  <ClockOutlineIcon className="inline w-5 mr-2 "/> {formatDate(selected.createdAt, 'MMMM Do, h:mm:ss a')}
+              </p>
+                
+              <p className="mb-10 text-gray-600">
+                <span className="text-gray-500">Author:</span> {selected.author.first_name} {selected.author.last_name} / 
+                <span className="ml-2 text-gray-500">Project:</span> {selected.project.title}
+              </p>
+
 
               <div className="mb-20 text-lg leading-9 text-gray-700">
                 {selected.content}

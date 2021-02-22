@@ -72,6 +72,21 @@ export const updateComment = async (comment) => {
     }
 }
 
+
+export const hitLikeComment = async (id) => {
+    try {
+        const response = await ApiService.post("/comments/" + id + "/like");
+        const data = await response.data
+        return data;
+        
+    } catch (error) {
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
+    }
+}
+
 export const createComment = async ({content, articleId}) => {
     try {
         
