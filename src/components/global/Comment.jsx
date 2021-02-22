@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
+import {  TrashIcon } from '../Icons';
 import { useAuth } from '../../hooks/useAuth';
 import { formatDate } from '../../helpers/utils'
 import { CommentsContext } from '../../context/CommentsContext';
-import { PencilOutlineIcon, TrashIcon } from '../Icons';
 
 const Comment = ({comment}) => {
 
@@ -59,8 +59,8 @@ const Comment = ({comment}) => {
 
                 {
                     editMode && editMode._id === comment._id && (
-                        <div className="">
-                            
+                        <div className="relative">
+                            <span className="absolute top-0 right-0 p-1 text-xs text-blue-600 bg-blue-100">ENTER to save / ESC to cancel</span>
                             <input 
                             value={editMode.content}
                             onKeyDown={handleUpdateComment}
