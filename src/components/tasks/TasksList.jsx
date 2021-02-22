@@ -8,7 +8,7 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { getTasks, tasks, loadingTasks, setComposing, setSelected, error } = useContext(TasksContext)
+    const { getTasks, tasks, loadingTasks, setComposing, setSelected, errorTasks } = useContext(TasksContext)
 
     const history = useHistory()
 
@@ -25,9 +25,9 @@ const TasksList = () => {
     return (
         <div className="relative bg-white">
 
-            { error && (<div className="alert-danger m-5">{error}</div>) }
+            { errorTasks && (<div className="alert-danger m-5">{errorTasks}</div>) }
   
-            <div className="w-full overflow-y-auto min-h-screen">
+            <div className="w-full overflow-y-auto max-h-screen">
 
                 <Spinner loading={loadingTasks}/>
 

@@ -1,4 +1,5 @@
 import ApiService from './api.service';
+import { RequestError } from './api.service';
 
 export const getAll = async () => {
     try {
@@ -7,7 +8,11 @@ export const getAll = async () => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
+
     }
 }
 
@@ -18,7 +23,10 @@ export const getAllByArticle = async (articleId) => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
     }
 }
 
@@ -29,7 +37,10 @@ export const getSingle = async (id) => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
     }
 }
 
@@ -40,7 +51,10 @@ export const removeComment = async (id) => {
         return { id, ...data };
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
     }
 }
 
@@ -51,7 +65,10 @@ export const updateComment = async (comment) => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
     }
 }
 
@@ -63,6 +80,9 @@ export const createComment = async ({content, articleId}) => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+    
+        throw new Error(error.message)
     }
 }

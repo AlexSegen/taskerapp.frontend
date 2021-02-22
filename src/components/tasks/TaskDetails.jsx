@@ -16,9 +16,9 @@ const TaskDetails = () => {
     }
 
     return ( 
-        <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
+        <div className="min-h-screen bg-white">
           <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
-                <Tool onClick={() => toggleTaskStatus(selected)} ><CheckIcon className="w-8"/></Tool>
+                <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
                 <Tool disabled={selected.completed} onClick={() => setComposing(true)} ><PencilOutlineIcon className="w-8"/></Tool>
                 <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
           </TaskToolbar>
