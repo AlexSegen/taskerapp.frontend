@@ -1,6 +1,9 @@
 import React from 'react';
+
 import { useAuth } from '../hooks/useAuth';
-import { BellIcon, SettingsIcon, EnvelopeIcon, ChevronRightIcon} from './Icons';
+import { BellIcon, SettingsIcon, EnvelopeIcon } from './Icons';
+import ProjectList from './sidebar/ProjectList';
+import TeamList from './sidebar/TeamList';
 
 const Sidebar = () => {
 
@@ -8,10 +11,11 @@ const Sidebar = () => {
 
     const { first_name, last_name, email, avatar } = user;
 
+
     return ( 
         <div className="w-1/4 min-h-screen pt-16 px-10 py-10 bg-white border-r-2 border-gray-200">
 
-            <div>
+            <div className="mt-10">
                 <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
                 <span className="block text-base text-xl font-bold text-center">{first_name} {last_name}</span>
                 <span className="block text-sm text-center text-gray-600">{email}</span>
@@ -57,45 +61,9 @@ const Sidebar = () => {
 
                 <hr className="my-8 border-gray-400"/>
 
-                <div className="px-10">
-                    <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Projects</p>
-                    <ul>
-                        <li className="mb-4">
-                            <button type="button" className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className="inline w-6 mr-1 text-blue-500"/> Marketing</button>
-                        </li>
-                        <li className="mb-4">
-                            <button type="button" className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className="inline w-6 mr-1 text-green-500"/> Design</button>
-                        </li>
-                        <li className="mb-4">
-                            <button type="button" className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className="inline w-6 mr-1 text-yellow-500"/> Development</button>
-                        </li>
-                        <li className="mb-4">
-                            <button type="button" className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className="inline w-6 mr-1 text-red-500"/> Management</button>
-                        </li>
-                    </ul>
-                </div>
+                <ProjectList/>
 
-                <hr className="my-8 border-gray-400"/>
-
-                <div className="px-10">
-                    <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Team</p>
-                    <div className="flex items-center justify-center">
-                        <div className="w-1/3 p-3">
-                            <img className="block mx-auto rounded-full w-15 h-13" src="https://randomuser.me/api/portraits/men/89.jpg" alt=""/>
-                        </div>
-                        <div className="w-1/3 p-3">
-                            <img className="block mx-auto rounded-full w-15 h-13" src="https://randomuser.me/api/portraits/women/89.jpg" alt=""/>
-                        </div>
-                        <div className="w-1/3 p-3">
-                            <img className="block mx-auto rounded-full w-15 h-13" src="https://randomuser.me/api/portraits/men/8.jpg" alt=""/>
-                        </div>
-                        <div className="w-1/3 p-3">
-                            <img className="block mx-auto rounded-full w-15 h-13" src="https://randomuser.me/api/portraits/women/9.jpg" alt=""/>
-                        </div>
-                    </div>
-                </div>
-
-                
+                <TeamList/>
 
             </div>
         </div>

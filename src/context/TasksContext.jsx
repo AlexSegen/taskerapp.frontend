@@ -1,83 +1,116 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { Comments } from '../services/mockup';
+import React, { createContext, useEffect, useState, useReducer } from 'react';
 
 import { getAll as getAllusers } from '../services/user.services';
 import { getAll as getAllProjects } from '../services/project.services';
 import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
 
+import { TasksReducer, initialState } from './reducers/TasksReducer';
+
 export const TasksContext = createContext()
 
 const TasksContextProvider = ({children}) => {
 
-    const [tasks, setTasks] = useState([]);
-
-    const [selected, setSelected] = useState(null);
-
-    const [projects, setProjects] = useState([]);
-
-    const [comments, setComments] = useState([]);
-
-    const [users, setUsers] = useState([])
+    const [{ 
+        tasks, 
+        loadingTasks,
+        errorTasks,
+        selected, 
+        loadingTask,
+        errorTask,
+        projects,
+        loadingProjects,
+        errorProjects,
+        users,
+        loadingUsers,
+        errorUsers
+    }, dispatch] = useReducer(TasksReducer, initialState)
 
     const [composing, setComposing] = useState(false);
 
     const getUsers = () => {
+        dispatch({ type: "REQUEST_USERS" })
         getAllusers().then(data => {
-            setUsers(data)
+            dispatch({ type: "SET_USERS", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_USERS_FAILURE", payload: error.message })
         })
     }
 
     const getProjects = () => {
+        dispatch({ type: "REQUEST_PROJECTS" })
         getAllProjects().then(data => {
-            setProjects(data)
-        })
-    }
-
-    const setTask = task => {
-        createTask(task).then(data => {
-            setSelected(data)
-            setTasks([data, ...tasks]);
+            dispatch({ type: "SET_PROJECTS", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_PROJECTS_FAILURE", payload: error.message })
         })
     }
 
     const getTasks = () => {
+        dispatch({ type: "REQUEST_TASKS" })
+        
         getAll().then(data => {
-            setTasks(data)
+            dispatch({ type: "SET_TASKS", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_TASKS_FAILURE", payload: error.message })
+        })
+    }
+    
+    const setTask = task => {
+        dispatch({ type: "REQUEST_TASK" })
+        createTask(task).then(data => {
+            dispatch({ type: "ADD_TASK", payload: data })
+            dispatch({ type: "SET_SELECTED", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
     }
 
     const getTask = id => {
+        dispatch({ type: "REQUEST_TASK" })
         getSingle(id).then(data => {
-            setSelected(data)
-        });
+            dispatch({ type: "SET_SELECTED", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
+        })
     }
 
     const deleteTask = id => {
+        dispatch({ type: "REQUEST_TASK" })
         removeTask(id).then(() => {
-            setTasks([...tasks.filter(t => t._id != id)]);
-            setSelected(null);
-        });
+            dispatch({ type: "DELETE_TASK", payload: id })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
+        })
     }
 
     const editTask = task => {
+        dispatch({ type: "REQUEST_TASK" })
         updateTask(task).then(data => {
-            tasks[tasks.findIndex(t => t._id == data._id)] = data;
-            setTasks([...tasks])
-            setSelected(data);
-        });
+            dispatch({ type: "UPDATE_TASK", payload: data })
+        }).catch(error => {
+            dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
+        })
     }
 
-    const toggleTaskStatus = task => {
+    const toggleTaskStatus = (task, fromDetails) => {
+        dispatch({ type: "REQUEST_TASK" })
+
         toggleTask(task).then(data => {
-            tasks[tasks.findIndex(t => t._id == data._id)] = data;
-            setTasks([...tasks])
-            setSelected(data);
-        });
+            
+            dispatch({ type: "UPDATE_TASK", payload: data })
+
+            if (fromDetails)
+                dispatch({ type: "SET_SELECTED", payload: data })
+
+        }).catch(error => {
+            dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
+        })
     }
 
-    useEffect(() => {
-        setComments(Comments)
-    }, [])
+    const setSelected = data => {
+        dispatch({ type: "SET_SELECTED", payload: data })
+    }
+
 
     useEffect(() => {
         if(selected)
@@ -87,10 +120,42 @@ const TasksContextProvider = ({children}) => {
 
     useEffect(() => {
         if(composing)
-            setSelected(null)
+            dispatch({ type: "SET_SELECTED", payload: null })
     }, [composing])
 
-    const values = {getUsers, getProjects, getTasks, setTask, getTask, editTask, toggleTaskStatus, deleteTask, tasks, comments, projects, users, selected, setSelected, composing, setComposing}
+    const values = {
+        // tasks
+        tasks, 
+        loadingTasks,
+        errorTasks,
+
+        selected, 
+        setSelected,
+        loadingTask,
+        errorTask,
+
+        projects,
+        loadingProjects,
+        errorProjects,
+        
+        users,
+        loadingUsers,
+        errorUsers,
+
+        // methods
+        getUsers,
+        getProjects,
+        getTasks,
+        setTask,
+        getTask,
+        editTask,
+        toggleTaskStatus,
+        deleteTask,
+
+        // composing
+        composing,
+        setComposing
+    }
 
     return (
         <TasksContext.Provider value={values}>

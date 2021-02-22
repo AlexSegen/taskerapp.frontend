@@ -22,7 +22,7 @@ const TaskForm = ({id}) => {
 
     const history = useHistory();
 
-    const { setTask, editTask, setComposing, getProjects, projects, selected } = useContext(TasksContext);
+    const { setTask, editTask, setComposing, loadingProjects, projects, errorProjects, selected, loadingTask, errorTask } = useContext(TasksContext);
 
     const { form, title, content, setForm, handleChange } = useForm(initialState);
 
@@ -53,9 +53,7 @@ const TaskForm = ({id}) => {
 
     const handleProject = (e) => {
         const { value } = e.target;
-        form.project._id = value;
-        console.log("value", value)
-        setForm({...form})
+        setForm({...form, project: { ...form.project, _id: value}})
     }
 
     const submit = e => {
@@ -84,15 +82,12 @@ const TaskForm = ({id}) => {
         if (!id) { setForm(initialState) }
     }, [id])
 
-    useEffect(() => {
-        getProjects()
-    }, [])
 
     return ( 
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
-            <TaskToolbar task={form} onSelect={onSelect}>
-                <Tool onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
-                <Tool onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
+            <TaskToolbar task={form} onSelect={onSelect} disabled={loadingTask}>
+                <Tool disabled={loadingTask} onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
+                <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
             </TaskToolbar>
             <div className="w-full px-10 py-10">
 
@@ -102,13 +97,13 @@ const TaskForm = ({id}) => {
 
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Title</label>
-                        <input value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a title"/>
+                        <input disabled={loadingTask} value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a title"/>
                         <span className="text-sm text-red-400 block px-4"></span>
                     </div>
 
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Content</label>
-                        <textarea value={content} className="w-full px-10 py-4 bg-gray-100 focus:outline-none"
+                        <textarea disabled={loadingTask} value={content} className="w-full px-10 py-4 bg-gray-100 focus:outline-none"
                         placeholder="Write your content"
                         name="content" onChange={handleChange} cols="30" rows="5">
 
@@ -117,29 +112,29 @@ const TaskForm = ({id}) => {
                     </div>
 
 
-{
-    form.project && (
-                    <div className="relative mb-5">
-                        <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Select project</label>
-                        <select value={form.project._id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
-                            <option value="0">--</option>
-                            {
-                                projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
-                            }
-                        </select>
-                        <span className="text-sm text-red-400 block px-4"></span>
-                    </div>
-    )
-}
+                    {
+                        form.project && (
+                            <div className="relative mb-5">
+                                <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Select project</label>
+                                <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
+                                    <option value="0">--</option>
+                                    {
+                                        projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
+                                    }
+                                </select>
+                                <span className="text-sm text-red-400 block px-4"></span>
+                            </div>
+                        )
+                    }
 
+                    { errorProjects && <div className="alert-danger">{ errorProjects }</div> }
 
-       
 
                     <div className="relative mb-5">
                         <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Tags</label>
                         <div className="flex items-center max-w-md">
                             <input onChange={e => setTag(e.target.value)} value={tag} name="title" className="w-full max-w-lg h-16 px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a tag"/>
-                            <button onClick={() => handleTag()} type="button" className="px-10 h-16 py-3 text-white focus:outline-none bg-green-500 hover:bg-green-600">
+                            <button disabled={loadingTask} onClick={() => handleTag()} type="button" className="px-10 h-16 py-3 text-white focus:outline-none bg-green-500 hover:bg-green-600">
                                 <PlusCircleOutlineIcon  className="w-6" />
                             </button>
                         </div>
@@ -157,8 +152,12 @@ const TaskForm = ({id}) => {
                         }
                     </div>
 
+                    { errorTask && <div className="alert-danger">{ errorTask }</div> }
+
                     <div className="p-4 text-left">
-                        <button type="submit" className="px-10 py-3 text-white bg-blue-600 rounded-full focus:outline-none hover:bg-blue-700">Save task</button>
+                        <button type="submit" className="px-10 py-3 text-white bg-blue-600 rounded-full focus:outline-none hover:bg-blue-700">
+                            { loadingTask ? 'Saving task...' : 'Save task'}
+                        </button>
                     </div>
 
                 </form>

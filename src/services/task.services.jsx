@@ -1,4 +1,5 @@
 import ApiService from './api.service';
+import { RequestError } from './api.service';
 
 export const getAll = async () => {
 
@@ -8,7 +9,12 @@ export const getAll = async () => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+        
+        throw new Error(error.message)
+
     }
     
 }
@@ -20,7 +26,10 @@ export const getSingle = async (id) => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+        
+        throw new Error(error.message)
     }
 }
 
@@ -31,24 +40,28 @@ export const removeTask = async (id) => {
         return { id, ...data };
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+        
+        throw new Error(error.message)
     }
 }
 
 export const updateTask = async (task) => {
     try {
-        console.log('task', task)
+        
         task.project = task.project._id;
         task.asignated = task.asignated ? task.asignated._id : null;
-
-        console.log(task)
 
         const response = await ApiService.put("/tasks/" + task._id, task);
         const data = await response.data
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+        
+        throw new Error(error.message)
     }
 }
 
@@ -59,20 +72,26 @@ export const toggleTask = async ({ _id }) => {
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+        
+        throw new Error(error.message)
     }
 }
 
 export const createTask = async (task) => {
     try {
         
-        task.project = task.project.id;
+        task.project = task.project._id;
 
         const response = await ApiService.post("/tasks", task);
         const data = await response.data
         return data;
         
     } catch (error) {
-        throw new Error(error)
+        if (error.response) 
+            throw new RequestError(error.response.status, error.response.data.message, error.response.data)
+        
+        throw new Error(error.message)
     }
 }

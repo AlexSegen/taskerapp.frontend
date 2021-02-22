@@ -3,7 +3,7 @@ import { TasksContext } from '../../context/TasksContext';
 
 const UserPicker = ({onSelect, selected, disabled }) => {
 
-    const { users, getUsers } = useContext(TasksContext);
+    const { users } = useContext(TasksContext);
     const [user, setUser] = useState(selected);
 
     const [toggle, setToggle] = useState(false);
@@ -17,10 +17,6 @@ const UserPicker = ({onSelect, selected, disabled }) => {
     useEffect(() => {
         setUser(selected)
     }, [selected])
-
-    useEffect(() =>{
-        getUsers();
-    }, [])
 
     return (
         <div className="relative max-w-md">

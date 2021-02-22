@@ -64,8 +64,7 @@ const AuthContextProvider = ({ children }) => {
     };
 
    const Logout = () => {
-        TokenService.removeToken();
-        SetUser.removeUser();
+        authService.logout();
         setAuthenticated(false);
     }
 

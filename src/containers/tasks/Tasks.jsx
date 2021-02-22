@@ -7,6 +7,7 @@ import TasksList from '../../components/tasks/TasksList';
 import { TasksContext } from '../../context/TasksContext';
 import TaskDetails from '../../components/tasks/TaskDetails';
 import TasksFilter from '../../components/tasks/TasksFilter';
+import Spinner from '../../components/Spinner';
 
 
 const SelectTask = () => {
@@ -21,7 +22,7 @@ const Tasks = () => {
 
     let { id } = useParams();
 
-    const { getTask, selected, composing } = useContext(TasksContext);
+    const { getTask, selected, composing, loadingTask } = useContext(TasksContext);
 
     useEffect(() => {
         if (id) { getTask(id) }
@@ -39,11 +40,14 @@ const Tasks = () => {
                 </div>
                 <div className="w-full  bg-white">
 
+                    <Spinner loading={loadingTask} height="500"/>
+
+
                     { composing && <TaskForm id={id}/> }
 
-                    { !composing && selected && ( <TaskDetails /> ) }
+                    { !loadingTask && !composing && selected && ( <TaskDetails /> ) }
 
-                    { !composing && !selected && ( <SelectTask/>) }
+                    { !loadingTask && !composing && !selected && ( <SelectTask/>) }
                     
                 </div>
             </div>

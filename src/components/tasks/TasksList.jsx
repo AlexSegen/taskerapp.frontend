@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { TasksContext} from '../../context/TasksContext'
+import { TasksContext } from '../../context/TasksContext'
 
+import Spinner from '../Spinner';
 import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { getTasks, tasks, setComposing, setSelected } = useContext(TasksContext)
+    const { getTasks, tasks, loadingTasks, setComposing, setSelected, error } = useContext(TasksContext)
 
     const history = useHistory()
 
@@ -23,8 +24,12 @@ const TasksList = () => {
 
     return (
         <div className="relative bg-white">
+
+            { error && (<div className="alert-danger m-5">{error}</div>) }
   
-            <div className="w-full overflow-y-auto " style={{maxHeight: "70vh"}}>
+            <div className="w-full overflow-y-auto min-h-screen">
+
+                <Spinner loading={loadingTasks}/>
 
                 {
                     tasks && tasks.map(task => <TaskItem key={task._id} task={task}/>)

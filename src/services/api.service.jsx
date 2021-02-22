@@ -1,5 +1,14 @@
 import axios from 'axios'
 import { TokenService } from './storage.service'
+export class RequestError extends Error {
+    constructor(errorCode, message, data) {
+        super(message)
+        this.name = this.constructor.name
+        this.data = data;
+        this.message = message
+        this.errorCode = errorCode
+    }
+}
 
 const ApiService = {
 

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth';
-import { Link } from 'react-router-dom'
+import { TasksContext } from '../context/TasksContext';
 
 
 const Header = () => {
 
     const { Logout } = useAuth();
+    
+    const history = useHistory();
+
+    const { setComposing, setSelected } = useContext(TasksContext);
+
+    const handleAddTask = () => {
+        setSelected(null);
+        setComposing(true);
+        history.push("/")
+    }
 
     return ( 
         <div className="fixed top-0 z-10 flex items-center w-full px-3 py-4 bg-white border-b-2 border-gray-300 justify-strech">
@@ -28,9 +39,10 @@ const Header = () => {
                 </select>
             </div>
             <div className="w-full px-8 text-right">
-                <button onClick={() => Logout()} type="button" className="px-3 py-2 text-gray-500 focus:outline-none hover:text-gray-600">
-                    <i className="text-2xl icons icon-options "></i>
-                </button>
+                <button onClick={() => handleAddTask()} type="button" className="button focus:outline-none bg-blue-600 text-sm py-2 hover:bg-blue-700 mr-2">Add task</button>
+                <Link className="nav-item focus:outline-none hover:text-gray-600" to="/">Tasks</Link>
+                <Link className="nav-item focus:outline-none hover:text-gray-600" to="/">Projects</Link>
+                <button onClick={() => Logout()} type="button" className="nav-item  focus:outline-none hover:text-gray-600">Sign off</button>
             </div>
         </div>
      );
