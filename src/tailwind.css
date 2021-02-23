@@ -32,8 +32,9 @@
 /* Quill editor */
 
 .ql-editor {
-  @apply px-6 py-6 text-base bg-gray-100;
+  @apply max-h-screen px-6 py-6 text-base bg-gray-100;
   min-height: 250px;
+  
 }
 
 .quill,

@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import renderHTML from 'react-render-html';
 
 import Tasks from  "./Tasks"
@@ -11,20 +11,33 @@ import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import { TrashOutlineIcon, CheckIcon, ClockOutlineIcon, CheckCircleIcon, PencilOutlineIcon } from '../../components/Icons';
 
 const TaskDetails = () => {
+    let { id } = useParams();
+    let history = useHistory();
 
-  let history = useHistory();
-
-    const { selected, editTask, toggleTaskStatus, deleteTask, taskLoading } = useContext(TasksContext);
+    const { getTask, selected, composing, editTask, toggleTaskStatus, deleteTask, loadingTask } = useContext(TasksContext);
 
     const onSelect = (data) => {
       selected.assigned = data;
       editTask(selected);
     }
 
-    if(!selected || taskLoading)
-      return <Tasks><Spinner loading={taskLoading}/></Tasks>
+    useEffect(() => {
+      if (id) { 
+        getTask(id)
+      }
+    }, [id])
 
-    return (
+    useEffect(() => {
+      if (selected === null && !composing) {
+          history.push("/tasks")
+      }
+    },[composing, selected])
+
+
+    if(loadingTask)
+      return <Tasks><Spinner height="400" loading={true}/></Tasks>
+
+    return selected && (
       <Tasks>
         <div className="min-h-screen bg-white">
           <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
@@ -40,10 +53,13 @@ const TaskDetails = () => {
               </p>
                 
               <p className="mb-10 text-gray-600">
-                <span className="text-gray-500">Author:</span> {selected.author.first_name} {selected.author.last_name} / 
-                <span className="ml-2 text-gray-500">Project:</span> {selected.project.title}
+                {
+                  selected.author && (<><span className="text-gray-500">Author:</span> {selected.author.first_name} {selected.author.last_name} / </>)
+                }
+                {
+                  selected.project && (<><span className="ml-2 text-gray-500">Project:</span> {selected.project.title}</>)
+                }
               </p>
-
 
               <div className="mb-20 text-lg leading-9 text-gray-700 __content">
                 {renderHTML(selected.content)}

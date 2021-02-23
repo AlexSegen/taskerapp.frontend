@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-
 import AuthContextProvider from './context/AuthContext';
+import TasksContextProvider from './context/TasksContext';
+import CommentsContextProvider from './context/CommentsContext';
+
 
 //Services
 import ApiService from './services/api.service'
@@ -19,7 +21,11 @@ if (TokenService.getToken()) {
 
 ReactDOM.render(
   <AuthContextProvider>
-    <App />
+    <TasksContextProvider>
+      <CommentsContextProvider>
+        <App />
+      </CommentsContextProvider>
+    </TasksContextProvider>
   </AuthContextProvider>,
   document.getElementById('root')
 );

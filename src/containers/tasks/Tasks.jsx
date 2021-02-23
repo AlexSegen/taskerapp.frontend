@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 import TasksList from '../../components/tasks/TasksList';
 import { TasksContext } from '../../context/TasksContext';
 import TasksFilter from '../../components/tasks/TasksFilter';
-// import Spinner from '../../components/Spinner';
-
 
 const SelectTask = () => {
     return (
@@ -20,13 +18,7 @@ const Tasks = ({children}) => {
 
     let { id } = useParams();
 
-    const { getTask, selected } = useContext(TasksContext);
-
-    useEffect(() => {
-        if (id) { 
-            getTask(id)
-        }
-    }, [id])
+    const { selected } = useContext(TasksContext);
 
     return ( 
         <Layout>
@@ -39,8 +31,9 @@ const Tasks = ({children}) => {
                     
                 </div>
                 <div className="w-full bg-white">
+                    
 
-                    { !id && selected &&( <SelectTask/>) }
+                    { !id && selected  && selected._id !== 0 &&( <SelectTask/>) }
 
                     {/* {loadingTask ? (<Spinner loading={true && !composing} height="500"/>) : (<>{ children }</>)} */}
 

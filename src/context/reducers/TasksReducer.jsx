@@ -1,3 +1,14 @@
+export const TaskInitialState = {
+    "_id": 0,
+    "title": "",
+    "content": "",
+    "project": {
+        "_id": 0
+    },
+    "completed": false,
+    "assigned": null,
+    "tags": []
+  }
 
 export const initialState = {
     loadingTasks: false,
@@ -7,7 +18,7 @@ export const initialState = {
     loadingProjects: false,
     errorProjects: false,
     tasks: [],
-    selected: null,
+    selected: TaskInitialState,
     projects: [],
     users: [],
     loadingUsers: false,
@@ -21,7 +32,7 @@ export const TasksReducer = (state, action) => {
             return {
                 ...state,
                 loadingTask: true,
-                errorTasks: false
+                errorTask: false
             }
         case "REQUEST_TASKS":
             return {
@@ -89,13 +100,14 @@ export const TasksReducer = (state, action) => {
         case "REMOVE_SELECTED":
             return {
                 ...state,
-                loadingTasks: false,
-                selected: null
+                loadingTask: false,
+                selected: TaskInitialState
             }
 
         case "ADD_TASK":
             return {
                 ...state,
+                selected: null,
                 tasks: [action.payload, ...state.tasks],
                 loadingTask: false
             }
@@ -117,7 +129,7 @@ export const TasksReducer = (state, action) => {
 
             let tmp = state.tasks;
 
-            tmp[tmp.findIndex(t => t._id == action.payload._id)] = action.payload;
+            tmp[tmp.findIndex(t => t._id === action.payload._id)] = action.payload;
 
             return {
                 ...state,

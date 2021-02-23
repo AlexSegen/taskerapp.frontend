@@ -5,13 +5,20 @@ import { getAll as getAllusers } from '../services/user.services';
 import { getAll as getAllProjects } from '../services/project.services';
 import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
 
-import { TasksReducer, initialState } from './reducers/TasksReducer';
+import { TasksReducer, initialState, TaskInitialState } from './reducers/TasksReducer';
+
+
 
 export const TasksContext = createContext()
 
 const TasksContextProvider = ({children}) => {
 
     const { user } = useAuth();
+
+    const [isEditing, setIsEditing] = useState(false)
+
+    const [composing, setComposing] = useState(false);
+
 
     const [completed, setCompleted] = useState([])
     const [todo, setTodo] = useState([])
@@ -34,7 +41,6 @@ const TasksContextProvider = ({children}) => {
         errorUsers
     }, dispatch] = useReducer(TasksReducer, initialState)
 
-    const [composing, setComposing] = useState(false);
 
     const setSelected = data => {
         dispatch({ type: "SET_SELECTED", payload: data })
@@ -73,14 +79,13 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         createTask(task).then(data => {
             dispatch({ type: "ADD_TASK", payload: data })
-            setSelected(data)
+            setComposing(false);
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
     }
 
     const getTask = id => {
-        setSelected(null)
         dispatch({ type: "REQUEST_TASK" })
         getSingle(id).then(data => {
             setSelected(data)
@@ -93,6 +98,7 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         removeTask(id).then(() => {
             dispatch({ type: "DELETE_TASK", payload: id })
+            setComposing(false)
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
@@ -125,9 +131,7 @@ const TasksContextProvider = ({children}) => {
 
     useEffect(() => {
         getTasks();
-        setSelected(null);
     }, [filter])
-
 
     useEffect(() => {
         if(tasks.length > 0) {
@@ -138,19 +142,10 @@ const TasksContextProvider = ({children}) => {
         }
     }, [tasks])
 
-
-    useEffect(() => {
-        if(selected)
-            setComposing(false)
-
-    }, [selected])
-
-    useEffect(() => {
-        if(composing)
-            dispatch({ type: "SET_SELECTED", payload: null })
-    }, [composing])
-
     const values = {
+        setIsEditing,
+        isEditing,
+
         // tasks
         tasks, 
         loadingTasks,
@@ -160,6 +155,7 @@ const TasksContextProvider = ({children}) => {
         setSelected,
         loadingTask,
         errorTask,
+        TaskInitialState,
 
         projects,
         loadingProjects,

@@ -29,9 +29,9 @@ const TaskForm = () => {
     
     const history = useHistory();
 
-    const { setTask, editTask, getTask, setComposing, loadingProjects, projects, errorProjects, selected, loadingTask, errorTask } = useContext(TasksContext);
+    const { composing, setIsEditing, TaskInitialState, setTask, editTask, getTask, setComposing, setSelected, loadingProjects, projects, errorProjects, selected, loadingTask, errorTask } = useContext(TasksContext);
 
-    const { form, title, content, setForm, handleChange } = useForm(initialState);
+    const { form, title, content, setForm, handleChange } = useForm(TaskInitialState);
 
     const [tag, setTag] = useState("");
 
@@ -73,33 +73,37 @@ const TaskForm = () => {
     }
 
     const handleClose = () => {
-        setForm(initialState);
-        setComposing(false);
-        history.push("/tasks")
+        /* setSelected(null)
+        setComposing(false)
+        setForm(TaskInitialState); */
+        const target = id || "";
+        history.push("/tasks/" + target)
     }
 
     useEffect(() => {
-        console.log('hola', selected)
-        if (selected && selected._id !== 0) { 
-            setForm({...selected})
-            console.log('chao', selected)
-            //history.push("/tasks/" + selected._id)
-        }
-    }, [selected])
-
-
-    useEffect(() => {
-        if (id && selected) { 
-            setForm(selected)
-        } else if(id && !selected) {
+        if (id) {
+            setIsEditing(true)
             getTask(id)
         } else {
-            setForm(initialState)
+            setForm(TaskInitialState)
         }
     }, [id])
 
+    useEffect(() => {
+        if(selected){
+            setForm({...selected})
+        }
+    }, [selected])
 
-    if (loadingTask || !form)
+    useEffect(() => {
+        if (selected === null && !composing) {
+            history.push("/tasks")
+        }
+      },[composing, selected])
+  
+
+
+    if (loadingTask)
         return <Tasks><Spinner loading={loadingTask}/></Tasks>
 
     return ( 
@@ -109,7 +113,7 @@ const TaskForm = () => {
                 <Tool disabled={loadingTask} onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
                 <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
             </TaskToolbar>
-            <div className="w-full px-10 py-10">
+            <div className="max-w-screen-md px-10 py-10 mx-auto">
 
                 <h1 className="mb-5 text-2xl font-bold text-gray-700"> { id ? 'Edit':'Create new' } task</h1>
 

@@ -21,6 +21,7 @@ const CommentsContextProvider = ({children}) => {
     const [editMode, setEditMode] = useState(false);
 
     const getComments = (articleId) => {
+        dispatch({ type: "SET_COMMENTS", payload: []})
         dispatch({ type: "REQUEST_COMMENTS"})
         getAll(articleId).then(data => {
             dispatch({ type: "SET_COMMENTS", payload: data})
