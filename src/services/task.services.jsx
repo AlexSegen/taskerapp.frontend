@@ -1,10 +1,12 @@
 import ApiService from './api.service';
 import { RequestError } from './api.service';
 
-export const getAll = async () => {
+export const getAll = async (filter) => {
+
+    const params =  filter ? ('&' + filter) : '';
 
     try {
-        const response = await ApiService.get("/tasks?sort=-createdAt");
+        const response = await ApiService.get("/tasks?sort=-createdAt" + params );
         const data = await response.data
         return data;
         

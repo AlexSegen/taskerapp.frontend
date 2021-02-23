@@ -10,7 +10,7 @@ const Header = () => {
     
     const history = useHistory();
 
-    const { setComposing, setSelected } = useContext(TasksContext);
+    const { setComposing, setSelected, filter, setFilter } = useContext(TasksContext);
 
     const handleAddTask = () => {
         setSelected(null);
@@ -32,17 +32,19 @@ const Header = () => {
                 </div>
             </div>
             <div className="w-full px-8">
-                <select className="px-3 py-2 text-lg font-bold cursor-pointer border-2 border-white">
+                <select value={filter} 
+                onChange={e => setFilter(e.target.value)}
+                className="px-3 py-2 text-lg font-bold border-2 border-white cursor-pointer focus:outline-none">
                     <option value="">All tasks</option>
-                    <option value="">Pending</option>
-                    <option value="">Completed</option>
+                    <option value="completed=false">Pending</option>
+                    <option value="completed=true">Completed</option>
                 </select>
             </div>
             <div className="w-full px-8 text-right">
-                <button onClick={() => handleAddTask()} type="button" className="button focus:outline-none bg-blue-600 text-sm py-2 hover:bg-blue-700 mr-2">Add task</button>
+                <button onClick={() => handleAddTask()} type="button" className="py-2 mr-2 text-sm bg-blue-600 button focus:outline-none hover:bg-blue-700">Add task</button>
                 <Link className="nav-item focus:outline-none hover:text-gray-600" to="/">Tasks</Link>
                 <Link className="nav-item focus:outline-none hover:text-gray-600" to="/">Projects</Link>
-                <button onClick={() => Logout()} type="button" className="nav-item  focus:outline-none hover:text-gray-600">Sign off</button>
+                <button onClick={() => Logout()} type="button" className="nav-item focus:outline-none hover:text-gray-600">Sign off</button>
             </div>
         </div>
      );

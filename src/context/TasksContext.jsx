@@ -17,6 +17,7 @@ const TasksContextProvider = ({children}) => {
     const [todo, setTodo] = useState([])
     const [done, setDone] = useState([])
     const [myTasks, setMyTasks] = useState([]);
+    const [filter, setFilter] = useState(null);
 
     const [{ 
         tasks, 
@@ -54,9 +55,10 @@ const TasksContextProvider = ({children}) => {
     }
 
     const getTasks = () => {
+        dispatch({ type: "SET_TASKS", payload: [] })
         dispatch({ type: "REQUEST_TASKS" })
         
-        getAll().then(data => {
+        getAll(filter).then(data => {
             dispatch({ type: "SET_TASKS", payload: data })
         }).catch(error => {
             dispatch({ type: "REQUEST_TASKS_FAILURE", payload: error.message })
@@ -121,6 +123,11 @@ const TasksContextProvider = ({children}) => {
 
 
     useEffect(() => {
+            getTasks()
+    }, [filter])
+
+
+    useEffect(() => {
         if(tasks.length > 0) {
             setCompleted([...tasks.filter(t => t.completed)]);
             setTodo([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
@@ -165,6 +172,8 @@ const TasksContextProvider = ({children}) => {
         myTasks,
         done,
 
+        filter,
+
         // methods
         getUsers,
         getProjects,
@@ -174,6 +183,7 @@ const TasksContextProvider = ({children}) => {
         editTask,
         toggleTaskStatus,
         deleteTask,
+        setFilter,
 
         // composing
         composing,
