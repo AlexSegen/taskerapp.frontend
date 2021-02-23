@@ -17,7 +17,7 @@ const TasksContextProvider = ({children}) => {
     const [todo, setTodo] = useState([])
     const [done, setDone] = useState([])
     const [myTasks, setMyTasks] = useState([]);
-    const [filter, setFilter] = useState(null);
+    const [filter, setFilter] = useState("");
 
     const [{ 
         tasks, 

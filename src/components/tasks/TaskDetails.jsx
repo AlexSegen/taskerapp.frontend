@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import renderHTML from 'react-render-html';
 
 import TaskComments from './TaskComments';
 import { formatDate } from '../../helpers/utils'
@@ -35,8 +36,8 @@ const TaskDetails = () => {
               </p>
 
 
-              <div className="mb-20 text-lg leading-9 text-gray-700">
-                {selected.content}
+              <div className="mb-20 text-lg leading-9 text-gray-700 __content">
+                {renderHTML(selected.content)}
               </div>
 
               {

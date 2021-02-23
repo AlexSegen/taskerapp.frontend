@@ -29,10 +29,43 @@
 }
 
 
+/* Quill editor */
+
+.ql-editor {
+  @apply px-6 py-6 bg-gray-100;
+  min-height: 250px;
+}
+
+.quill,
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  
+  border: none!important;
+}
+
+.__content pre {
+  @apply w-full px-2 py-2 text-blue-500 bg-gray-700;
+}
+
+.__content h1 {
+  @apply text-2xl;
+}
+
+.__content h2 {
+  @apply text-xl;
+}
+
+.__content h3 {
+  @apply text-lg;
+}
+
+
 /* Spiner */
 .half-circle-spinner, .half-circle-spinner * {
   box-sizing: border-box;
 }
+
+
 
 .half-circle-spinner {
   width: 60px;

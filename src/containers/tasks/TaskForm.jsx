@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
+
+import ReactQuill from 'react-quill'; 
+import 'react-quill/dist/quill.snow.css';
 
 import { useForm } from '../../hooks/useForm';
 import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
+import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
 import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon } from '../../components/Icons';
-import { useHistory } from 'react-router-dom';
 
 const initialState = {
     "_id": 0,
@@ -58,7 +62,7 @@ const TaskForm = ({id}) => {
 
     const submit = e => {
         e.preventDefault();
-        form._id != 0 ? editTask(form) : setTask(form);
+        form._id !== 0 ? editTask(form) : setTask(form);
     }
 
     const onSelect = data => {
@@ -72,7 +76,8 @@ const TaskForm = ({id}) => {
     }
 
     useEffect(() => {
-        if (selected && selected._id != 0) { 
+        console.log('hello', selected)
+        if (selected && selected._id !== 0) { 
             setForm({...selected})
             history.push("/task/" + selected._id)
         }
@@ -91,38 +96,39 @@ const TaskForm = ({id}) => {
             </TaskToolbar>
             <div className="w-full px-10 py-10">
 
-                <h1 className="text-gray-700 text-2xl font-bold mb-5"> { id ? 'Edit':'Create new' } task</h1>
+                <h1 className="mb-5 text-2xl font-bold text-gray-700"> { id ? 'Edit':'Create new' } task</h1>
 
                 <form className="w-full max-w-xl" onSubmit={submit}>
 
                     <div className="relative mb-5">
-                        <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Title</label>
+                        <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Title</label>
                         <input disabled={loadingTask} value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a title"/>
-                        <span className="text-sm text-red-400 block px-4"></span>
+                        <span className="block px-4 text-sm text-red-400"></span>
                     </div>
 
                     <div className="relative mb-5">
-                        <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Content</label>
-                        <textarea disabled={loadingTask} value={content} className="w-full px-10 py-4 bg-gray-100 focus:outline-none"
-                        placeholder="Write your content"
-                        name="content" onChange={handleChange} cols="30" rows="5">
+                        <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Content</label>
 
-                        </textarea>
-                        <span className="text-sm text-red-400 block px-4"></span>
+                        <ReactQuill onChange={(value) => setForm({...form, content: value })}
+                        placeholder="Write your blog ♥"
+                        modules={ReactQuillModules}
+                        value={content}
+                        formats={ReactQuillFormats}/>
+                        <span className="block px-4 text-sm text-red-400"></span>
                     </div>
 
 
                     {
                         form.project && (
                             <div className="relative mb-5">
-                                <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Select project</label>
-                                <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="w-full block text-gray-700 bg-gray-100 h-16 px-10 py-4 tracking-wide cursor-pointer focus:outline-none">
+                                <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Select project</label>
+                                <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="block w-full h-16 px-10 py-4 tracking-wide text-gray-700 bg-gray-100 cursor-pointer focus:outline-none">
                                     <option value="0">--</option>
                                     {
                                         projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
                                     }
                                 </select>
-                                <span className="text-sm text-red-400 block px-4"></span>
+                                <span className="block px-4 text-sm text-red-400"></span>
                             </div>
                         )
                     }
@@ -131,10 +137,10 @@ const TaskForm = ({id}) => {
 
 
                     <div className="relative mb-5">
-                        <label className="font-bold text-base text-sm mb-3 block" htmlFor="">Tags</label>
+                        <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Tags</label>
                         <div className="flex items-center max-w-md">
-                            <input onChange={e => setTag(e.target.value)} value={tag} name="title" className="w-full max-w-lg h-16 px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a tag"/>
-                            <button disabled={loadingTask} onClick={() => handleTag()} type="button" className="px-10 h-16 py-3 text-white focus:outline-none bg-green-500 hover:bg-green-600">
+                            <input onChange={e => setTag(e.target.value)} value={tag} name="title" className="w-full h-16 max-w-lg px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a tag"/>
+                            <button disabled={loadingTask} onClick={() => handleTag()} type="button" className="h-16 px-10 py-3 text-white bg-green-500 focus:outline-none hover:bg-green-600">
                                 <PlusCircleOutlineIcon  className="w-6" />
                             </button>
                         </div>
@@ -144,7 +150,7 @@ const TaskForm = ({id}) => {
                                 <div className="my-4">
                                     {
                                          form.tags.map(tag => (
-                                            <span onClick={() => handleTag(tag)} key={tag} className="rounded-full px-6 py-3 inline bg-gray-200 text-sm cursor-pointer hover:bg-red-200 mr-2">{tag}</span>
+                                            <span onClick={() => handleTag(tag)} key={tag} className="inline px-6 py-3 mr-2 text-sm bg-gray-200 rounded-full cursor-pointer hover:bg-red-200">{tag}</span>
                                         ))
                                     }
                                 </div>

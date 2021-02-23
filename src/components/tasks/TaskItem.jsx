@@ -13,7 +13,7 @@ const TaskItem = ({task}) => {
     const { selected, toggleTaskStatus } = useContext(TasksContext);
 
     const baseButton = "button p-2 border-2 w-full focus:outline-none";
-    const baseItem = "flex items-center px-2 py-4 justify-stretch"
+    const baseItem = "flex items-center px-2 py-2 justify-stretch"
     return ( 
         <div className={`${baseItem} ${selected && selected._id === task._id ? 'bg-gray-200' : 'bg-white'}`}>
             <div className="w-auto p-2">
