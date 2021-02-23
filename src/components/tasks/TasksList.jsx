@@ -15,19 +15,19 @@ const TasksList = () => {
     const handleAddTask = () => {
         setSelected(null);
         setComposing(true);
-        history.push("/")
+        history.push("/add/new")
     }
 
     useEffect(() => {
-        getTasks()
+        // getTasks()
     }, [])
 
     return (
         <div className="relative bg-white">
 
-            { errorTasks && (<div className="alert-danger m-5">{errorTasks}</div>) }
+            { errorTasks && (<div className="m-5 alert-danger">{errorTasks}</div>) }
   
-            <div className="w-full overflow-y-auto max-h-screen">
+            <div className="w-full max-h-screen overflow-y-auto">
 
                 <Spinner loading={loadingTasks}/>
 
@@ -37,7 +37,7 @@ const TasksList = () => {
  
             </div>
             <div className="p-4 text-center">
-                <button onClick={() => handleAddTask()} type="button" className="button focus:outline-none bg-blue-600  hover:bg-blue-700">Add task</button>
+                <button onClick={() => handleAddTask()} type="button" className="bg-blue-600 button focus:outline-none hover:bg-blue-700">Add task</button>
             </div>
         </div>
      );

@@ -36,6 +36,10 @@ const TasksContextProvider = ({children}) => {
 
     const [composing, setComposing] = useState(false);
 
+    const setSelected = data => {
+        dispatch({ type: "SET_SELECTED", payload: data })
+    }
+
     const getUsers = () => {
         dispatch({ type: "REQUEST_USERS" })
         getAllusers().then(data => {
@@ -69,16 +73,17 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         createTask(task).then(data => {
             dispatch({ type: "ADD_TASK", payload: data })
-            dispatch({ type: "SET_SELECTED", payload: data })
+            setSelected(data)
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
     }
 
     const getTask = id => {
+        setSelected(null)
         dispatch({ type: "REQUEST_TASK" })
         getSingle(id).then(data => {
-            dispatch({ type: "SET_SELECTED", payload: data })
+            setSelected(data)
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
@@ -117,13 +122,10 @@ const TasksContextProvider = ({children}) => {
         })
     }
 
-    const setSelected = data => {
-        dispatch({ type: "SET_SELECTED", payload: data })
-    }
-
 
     useEffect(() => {
-            getTasks()
+        getTasks();
+        setSelected(null);
     }, [filter])
 
 

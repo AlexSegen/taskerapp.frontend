@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
-
+import { useHistory, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill'; 
 import 'react-quill/dist/quill.snow.css';
 
+import Tasks from  "./Tasks"
 import { useForm } from '../../hooks/useForm';
+import Spinner from '../../components/Spinner';
 import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
@@ -22,11 +23,13 @@ const initialState = {
     "tags": []
 }
 
-const TaskForm = ({id}) => {
+const TaskForm = () => {
 
+    let { id } = useParams();
+    
     const history = useHistory();
 
-    const { setTask, editTask, setComposing, loadingProjects, projects, errorProjects, selected, loadingTask, errorTask } = useContext(TasksContext);
+    const { setTask, editTask, getTask, setComposing, loadingProjects, projects, errorProjects, selected, loadingTask, errorTask } = useContext(TasksContext);
 
     const { form, title, content, setForm, handleChange } = useForm(initialState);
 
@@ -72,23 +75,35 @@ const TaskForm = ({id}) => {
     const handleClose = () => {
         setForm(initialState);
         setComposing(false);
-        history.push("/")
+        history.push("/tasks")
     }
 
     useEffect(() => {
-        console.log('hello', selected)
+        console.log('hola', selected)
         if (selected && selected._id !== 0) { 
             setForm({...selected})
-            history.push("/task/" + selected._id)
+            console.log('chao', selected)
+            //history.push("/tasks/" + selected._id)
         }
     }, [selected])
 
+
     useEffect(() => {
-        if (!id) { setForm(initialState) }
+        if (id && selected) { 
+            setForm(selected)
+        } else if(id && !selected) {
+            getTask(id)
+        } else {
+            setForm(initialState)
+        }
     }, [id])
 
 
+    if (loadingTask || !form)
+        return <Tasks><Spinner loading={loadingTask}/></Tasks>
+
     return ( 
+        <Tasks>
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
             <TaskToolbar task={form} onSelect={onSelect} disabled={loadingTask}>
                 <Tool disabled={loadingTask} onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
@@ -170,6 +185,7 @@ const TaskForm = ({id}) => {
 
             </div>
         </div>
+        </Tasks>
      );
 }
  

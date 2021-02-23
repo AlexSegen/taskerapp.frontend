@@ -1,13 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import TaskForm from './TaskForm';
 import Layout from '../../components/Layout';
 import TasksList from '../../components/tasks/TasksList';
 import { TasksContext } from '../../context/TasksContext';
-import TaskDetails from '../../components/tasks/TaskDetails';
 import TasksFilter from '../../components/tasks/TasksFilter';
-import Spinner from '../../components/Spinner';
+// import Spinner from '../../components/Spinner';
 
 
 const SelectTask = () => {
@@ -18,14 +16,16 @@ const SelectTask = () => {
     )
 }
 
-const Tasks = () => {
+const Tasks = ({children}) => {
 
     let { id } = useParams();
 
-    const { getTask, selected, composing, loadingTask } = useContext(TasksContext);
+    const { getTask, selected } = useContext(TasksContext);
 
     useEffect(() => {
-        if (id) { getTask(id) }
+        if (id) { 
+            getTask(id)
+        }
     }, [id])
 
     return ( 
@@ -40,14 +40,11 @@ const Tasks = () => {
                 </div>
                 <div className="w-full bg-white">
 
-                    <Spinner loading={loadingTask && !composing} height="500"/>
+                    { !id && selected &&( <SelectTask/>) }
 
+                    {/* {loadingTask ? (<Spinner loading={true && !composing} height="500"/>) : (<>{ children }</>)} */}
 
-                    { composing && <TaskForm id={id}/> }
-
-                    { !loadingTask && !composing && selected && ( <TaskDetails /> ) }
-
-                    { !loadingTask && !composing && !selected && ( <SelectTask/>) }
+                    {children}
                     
                 </div>
             </div>

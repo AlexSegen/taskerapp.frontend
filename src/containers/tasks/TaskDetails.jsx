@@ -1,26 +1,35 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import renderHTML from 'react-render-html';
 
-import TaskComments from './TaskComments';
+import Tasks from  "./Tasks"
+import Spinner from '../../components/Spinner';
 import { formatDate } from '../../helpers/utils'
-import TaskToolbar, { Tool } from './TaskToolbar';
+import TaskComments from '../../components/tasks/TaskComments';
 import { TasksContext } from '../../context/TasksContext';
-import { TrashOutlineIcon, CheckIcon, ClockOutlineIcon, CheckCircleIcon, PencilOutlineIcon } from '../Icons';
+import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
+import { TrashOutlineIcon, CheckIcon, ClockOutlineIcon, CheckCircleIcon, PencilOutlineIcon } from '../../components/Icons';
 
 const TaskDetails = () => {
 
-    const { selected, setComposing, editTask, toggleTaskStatus, deleteTask } = useContext(TasksContext);
+  let history = useHistory();
+
+    const { selected, editTask, toggleTaskStatus, deleteTask, taskLoading } = useContext(TasksContext);
 
     const onSelect = (data) => {
       selected.assigned = data;
       editTask(selected);
     }
 
-    return ( 
+    if(!selected || taskLoading)
+      return <Tasks><Spinner loading={taskLoading}/></Tasks>
+
+    return (
+      <Tasks>
         <div className="min-h-screen bg-white">
           <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
                 <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
-                <Tool disabled={selected.completed} onClick={() => setComposing(true)} ><PencilOutlineIcon className="w-8"/></Tool>
+                <Tool disabled={selected.completed} onClick={() => history.push(`/tasks/${selected._id}/edit`)} ><PencilOutlineIcon className="w-8"/></Tool>
                 <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
           </TaskToolbar>
           <div className="w-full px-10 py-10" >
@@ -56,6 +65,7 @@ const TaskDetails = () => {
 
           </div>
         </div>
+      </Tasks> 
      );
 }
  

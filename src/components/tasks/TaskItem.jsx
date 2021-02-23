@@ -25,7 +25,7 @@ const TaskItem = ({task}) => {
                 </button>
             </div>
             <div className="w-full p-2 ">
-                <button onClick={() => history.push("/task/" + task._id)} type="button" className="block w-full font-bold text-left text-gray-700 hover:text-gray-600 focus:outline-none">
+                <button onClick={() => history.push("/tasks/" + task._id)} type="button" className="block w-full font-bold text-left text-gray-700 hover:text-gray-600 focus:outline-none">
                     {task.title}
                     <span className="block font-normal text-gray-500">{formatDate(task.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                 </button>
