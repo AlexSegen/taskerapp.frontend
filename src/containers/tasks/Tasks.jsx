@@ -38,9 +38,9 @@ const Tasks = () => {
                     <TasksList/>
                     
                 </div>
-                <div className="w-full  bg-white">
+                <div className="w-full bg-white">
 
-                    <Spinner loading={loadingTask} height="500"/>
+                    <Spinner loading={loadingTask && !composing} height="500"/>
 
 
                     { composing && <TaskForm id={id}/> }

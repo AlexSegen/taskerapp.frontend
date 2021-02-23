@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState, useReducer } from 'react';
 
+import { useAuth } from '../hooks/useAuth';
 import { getAll as getAllusers } from '../services/user.services';
 import { getAll as getAllProjects } from '../services/project.services';
 import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
@@ -9,6 +10,13 @@ import { TasksReducer, initialState } from './reducers/TasksReducer';
 export const TasksContext = createContext()
 
 const TasksContextProvider = ({children}) => {
+
+    const { user } = useAuth();
+
+    const [completed, setCompleted] = useState([])
+    const [todo, setTodo] = useState([])
+    const [done, setDone] = useState([])
+    const [myTasks, setMyTasks] = useState([]);
 
     const [{ 
         tasks, 
@@ -113,6 +121,16 @@ const TasksContextProvider = ({children}) => {
 
 
     useEffect(() => {
+        if(tasks.length > 0) {
+            setCompleted([...tasks.filter(t => t.completed)]);
+            setTodo([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
+            setMyTasks([...tasks.filter(t => t.assigned && (t.assigned._id === user._id))]);
+            setDone([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
+        }
+    }, [tasks])
+
+
+    useEffect(() => {
         if(selected)
             setComposing(false)
 
@@ -141,6 +159,11 @@ const TasksContextProvider = ({children}) => {
         users,
         loadingUsers,
         errorUsers,
+
+        completed,
+        todo,
+        myTasks,
+        done,
 
         // methods
         getUsers,
