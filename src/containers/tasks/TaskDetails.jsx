@@ -46,7 +46,7 @@ const TaskDetails = () => {
                 <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
           </TaskToolbar>
           <div className="w-full px-10 py-10" >
-              <h1 className="text-3xl font-bold text-gray-900">{selected.title}</h1>
+              <h1 className="text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
               
               <p className="flex items-center mb-5 text-gray-600">
                   <ClockOutlineIcon className="inline w-5 mr-2 "/> {formatDate(selected.createdAt, 'MMMM Do, h:mm:ss a')}
@@ -61,7 +61,7 @@ const TaskDetails = () => {
                 }
               </p>
 
-              <div className="mb-20 text-lg leading-9 text-gray-700 __content">
+              <div className="mb-20 leading-9 text-gray-700 sm:text-base lg:text-lg __content">
                 {renderHTML(selected.content)}
               </div>
 

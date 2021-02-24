@@ -19,11 +19,11 @@ const Header = () => {
     }
 
     return ( 
-        <div className="fixed top-0 z-10 flex items-center w-full px-3 py-4 bg-white border-b-2 border-gray-300 justify-streetch">
+        <div className="fixed top-0 z-20 flex items-center w-full px-3 py-4 bg-white border-b-2 border-gray-300 justify-streetch">
             <div className="w-1/3 px-10 border-r-2 lg:w-1/4 lg:px-4">
                 <Link to="/" className="block font-bold tracking-wider text-gray-500 uppercase hover:text-gray-600">
-                    <span className="block md:hidden lg:block">Task Manager</span>
-                    <span className="hidden md:block lg:hidden">TM</span>
+                    <span className="sm:hidden md:block">Task Manager</span>
+                    <span className="sm:block md:hidden">TM</span>
                 </Link>
             </div>
             <div className="w-1/3 px-8 lg:w-1/4 lg:px-4">

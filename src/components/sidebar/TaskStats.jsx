@@ -29,17 +29,17 @@ const TaskStats = () => {
                 <div className="flex justify-between text-center">
                     <div className="p-3">
                         <div className="mb-1 text-2xl font-bold text-gray-900">{completed.length}</div>
-                        <div className="font-bold text-gray-600">Completed</div>
+                        <div className="text-gray-600 sm:font-semibold lg:font-bold">Completed</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
                     <div className="p-3">
                         <div className="mb-1 text-2xl font-bold text-gray-900">{tasks.length - completed.length}</div>
-                        <div className="font-bold text-gray-600">Todo</div>
+                        <div className="text-gray-600 sm:font-semibold lg:font-bold">Todo</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
                     <div className="p-3">
                         <div className="mb-1 text-2xl font-bold text-gray-900">{tasks.length }</div>
-                        <div className="font-bold text-gray-600">Total</div>
+                        <div className="text-gray-600 sm:font-semibold lg:font-bold">Total</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
                 </div>
