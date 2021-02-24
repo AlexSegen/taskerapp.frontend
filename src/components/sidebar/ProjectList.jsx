@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 
-import Spinner from '../Spinner';
 import { ChevronRightIcon } from '../Icons';
 import { TasksContext } from '../../context/TasksContext';
 
 const ProjectList = () => {
 
-    const { getProjects, loadingProjects, projects, errorProjects } = useContext(TasksContext);
+    const { getProjects, projects, errorProjects } = useContext(TasksContext);
 
     useEffect(() => {
         getProjects();
@@ -16,9 +15,6 @@ const ProjectList = () => {
         <>
             <div className="px-10 lg:px-4">
                 <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Projects</p>
-
-                <Spinner loading={loadingProjects} />
-
                 <ul>
                     {
                         projects.map(p => (
@@ -28,13 +24,9 @@ const ProjectList = () => {
                         ))
                     }
                 </ul>
-
                 { errorProjects && ( <div className="alert-danger"> {errorProjects} </div> ) }
-
             </div>
-
             <hr className="my-8 border-gray-400"/>
-
         </>
     );
 }

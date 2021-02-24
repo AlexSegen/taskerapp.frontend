@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 
-import Spinner from '../Spinner';
 import { TasksContext } from '../../context/TasksContext';
 
 const TeamList = () => {
 
-    const { getUsers, users, loadingUsers, errorUsers } = useContext(TasksContext);
+    const { getUsers, users,  errorUsers } = useContext(TasksContext);
 
     useEffect(() => {
         getUsers();
@@ -13,12 +12,8 @@ const TeamList = () => {
 
     return ( 
         <>
-
             <div className="px-10 lg:px-4">
                 <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Team</p>
-
-                <Spinner loading={loadingUsers} />
-
                 <div className="text-center">
                 {
                     users.map(user => (
@@ -28,13 +23,9 @@ const TeamList = () => {
                     ))
                 }
                 </div>
-
                 { errorUsers && ( <div className="alert-danger"> {errorUsers} </div> ) }
-
             </div>
-
             <hr className="my-8 border-gray-400"/>
-
         </>
     );
 }

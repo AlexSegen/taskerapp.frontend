@@ -8,7 +8,7 @@ import { formatDate } from '../../helpers/utils'
 import TaskComments from '../../components/tasks/TaskComments';
 import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
-import { TrashOutlineIcon, CheckIcon, ClockOutlineIcon, CheckCircleIcon, PencilOutlineIcon } from '../../components/Icons';
+import { TrashOutlineIcon, CheckIcon, ClockOutlineIcon, CheckCircleIcon, PencilOutlineIcon, XOutlineIcon } from '../../components/Icons';
 
 const TaskDetails = () => {
     let { id } = useParams();
@@ -19,6 +19,10 @@ const TaskDetails = () => {
     const onSelect = (data) => {
       selected.assigned = data;
       editTask(selected);
+    }
+    
+    const handleClose = () => {
+      history.push("/tasks")
     }
 
     useEffect(() => {
@@ -44,6 +48,7 @@ const TaskDetails = () => {
                 <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
                 <Tool disabled={selected.completed} onClick={() => history.push(`/tasks/${selected._id}/edit`)} ><PencilOutlineIcon className="w-8"/></Tool>
                 <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
+                <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
           </TaskToolbar>
           <div className="w-full px-10 py-10" >
               <h1 className="text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth';
 import { TasksContext } from '../context/TasksContext';
-import { PlusIcon } from './Icons'
 
 const Header = () => {
 

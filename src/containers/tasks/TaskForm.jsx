@@ -11,18 +11,6 @@ import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
 import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon } from '../../components/Icons';
 
-const initialState = {
-    "_id": 0,
-    "title": "",
-    "content": "",
-    "project": {
-        "_id": 0
-    },
-    "completed": false,
-    "assigned": null,
-    "tags": []
-}
-
 const TaskForm = () => {
 
     let { id } = useParams();
@@ -73,9 +61,6 @@ const TaskForm = () => {
     }
 
     const handleClose = () => {
-        /* setSelected(null)
-        setComposing(false)
-        setForm(TaskInitialState); */
         const target = id || "";
         history.push("/tasks/" + target)
     }

@@ -14,10 +14,10 @@ const Sidebar = () => {
 
     const isOpen = false;
 
-    const css = "sm:transform sm:fixed sm:top-0 sm:left-0 sm:bottom-0 z-10"
+    const css = "transform fixed top-0 left-0 bottom-0 z-10"
 
     return ( 
-        <aside className={`${css} ${isOpen ? 'sm:-translate-x-0':'sm:-translate-x-full'} lg:static md:w-7/12 sm:w-10/12 lg:w-1/4 min-h-screen px-10 py-10  bg-white border-r-2 border-gray-200  lg:px-4 lg:transform-none`}>
+        <aside className={`${css} ${isOpen ? '-translate-x-0':'-translate-x-full'} lg:static md:w-7/12 sm:w-10/12 lg:w-1/4 min-h-screen px-10 py-10  bg-white border-r-2 border-gray-200  lg:px-4 lg:transform-none`}>
 
             <div className="mt-10">
                 <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>

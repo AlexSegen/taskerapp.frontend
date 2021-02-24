@@ -23,17 +23,17 @@ const Tasks = ({children}) => {
     return ( 
         <Layout>
             <div className="flex ">
-                <div className="w-3/6">
+                <div className="w-full lg:w-3/6">
                     
                     <TasksFilter/>
 
                     <TasksList/>
                     
                 </div>
-                <div className="w-full bg-white">
+                <div className="w-full bg-white lg:w-full">
                     
 
-                    { !id && selected  && selected._id !== 0 &&( <SelectTask/>) }
+                    { ((!id && selected && selected._id !== 0)  || (!id && !selected)) && ( <SelectTask/>) }
 
                     {/* {loadingTask ? (<Spinner loading={true && !composing} height="500"/>) : (<>{ children }</>)} */}
 

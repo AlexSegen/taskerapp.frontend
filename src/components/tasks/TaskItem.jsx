@@ -16,7 +16,7 @@ const TaskItem = ({task}) => {
     const baseItem = "flex items-center px-2 py-2 justify-stretch"
     return ( 
         <div className={`${baseItem} ${selected && selected._id === task._id ? 'bg-gray-200' : 'bg-white'}`}>
-            <div className="w-auto p-2 sm:hidden lg:block">
+            <div className="hidden w-auto p-2 lg:block">
                 <button 
                     onClick={() => toggleTaskStatus(task)}
                     type="button" 
@@ -30,7 +30,7 @@ const TaskItem = ({task}) => {
                     <span className="block font-normal text-gray-500">{formatDate(task.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                 </button>
             </div>
-            <div className="w-1/4 p-2 sm:hidden lg:block">
+            <div className="hidden w-1/4 p-2 lg:block">
                 { task.assigned ? 
                     (<img className="block w-12 mx-auto rounded-full" src={task.assigned.avatar} alt=""/>) :
                     (<img className="block w-12 mx-auto rounded-full" src="/avatar.jpg" alt=""/>) 
