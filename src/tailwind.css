@@ -2,9 +2,6 @@
 
 @tailwind components;
 
-@tailwind utilities;
-
-
 /* General */
 
 .button {
@@ -103,3 +100,6 @@
     transform: rotate(360deg);
   }
 }
+
+
+@tailwind utilities;

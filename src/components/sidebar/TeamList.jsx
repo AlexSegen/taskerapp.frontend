@@ -14,7 +14,7 @@ const TeamList = () => {
     return ( 
         <>
 
-            <div className="px-8">
+            <div className="px-10 lg:px-4">
                 <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Team</p>
 
                 <Spinner loading={loadingUsers} />
@@ -22,8 +22,8 @@ const TeamList = () => {
                 <div className="text-center">
                 {
                     users.map(user => (
-                        <div key={user._id} className="inline-block p-3 w-16 h-16" title={`${user.first_name} ${user.last_name}`}>
-                            <img className="block mx-auto rounded-full w-full" src={user.avatar} alt={`${user.first_name} ${user.last_name}`}/>
+                        <div key={user._id} className="inline-block w-16 h-16 p-3 lg:p-2" title={`${user.first_name} ${user.last_name}`}>
+                            <img className="block w-full mx-auto rounded-full" src={user.avatar} alt={`${user.first_name} ${user.last_name}`}/>
                         </div>
                     ))
                 }

@@ -14,7 +14,7 @@ const ProjectList = () => {
 
     return ( 
         <>
-            <div className="px-10">
+            <div className="px-10 lg:px-4">
                 <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Projects</p>
 
                 <Spinner loading={loadingProjects} />

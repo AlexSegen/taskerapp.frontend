@@ -30,7 +30,7 @@ const TaskItem = ({task}) => {
                     <span className="block font-normal text-gray-500">{formatDate(task.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                 </button>
             </div>
-            <div className="w-1/4 p-2">
+            <div className="w-1/4 p-2 md:hidden lg:block">
                 { task.assigned ? 
                     (<img className="block w-12 mx-auto rounded-full" src={task.assigned.avatar} alt=""/>) :
                     (<img className="block w-12 mx-auto rounded-full" src="/avatar.jpg" alt=""/>) 
