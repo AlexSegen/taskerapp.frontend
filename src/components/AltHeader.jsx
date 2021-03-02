@@ -11,7 +11,7 @@ const Altheader = () => {
   const [toggled, setToggled] = useState(false);
   const [showDrop, setShowDrop] = useState(false);
 
-  const { TaskInitialState, setSelected, filter, setFilter } = useContext(TasksContext);
+  const { TaskInitialState, setSelected } = useContext(TasksContext);
 
   const handleAddTask = () => {
       setSelected(TaskInitialState);
