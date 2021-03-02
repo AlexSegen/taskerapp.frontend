@@ -20,7 +20,7 @@ const TaskEdit = () => {
     }, [id])
 
     useEffect(() => {
-        if (selected && selected._id !== 0) {
+        if (selected && selected._id !== 0 && selected.isNew) {
             history.push("/tasks/" + selected._id)
         } else {
             history.push("/task/new")

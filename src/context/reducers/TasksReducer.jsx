@@ -106,9 +106,10 @@ export const TasksReducer = (state, action) => {
             }
 
         case "ADD_TASK":
+        
             return {
                 ...state,
-                selected: action.payload,
+                selected: {...action.payload, isNew: true},
                 tasks: [action.payload, ...state.tasks],
                 loadingTask: false
             }

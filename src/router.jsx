@@ -9,6 +9,7 @@ import {
 import { useAuth } from './hooks/useAuth';
 
 import Login from './containers/auth/Login';
+import Register from './containers/auth/Register';
 
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
@@ -40,6 +41,9 @@ const RouterRoot = () => {
                 </PrivateRoute>
                 <NoAuthOnlyRoute path="/login">
                     <Login />
+                </NoAuthOnlyRoute>
+                <NoAuthOnlyRoute path="/register">
+                    <Register />
                 </NoAuthOnlyRoute>
             </Switch>
         </Router>
