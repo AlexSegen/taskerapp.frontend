@@ -20,21 +20,21 @@ const RouterRoot = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path="/">
+                <PrivateRoute exact path="/">
                     <Redirect to="/tasks" />
-                </Route>
-                <Route exact path="/tasks">
+                </PrivateRoute>
+                <PrivateRoute exact path="/tasks">
                     <Tasks />
-                </Route>
-                <Route exact path="/tasks/:id">
+                </PrivateRoute>
+                <PrivateRoute exact path="/tasks/:id">
                     <TaskDetails />
-                </Route>
-                <Route path="/task/new">
+                </PrivateRoute>
+                <PrivateRoute path="/task/new">
                     <TaskEdit />
-                </Route>
-                <Route exact path="/tasks/:id/edit">
+                </PrivateRoute>
+                <PrivateRoute exact path="/tasks/:id/edit">
                     <TaskEdit />
-                </Route>
+                </PrivateRoute>
                 <PrivateRoute exact path="/projects">
                     <Projects />
                 </PrivateRoute>
