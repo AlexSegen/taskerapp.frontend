@@ -24,7 +24,7 @@ const AuthContextProvider = ({ children }) => {
             setLoading(false);
             setUser(data.user);
             setToken(data.token);
-            setAuthenticated(true);
+            setAuthenticated(!!data.token);
 
         }).catch(error => {
             setLoading(false);

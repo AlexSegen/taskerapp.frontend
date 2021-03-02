@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import AltHeader from './AltHeader';
 import Sidebar from './Sidebar';
 
@@ -7,7 +6,6 @@ import Sidebar from './Sidebar';
 const Layout = ({children}) => {
     return (  
         <>
-            {/* <Header/> */}
             <AltHeader/>
             <div className="flex">
                 <Sidebar/>

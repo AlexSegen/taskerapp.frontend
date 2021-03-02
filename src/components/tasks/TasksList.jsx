@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TasksContext } from '../../context/TasksContext'
@@ -8,7 +8,7 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { TaskInitialState, tasks, loadingTasks, setComposing, setSelected, errorTasks } = useContext(TasksContext)
+    const { getTasks, TaskInitialState, tasks, loadingTasks, setComposing, setSelected, errorTasks } = useContext(TasksContext)
 
     const history = useHistory()
 
@@ -17,6 +17,10 @@ const TasksList = () => {
         setComposing(true);;
         history.push("/task/new")
     }
+
+    useEffect(() => {
+        getTasks();
+    }, [])
 
     return (
         <div className="relative bg-white">

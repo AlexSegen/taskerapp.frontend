@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { useAuth } from '../hooks/useAuth';
 import { TasksContext } from '../context/TasksContext';
-import { MenuIcon, BellOutlineIcon, PlusIcon } from './Icons';
+import { MenuIcon, BellOutlineIcon } from './Icons';
 
 const Altheader = () => {
   const { user, Logout } = useAuth();
@@ -11,11 +11,10 @@ const Altheader = () => {
   const [toggled, setToggled] = useState(false);
   const [showDrop, setShowDrop] = useState(false);
 
-  const { TaskInitialState, setComposing, setSelected, filter, setFilter } = useContext(TasksContext);
+  const { TaskInitialState, setSelected, filter, setFilter } = useContext(TasksContext);
 
   const handleAddTask = () => {
       setSelected(TaskInitialState);
-      setComposing(true);
       history.push("/task/new")
   }
 
@@ -39,10 +38,6 @@ const Altheader = () => {
     useEffect(() => {
 
       handleMobileMenu();
-
-/*       return () => {
-        document.removeEventListener('click')
-      } */
 
     }, [])
 

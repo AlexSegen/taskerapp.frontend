@@ -15,7 +15,7 @@ const Comment = ({comment}) => {
         if (e.key === 'Enter') {
             editComment(editMode)
         }
-        if (e.key === "Escape") {
+        if (e.key === "Escape" || e.key === "ESC" || e.key === "Esc") {
             setEditMode(false)
         }
     }

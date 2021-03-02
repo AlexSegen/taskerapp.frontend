@@ -11,15 +11,13 @@ export const TasksContext = createContext()
 
 const TasksContextProvider = ({children}) => {
 
-    const { user, Logout } = useAuth();
+    const { user } = useAuth();
 
-    const [composing, setComposing] = useState(false);
 
     const [completed, setCompleted] = useState([])
     const [todo, setTodo] = useState([])
     const [done, setDone] = useState([])
     const [myTasks, setMyTasks] = useState([]);
-    const [filter, setFilter] = useState("");
 
     const [{ 
         tasks, 
@@ -63,15 +61,9 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "SET_TASKS", payload: [] })
         dispatch({ type: "REQUEST_TASKS" })
         
-        getAll(filter).then(data => {
+        getAll().then(data => {
             dispatch({ type: "SET_TASKS", payload: data })
         }).catch(error => {
-            /* if(error.data && error.data.code) {
-                const { code } = error.data;
-                if(code ==="TOKEN_EXPIRED") {
-                    Logout();
-                }
-            } */
             dispatch({ type: "REQUEST_TASKS_FAILURE", payload: error.message })
         })
     }
@@ -80,7 +72,6 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         createTask(task).then(data => {
             dispatch({ type: "ADD_TASK", payload: data })
-            setComposing(false);
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
@@ -99,7 +90,6 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         removeTask(id).then(() => {
             dispatch({ type: "DELETE_TASK", payload: id })
-            setComposing(false)
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
@@ -129,10 +119,6 @@ const TasksContextProvider = ({children}) => {
         })
     }
 
-
-    useEffect(() => {
-        getTasks();
-    }, [filter])
 
     useEffect(() => {
         if(tasks.length > 0) {
@@ -169,8 +155,6 @@ const TasksContextProvider = ({children}) => {
         myTasks,
         done,
 
-        filter,
-
         // methods
         getUsers,
         getProjects,
@@ -180,11 +164,7 @@ const TasksContextProvider = ({children}) => {
         editTask,
         toggleTaskStatus,
         deleteTask,
-        setFilter,
 
-        // composing
-        composing,
-        setComposing
     }
 
     return (
