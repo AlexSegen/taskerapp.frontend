@@ -5,7 +5,6 @@ import { TasksContext } from '../../context/TasksContext';
 const TeamList = () => {
 
     const { getUsers, users,  errorUsers } = useContext(TasksContext);
-
     useEffect(() => {
         getUsers();
     }, [])

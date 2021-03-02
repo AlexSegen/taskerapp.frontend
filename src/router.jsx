@@ -12,7 +12,7 @@ import Login from './containers/auth/Login';
 
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
-import TaskForm from './containers/tasks/TaskForm';
+import TaskEdit from './containers/tasks/TaskEdit';
 import Projects from './containers/Projects';
 
 const RouterRoot = () => {
@@ -30,10 +30,10 @@ const RouterRoot = () => {
                     <TaskDetails />
                 </Route>
                 <Route path="/task/new">
-                    <TaskForm />
+                    <TaskEdit />
                 </Route>
                 <Route exact path="/tasks/:id/edit">
-                    <TaskForm />
+                    <TaskEdit />
                 </Route>
                 <PrivateRoute exact path="/projects">
                     <Projects />

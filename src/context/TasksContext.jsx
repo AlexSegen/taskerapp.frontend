@@ -7,18 +7,13 @@ import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } fro
 
 import { TasksReducer, initialState, TaskInitialState } from './reducers/TasksReducer';
 
-
-
 export const TasksContext = createContext()
 
 const TasksContextProvider = ({children}) => {
 
-    const { user } = useAuth();
-
-    const [isEditing, setIsEditing] = useState(false)
+    const { user, Logout } = useAuth();
 
     const [composing, setComposing] = useState(false);
-
 
     const [completed, setCompleted] = useState([])
     const [todo, setTodo] = useState([])
@@ -71,6 +66,12 @@ const TasksContextProvider = ({children}) => {
         getAll(filter).then(data => {
             dispatch({ type: "SET_TASKS", payload: data })
         }).catch(error => {
+            /* if(error.data && error.data.code) {
+                const { code } = error.data;
+                if(code ==="TOKEN_EXPIRED") {
+                    Logout();
+                }
+            } */
             dispatch({ type: "REQUEST_TASKS_FAILURE", payload: error.message })
         })
     }
@@ -143,8 +144,6 @@ const TasksContextProvider = ({children}) => {
     }, [tasks])
 
     const values = {
-        setIsEditing,
-        isEditing,
 
         // tasks
         tasks, 

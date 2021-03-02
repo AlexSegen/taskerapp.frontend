@@ -1,13 +1,14 @@
 export const TaskInitialState = {
-    "_id": 0,
-    "title": "",
-    "content": "",
-    "project": {
-        "_id": 0
+    _id: 0,
+    title: "",
+    content: "",
+    project: {
+        _id: 0
     },
-    "completed": false,
-    "assigned": null,
-    "tags": []
+    completed: false,
+    assigned: null,
+    tag: [],
+    redirect: false
   }
 
 export const initialState = {
@@ -22,7 +23,7 @@ export const initialState = {
     projects: [],
     users: [],
     loadingUsers: false,
-    errorUsers: false
+    errorUsers: false,
 }
 
 export const TasksReducer = (state, action) => {
@@ -107,7 +108,7 @@ export const TasksReducer = (state, action) => {
         case "ADD_TASK":
             return {
                 ...state,
-                selected: null,
+                selected: action.payload,
                 tasks: [action.payload, ...state.tasks],
                 loadingTask: false
             }
@@ -121,7 +122,7 @@ export const TasksReducer = (state, action) => {
         case "SET_TASK":
             return {
                 ...state,
-                tasks: action.payload,
+                selected: action.payload,
                 loadingTask: false
             }
 
@@ -142,7 +143,7 @@ export const TasksReducer = (state, action) => {
 
             return {
                 ...state,
-                selected: null,
+                selected: {...TaskInitialState, redirect: true},
                 loadingTask: false,
                 tasks: [...state.tasks.filter(t => t._id !== action.payload)]
             }

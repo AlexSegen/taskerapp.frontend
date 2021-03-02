@@ -3,9 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill'; 
 import 'react-quill/dist/quill.snow.css';
 
-import Tasks from  "./Tasks"
 import { useForm } from '../../hooks/useForm';
-import Spinner from '../../components/Spinner';
 import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
@@ -17,9 +15,9 @@ const TaskForm = () => {
     
     const history = useHistory();
 
-    const { composing, setIsEditing, TaskInitialState, setTask, editTask, getTask, setComposing, setSelected, loadingProjects, projects, errorProjects, selected, loadingTask, errorTask } = useContext(TasksContext);
+    const { selected, setTask, editTask, loadingProjects, projects, errorProjects, loadingTask, errorTask } = useContext(TasksContext);
 
-    const { form, title, content, setForm, handleChange } = useForm(TaskInitialState);
+    const { form, title, content, setForm, handleChange } = useForm(selected);
 
     const [tag, setTag] = useState("");
 
@@ -66,33 +64,10 @@ const TaskForm = () => {
     }
 
     useEffect(() => {
-        if (id) {
-            setIsEditing(true)
-            getTask(id)
-        } else {
-            setForm(TaskInitialState)
-        }
-    }, [id])
-
-    useEffect(() => {
-        if(selected){
-            setForm({...selected})
-        }
+        setForm({...selected})
     }, [selected])
 
-    useEffect(() => {
-        if (selected === null && !composing) {
-            history.push("/tasks")
-        }
-      },[composing, selected])
-  
-
-
-    if (loadingTask)
-        return <Tasks><Spinner loading={loadingTask}/></Tasks>
-
     return ( 
-        <Tasks>
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
             <TaskToolbar task={form} onSelect={onSelect} disabled={loadingTask}>
                 <Tool disabled={loadingTask} onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
@@ -100,7 +75,7 @@ const TaskForm = () => {
             </TaskToolbar>
             <div className="max-w-screen-md px-10 py-10 mx-auto">
 
-                <h1 className="mb-5 text-2xl font-bold text-gray-700"> { id ? 'Edit':'Create new' } task</h1>
+                <h1 className="mb-5 text-2xl font-bold text-gray-700"> { selected && selected._id !== 0 ? 'Edit':'Create new' } task</h1>
 
                 <form className="w-full max-w-xl" onSubmit={submit}>
 
@@ -153,7 +128,7 @@ const TaskForm = () => {
 
                                 <div className="my-4">
                                     {
-                                         form.tags.map(tag => (
+                                        form.tags.map(tag => (
                                             <span onClick={() => handleTag(tag)} key={tag} className="inline px-6 py-3 mr-2 text-sm bg-gray-200 rounded-full cursor-pointer hover:bg-red-200">{tag}</span>
                                         ))
                                     }
@@ -174,7 +149,7 @@ const TaskForm = () => {
 
             </div>
         </div>
-        </Tasks>
+
      );
 }
  

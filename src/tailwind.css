@@ -42,7 +42,7 @@
 }
 
 .__content pre {
-  @apply w-full px-2 py-2 text-blue-500 bg-gray-700;
+  @apply w-full max-w-full px-2 py-2 overflow-x-auto text-blue-500 bg-gray-700;
 }
 
 .__content h1 {

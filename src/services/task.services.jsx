@@ -11,7 +11,6 @@ export const getAll = async (filter) => {
         return data;
         
     } catch (error) {
-        
         if (error.response) 
             throw new RequestError(error.response.status, error.response.data.message, error.response.data)
         
