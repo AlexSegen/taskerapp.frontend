@@ -58,12 +58,25 @@
 }
 
 
+/* Toastme */
+
+.toastme.ligh.success {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #f7fafc;
+}
+
+
+.toastme .toastme-close {
+  right: 5px;
+  top: 5px;
+}
+
+
 /* Spiner */
 .half-circle-spinner, .half-circle-spinner * {
   box-sizing: border-box;
 }
-
-
 
 .half-circle-spinner {
   width: 60px;

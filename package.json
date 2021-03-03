@@ -15,7 +15,8 @@
     "react-render-html": "^0.6.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.4.6",
+    "toastmejs": "^1.2.3"
   },
   "scripts": {
     "purge:css": "cross-env NODE_ENV=production postcss src/tailwind.css -o src/index.css",

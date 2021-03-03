@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState, useReducer } from 'react';
 
+
 import { useAuth } from '../hooks/useAuth';
+import { useNotification } from '../hooks/useNotification';
 import { getAll as getAllusers } from '../services/user.services';
 import { getAll as getAllProjects } from '../services/project.services';
 import { getAll, getSingle, createTask, updateTask, removeTask, toggleTask } from '../services/task.services';
@@ -12,6 +14,8 @@ export const TasksContext = createContext()
 const TasksContextProvider = ({children}) => {
 
     const { user } = useAuth();
+
+    const { toastSuccess, toastError } = useNotification();
 
 
     const [completed, setCompleted] = useState([])
@@ -72,6 +76,8 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         createTask(task).then(data => {
             dispatch({ type: "ADD_TASK", payload: data })
+            toastSuccess("Task added");
+
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
@@ -90,6 +96,7 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         removeTask(id).then(() => {
             dispatch({ type: "DELETE_TASK", payload: id })
+            toastSuccess("Task deleted");
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })
@@ -99,6 +106,7 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "REQUEST_TASK" })
         updateTask(task).then(data => {
             dispatch({ type: "UPDATE_TASK", payload: data })
+            toastSuccess("Task updated");
         }).catch(error => {
             dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
         })

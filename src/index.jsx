@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+//Assets
+import 'toastmejs/dist/css/toastme.css'
+
+import './index.css';
+
+
+//Contexts
 import AuthContextProvider from './context/AuthContext';
 import TasksContextProvider from './context/TasksContext';
 import CommentsContextProvider from './context/CommentsContext';
