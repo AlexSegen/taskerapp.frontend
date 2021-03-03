@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TasksContext } from '../../context/TasksContext'
+import { TaskItemLoader } from '../loaders/TaskLoaders';
 
-import Spinner from '../Spinner';
 import TaskItem from './TaskItem';
 
 const TasksList = () => {
@@ -29,7 +29,21 @@ const TasksList = () => {
   
             <div className="w-full max-h-screen overflow-y-auto">
 
-                <Spinner loading={loadingTasks}/>
+                {
+                    loadingTasks && (
+                        <>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                            <TaskItemLoader/>
+                        </>
+                    )
+                }
+
 
                 {
                     tasks && tasks.map(task => <TaskItem key={task._id} task={task}/>)

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TasksContext } from '../../context/TasksContext';
 
+
 const TaskStats = () => {
 
-    const {completed, myTasks, done, tasks } = useContext(TasksContext);
+    const {completed, myTasks, done, tasks, loadingTasks } = useContext(TasksContext);
 
     const [percent, setPercent] = useState(0)
 
@@ -28,17 +29,17 @@ const TaskStats = () => {
                 </div>
                 <div className="flex justify-between text-center">
                     <div className="p-3">
-                        <div className="mb-1 text-2xl font-bold text-gray-900">{completed.length}</div>
+                        <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{completed.length}</div>
                         <div className="text-gray-600 sm:font-semibold lg:font-bold">Completed</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
                     <div className="p-3">
-                        <div className="mb-1 text-2xl font-bold text-gray-900">{tasks.length - completed.length}</div>
+                        <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{tasks.length - completed.length}</div>
                         <div className="text-gray-600 sm:font-semibold lg:font-bold">Todo</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
                     <div className="p-3">
-                        <div className="mb-1 text-2xl font-bold text-gray-900">{tasks.length }</div>
+                        <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{tasks.length }</div>
                         <div className="text-gray-600 sm:font-semibold lg:font-bold">Total</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
