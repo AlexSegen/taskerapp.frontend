@@ -15,7 +15,7 @@ const Tasks = ({children}) => {
 
     return ( 
         <Layout>
-            <div className="flex ">
+            <div className="flex">  
                 <div className={`w-full lg:w-3/6 lg:block`}>
                     <TasksFilter/>
                     <TasksList/>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { TasksContext } from '../context/TasksContext';
 
 import { useAuth } from '../hooks/useAuth';
 import { BellIcon, SettingsIcon, EnvelopeIcon } from './Icons';
@@ -8,6 +9,8 @@ import TeamList from './sidebar/TeamList';
 
 const Sidebar = () => {
 
+    const { getTasks } = useContext(TasksContext);
+
     const { user } = useAuth()
 
     const { first_name, last_name, email, avatar } = user;
@@ -15,6 +18,10 @@ const Sidebar = () => {
     const isOpen = false;
 
     const css = "transform fixed top-0 left-0 bottom-0 z-10"
+
+    useEffect(() => {
+        getTasks();
+    }, [])
 
     return ( 
         <aside className={`${css} ${isOpen ? '-translate-x-0':'-translate-x-full'} lg:static md:w-7/12 sm:w-10/12 lg:w-1/4 min-h-screen px-10 py-10  bg-white border-r-2 border-gray-200  lg:px-4 lg:transform-none`}>

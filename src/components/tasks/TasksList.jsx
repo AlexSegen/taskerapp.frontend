@@ -18,9 +18,9 @@ const TasksList = () => {
         history.push("/task/new")
     }
 
-    useEffect(() => {
+/*     useEffect(() => {
         getTasks();
-    }, [])
+    }, []) */
 
     return (
         <div className="relative bg-white">

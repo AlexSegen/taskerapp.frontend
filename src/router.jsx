@@ -14,7 +14,8 @@ import Register from './containers/auth/Register';
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
 import TaskEdit from './containers/tasks/TaskEdit';
-import Projects from './containers/Projects';
+import Projects from './containers/projects/Projects';
+import Team from './containers/team/Team';
 
 const RouterRoot = () => {
 
@@ -33,11 +34,14 @@ const RouterRoot = () => {
                 <PrivateRoute path="/task/new">
                     <TaskEdit />
                 </PrivateRoute>
-                <PrivateRoute exact path="/tasks/:id/edit">
+                <PrivateRoute  path="/tasks/:id/edit">
                     <TaskEdit />
                 </PrivateRoute>
-                <PrivateRoute exact path="/projects">
+                <PrivateRoute  path="/projects">
                     <Projects />
+                </PrivateRoute>
+                <PrivateRoute exact path="/team">
+                    <Team />
                 </PrivateRoute>
                 <NoAuthOnlyRoute path="/login">
                     <Login />

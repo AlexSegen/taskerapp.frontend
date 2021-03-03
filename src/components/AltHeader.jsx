@@ -18,6 +18,10 @@ const Altheader = () => {
       history.push("/task/new")
   }
 
+  const isActiveLink = route => {
+    return window.location.pathname.indexOf(route) > -1 ? "__active" : ""
+  }
+
   const handleMobileMenu = () => {
       document.addEventListener('click', (e) => {
         if(e.target.classList.contains("mobile-button")) {
@@ -54,9 +58,9 @@ const Altheader = () => {
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
 
               <Link className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/">Dashboard</Link>
-              <Link className="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" to="/">Tasks</Link>
-              <Link className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/projects">Projects</Link>
-              <Link className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/team">Team</Link>
+              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/task")}`} to="/">Tasks</Link>
+              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/projects")}`} to="/projects">Projects</Link>
+              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/team")}`} to="/team">Team</Link>
             </div>
           </div>
         </div>
