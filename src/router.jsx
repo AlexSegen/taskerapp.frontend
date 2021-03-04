@@ -23,7 +23,7 @@ const RouterRoot = () => {
         <Router>
             <Switch>
                 <PrivateRoute exact path="/">
-                    <Redirect to="/tasks" />
+                    <Tasks />
                 </PrivateRoute>
                 <PrivateRoute exact path="/tasks">
                     <Tasks />
