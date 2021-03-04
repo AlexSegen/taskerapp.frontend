@@ -37,10 +37,9 @@ const Team = () => {
     return ( 
         <Layout>
             
-            <div className="">
                 <div className="flex justify-between p-2 border-b-2 border-gray-100">
                     <div className="p-2">
-                        <h1 className="m-0 text-base text-3xl">Team</h1>
+                        <h1 className="m-0 text-base text-2xl">Team</h1>
                     </div>
                     <div className="p-2">
                     </div>
@@ -119,7 +118,6 @@ const Team = () => {
 
                 </div>
 
-            </div>
         </Layout>
      );
 }
