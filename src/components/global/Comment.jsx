@@ -27,10 +27,10 @@ const Comment = ({comment}) => {
     
     return ( 
         <div className="flex items-start mb-6">
-            <img className="w-8 mr-5 rounded-full" src={comment.author.avatar} alt=""/>
             <div className="w-full">
                 <div className="flex items-center space-between">
-                    <div className="w-full p-2 text-base font-bold">{comment.author.first_name} {comment.author.last_name} 
+                    <img className="w-8 mr-2 rounded-full" src={comment.author.avatar} alt=""/>
+                    <div className="w-full p-2 text-base font-semibold">{comment.author.first_name} {comment.author.last_name} 
                         <span className="ml-2 text-sm font-normal text-gray-600">{formatDate(comment.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                     </div>
                     <div className="flex items-center justify-end w-1/3 p-2">
@@ -68,7 +68,7 @@ const Comment = ({comment}) => {
                     editMode && editMode._id === comment._id && (
                         <div className="relative">
                             <span className="absolute top-0 right-0 p-1 text-xs text-blue-600 bg-blue-100">ENTER to save / ESC to cancel</span>
-                            <input 
+                            <textarea 
                             value={editMode.content}
                             onKeyDown={handleUpdateComment}
                             disabled={loadingComment || loadingComments}

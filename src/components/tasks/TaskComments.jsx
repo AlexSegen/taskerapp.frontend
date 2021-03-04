@@ -13,7 +13,7 @@ const TaskComments = () => {
     const {content, editMode, setContent, getComments, comments, postComment, loadingComments, loadingComment, errorComment, errorComments }  = useContext(CommentsContext);
 
     const handlePostComment = () => {
-        if (content && !content.trim().length)
+        if (!content || (content && !content.trim().length))
             return;
         postComment({ content, articleId: id})
         
@@ -26,22 +26,22 @@ const TaskComments = () => {
 
     return ( 
         <>
-            <div className="flex items-center">
+            <div className="">
+                <p className="mb-4 text-base text-gray-600">Comments</p>
                 
-                <input 
+                <textarea 
                 disabled={loadingComment || loadingComments || editMode}
                 onChange={e => setContent(e.target.value)}
                 value={content}
-                className="w-full h-20 px-10 py-4 bg-gray-100 focus:outline-none" 
+                className="w-full h-20 px-10 py-4 bg-gray-100 focus:outline-none focus:h-40" 
                 type="text" 
                 placeholder="Write a comment..."/>
                 
                 <button 
                 onClick={() => handlePostComment()}
                 disabled={loadingComment || loadingComments || editMode}
-                type="button"  className="h-20 px-6 py-4 bg-blue-500 rounded-none button focus:outline-none hover:bg-blue-600">
-                    <ChevronRightIcon className="w-10"/>
-                
+                type="button"  className="px-8 py-2 bg-blue-500 rounded button focus:outline-none hover:bg-blue-600">
+                    {loadingComment ? 'Loading...': 'Save'}
                 </button>
             </div>
 

@@ -87,7 +87,7 @@ const TaskDetails = () => {
                       
                         <div className="flex items-center py-8 my-5 border-t-2 border-b-2 border-gray-300">
                             <CheckCircleIcon className="w-10 text-blue-500"/>
-                            <span className="mx-4 font-bold text-blue-500">{selected.completedBy.first_name} completed this task</span>
+                            <span className="mx-4 font-semibold text-blue-500">{selected.completedBy.first_name} completed this task</span>
                             <span className="text-gray-600">{formatDate(selected.completedAt, 'MMMM Do, h:mm:ss a')}</span>
                         </div>
 

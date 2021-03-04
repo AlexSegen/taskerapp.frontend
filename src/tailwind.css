@@ -5,7 +5,7 @@
 /* General */
 
 .button {
-  @apply px-10 py-3 text-white rounded-full font-bold
+  @apply px-10 py-3 text-white rounded-full font-semibold
 }
 
 
@@ -121,5 +121,3 @@
 
 
 @tailwind utilities;
-
-@tailwind animation;

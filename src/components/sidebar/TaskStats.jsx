@@ -27,18 +27,18 @@ const TaskStats = () => {
                     <div className="absolute top-0 left-0 w-full h-2 bg-gray-300 rounded"></div>
                     <div className="absolute top-0 left-0 h-2 bg-blue-500 rounded" style={{width: percent}}></div>
                 </div>
-                <div className="flex justify-between text-center">
-                    <div className="p-3">
+                <div className="flex justify-center w-full text-center">
+                    <div className="w-full p-3">
                         <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{completed.length}</div>
-                        <div className="font-semibold text-gray-600">Completed</div>
+                        <div className="font-semibold text-gray-600">Done</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
-                    <div className="p-3">
+                    <div className="w-full p-3">
                         <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{tasks.length - completed.length}</div>
-                        <div className="font-semibold text-gray-600">Todo</div>
+                        <div className="font-semibold text-gray-600">To do</div>
                         <div className="text-gray-500">tasks</div>
                     </div>
-                    <div className="p-3">
+                    <div className="w-full p-3">
                         <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{tasks.length }</div>
                         <div className="font-semibold text-gray-600">Total</div>
                         <div className="text-gray-500">tasks</div>
