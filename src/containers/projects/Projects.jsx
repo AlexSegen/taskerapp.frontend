@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
+import Card from '../../components/Card';
 const Projects = () => {
     return ( 
         <Layout>
@@ -10,6 +11,16 @@ const Projects = () => {
                 </div>
                 <div className="p-2">
                 </div>
+            </div>
+
+            <div className="p-4">
+
+                <Card>
+                    <Card.Header>Prueba titulo</Card.Header>
+                    <Card.Body>Prueba body</Card.Body>
+                    <Card.Footer>Prueba footer</Card.Footer>
+                </Card>
+
             </div>
             
         </Layout>
