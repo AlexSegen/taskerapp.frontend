@@ -19,6 +19,9 @@ I have to say, I really love working with that so called "*Utility CSS Framework
 ### Notes
 This "project" is using Context Api and it's only hooks based components.
 
+### Backend
+This is using a simple ExpressJS backend built by me called Ninja (WIP), details [here](https://github.com/AlexSegen/ninja.api)
+
 ### Screenshots
 
 ![image](https://user-images.githubusercontent.com/5666895/113159111-bb0a1980-9212-11eb-9153-dec711d24de5.png)
