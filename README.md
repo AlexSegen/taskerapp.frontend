@@ -1,5 +1,4 @@
 ### Description
-
 Bootstrapped with **CRA** and using Tailwindcss. I built a simple Task manager, it's incomplete and may have some bugs. I didn't have the intention to finish it at all but to try for the first time  **Tailwindcss**.
 
 I have to say, I really love working with that so called "*Utility CSS Framework*". In fact, I built the UI pretty fast.
@@ -19,8 +18,12 @@ I have to say, I really love working with that so called "*Utility CSS Framework
 ### Notes
 This "project" is using Context Api and it's only hooks based components.
 
+
 ### Backend
 This is using a simple ExpressJS backend built by me called Ninja (WIP), details [here](https://github.com/AlexSegen/ninja.api)
+
+### Disclaimer
+This is not fully functional and I published this for educational purposes only.
 
 ### Screenshots
 
