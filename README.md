@@ -11,6 +11,7 @@ I have to say, I really love working with that so called "*Utility CSS Framework
  - Assign task to a registered user
  - Mark tasks as done
  - Add comments to any task
+ - Edit/delete comments to any task (owner only)
  - Like comments
  - List Team  members
 
