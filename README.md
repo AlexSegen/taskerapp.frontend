@@ -20,8 +20,9 @@ This "project" is using Context Api and it's only hooks based components.
 
 ### Screenshots
 
-![image](https://user-images.githubusercontent.com/5666895/113158446-2bfd0180-9212-11eb-8baa-903a422b858f.png)
-![image](https://user-images.githubusercontent.com/5666895/113158458-2e5f5b80-9212-11eb-8f8d-79c813f4acd7.png)
-![image](https://user-images.githubusercontent.com/5666895/113158468-31f2e280-9212-11eb-8a59-f9d93a6d6d03.png)
-![image](https://user-images.githubusercontent.com/5666895/113158475-34553c80-9212-11eb-8d36-f57a1f508e71.png)
-![image](https://user-images.githubusercontent.com/5666895/113158496-37e8c380-9212-11eb-8ea5-09610b9577ea.png)
+![image](https://user-images.githubusercontent.com/5666895/113159111-bb0a1980-9212-11eb-9153-dec711d24de5.png)
+![image](https://user-images.githubusercontent.com/5666895/113159122-bd6c7380-9212-11eb-9421-b8bd752db072.png)
+![image](https://user-images.githubusercontent.com/5666895/113159131-bfcecd80-9212-11eb-966c-c96f4471b933.png)
+![image](https://user-images.githubusercontent.com/5666895/113159142-c1989100-9212-11eb-84cc-3854695ec81e.png)
+![image](https://user-images.githubusercontent.com/5666895/113159160-c4938180-9212-11eb-9673-f1c8d65d3598.png)
+
