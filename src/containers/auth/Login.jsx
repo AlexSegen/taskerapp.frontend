@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useForm } from '../../hooks/useForm';
 import { useAuth } from '../../hooks/useAuth';
-
+import { useForm } from '../../hooks/useForm';
 import validators from '../../helpers/validators';
+import { SpinnerI } from '../../components/Icons';
+import { FORGOT_PASSWORD, REGISTER,  } from '../../constants/paths';
 
 const initialState = {email: "", password: ""};
 
@@ -37,39 +38,42 @@ const LoginPage = () => {
     }
 
     return ( 
-        <div className="flex items-center justify-center min-h-screen">
-            <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-
-                <h1 className="text-base text-2xl text-center">Login</h1>
-
-                <p className="mb-5 text-center text-gray-600">Login to start creating content</p>
-
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="email" name="email" placeholder="Email" className="w-full px-5 py-2 text-base bg-gray-200"/>
-                    <span className="text-sm text-red-300"></span>
+        <div className="max-w-sm mx-auto mt-10 md:mt-20">
+        <div className="p-5 bg-white rounded shadow-md">
+            <div className="mb-4 text-center">
+                <h1 className="mb-2 text-3xl font-bold text-black">Sign In</h1>
+                <p className="text-gray-500">Start creating new content</p>
+            </div>
+            <div className="text-left">
+                <div className="mb-4">
+                    <input placeholder="Correo electrónico" className="field-control" type="email" name="email" onChange={handleChange} disabled={loading}/>
                 </div>
-
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="password" name="password" placeholder="Password" className="w-full px-5 py-2 text-base bg-gray-200"/>
+                <div className="mb-4">
+                    <input placeholder="Contraseña" className="field-control" type="password" name="password" onChange={handleChange} disabled={loading}/>
                 </div>
-
                 {
-                    error && <div className="alert-danger">{error}</div>
+                    error && <div className="text-red-500 bg-red-100 alert">{error}</div>
                 }
                 {
-                    invalidPayload && <div className="alert-danger">{invalidPayload}</div>
+                    invalidPayload && <div className="text-red-500 bg-red-100 alert">{invalidPayload}</div>
                 }
-                        
-                <div className="text-center">
-                    <button disabled={loading} type="submit" className="py-2 bg-blue-600 button hover:bg-blue-700 focus:outline-none">{loading ?'Loading...' : 'Login'}</button>
+                <div className="mb-4 text-right">
+                    <Link className="font-semibold text-indigo-500" to={FORGOT_PASSWORD}>Forgot your password?</Link>
                 </div>
-
-                <div className="mt-2 text-center">
-                    <Link className="underline" to="/register">Register</Link>
+                <div className="mb-4">
+                    <button onClick={handleSubmit} type="button" 
+                    className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block '}`}
+                    disabled={loading}>
+                        { loading && <SpinnerI/>}
+                        {loading ? 'Login In...':'Sign In'}
+                    </button>
                 </div>
-
-            </form>
+                <div className="mb-4 text-center text-gray-500">
+                    Not member yet? <Link className="font-semibold text-indigo-500" to={REGISTER}>Join now!</Link>
+                </div>
+            </div>
         </div>
+    </div>
      );
 }
  

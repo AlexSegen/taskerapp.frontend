@@ -1,103 +1,107 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useEffect, createContext, useReducer } from 'react';
+
 import { authService } from "../services/auth.service";
+import { useNotification } from '../hooks/useNotification';
 import { TokenService, SetUser } from '../services/storage.service'
+import { authReducer, initialState } from './reducers/authReducer';
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
 
+    const { toastSuccess, toastError } = useNotification();
 
-    const [user, setUser] = useState({ first_name: "" });
-    const [token, setToken] = useState(null)
-    const [isAuthenticated, setAuthenticated] = useState(false);
-
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
     const Login = ({ email, password }) => {
-
-        setLoading(true);
-        setError(false);
-
+        dispatch({ type: "AUTH_REQUEST"});
         return authService.login(email, password).then(data => {
-            setLoading(false);
-            setUser(data.user);
-            setToken(data.token);
-            setAuthenticated(!!data.token);
-
+            const { user, token } = data;
+            dispatch({ type: "LOGIN_SUCCESS", payload: { user, token, isAuthenticated: true }});
         }).catch(error => {
-            setLoading(false);
-
             if (error.data && error.data.name === "ValidationError") {
-                const message = error.data.details.body.length > 0 ? error.data.details.body[0].message : "Validation error."
-                setError(message);
+                    const message = error.data.details.body.length > 0 ? error.data.details.body[0].message : "Validation error."
+                    dispatch({ type: "AUTH_FAILED", payload: message })
                 return;
             }
-
-            setError(error.message)
+            dispatch({ type: "AUTH_FAILED", payload: error.message });
         });
 
     };
 
     const Register = ({ first_name, last_name, email, password }) => {
-
-        setLoading(true)
-        setError(false)
-
+        dispatch({ type: "AUTH_REQUEST" });
         return authService.register({ first_name, last_name, email, password }).then(() => {
-            setLoading(false)
-
+            dispatch({ type: "REGISTER_SUCCESS" });
         }).catch(error => {
-            setLoading(false);
-
             if (error.data && error.data.name === "ValidationError") {
-                const message = error.data.details.body.length > 0 ? error.data.details.body[0].message : "Validation error."
-                setError(message);
+                    const message = error.data.details.body.length > 0 ? error.data.details.body[0].message : "Validation error."
+                    dispatch({ type: "AUTH_FAILED", payload: message })
                 return;
             }
-
-            setError(error.message)
-
+            dispatch({ type: "AUTH_FAILED", payload: error.message });
         });
-
     };
 
    const Logout = () => {
-        authService.logout();
-        setAuthenticated(false);
+       return new Promise(() => {
+           authService.logout();
+           dispatch({ type: "LOGOUT" });
+       })
     }
-
     
     const GetProfile = () => {
-        setLoading(true);
-        setError(false);
-
+        dispatch({ type: "AUTH_REQUEST" });
         return authService.getProfile().then(data => {
-            setLoading(false);
-            setUser(data);
-
+            dispatch({ type: "SET_PROFILE", payload: data });
         }).catch(error => {
-            setLoading(false);
+            dispatch({ type: "AUTH_FAILED", payload: error.message });
+        });
+    }
 
-            if (error.response) {
-                setError(error.response.data.message)
-                return;
-            }
+    const UpdateProfile = (payload) => {
+        dispatch({ type: "AUTH_REQUEST" });
+        return authService.updateProfile(payload).then(data => {
+            dispatch({ type: "SET_PROFILE", payload: data });
+            toastSuccess("Perfil actualizado");
+        }).catch(error => {
+            dispatch({ type: "AUTH_FAILED", payload: error.message });
+        });
+    }
 
-            setError(error.message)
+    const UpdateAvatar = (avatar) => {
+        dispatch({ type: "UPLOAD_REQUEST" });
+        return authService.updateAvatar(avatar).then(data => {
+            dispatch({ type: "SET_PROFILE", payload: data });
+            toastSuccess("Avatar actualizado");
+        }).catch(error => {
+            dispatch({ type: "UPLOAD_FAILED", payload: error.message });
+            toastError("Error al actualizar avatar");
+        });
+    }
+
+    const UpdatePassword = (password) => {
+        dispatch({ type: "AUTH_REQUEST" });
+        return authService.updateProfilePassword(password).then(() => {
+            dispatch({ type: "SUCCESS_REQUEST" });
+            toastSuccess("Contraseña actualizada");
+        }).catch(error => {
+            dispatch({ type: "AUTH_FAILED", payload: error.message });
+            toastError("Error al actualizar contraseña");
         });
     }
 
     useEffect(() => {
-        setAuthenticated(!!TokenService.getToken());
-        setUser(SetUser.getUser())
-        setToken(TokenService.getToken())
+        dispatch({ type: "LOGIN_SUCCESS", payload: {
+            user: SetUser.getUser(),
+            token: TokenService.getToken(),
+            isAuthenticated: !!TokenService.getToken()
+        }});
+
     }, [])
 
-
     return (
-        <AuthContext.Provider value={{ Login, Logout, Register, GetProfile, isAuthenticated, user, token, loading, error }}>
+        <AuthContext.Provider value={{ Login, Logout, Register, GetProfile, UpdateProfile, UpdateAvatar, UpdatePassword, ...state }}>
             {children}
         </AuthContext.Provider>
     );

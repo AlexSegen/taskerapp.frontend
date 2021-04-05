@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useForm } from '../../hooks/useForm';
-import { useAuth } from '../../hooks/useAuth';
+import { useHistory } from 'react-router-dom';
 
+import { useAuth } from '../../hooks/useAuth';
+import { LOGIN } from '../../constants/paths';
+import { useForm } from '../../hooks/useForm';
+import { SpinnerI } from '../../components/Icons';
 import validators from '../../helpers/validators';
 
-const initialState = {email: "", password: ""};
+const initialUser = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: ""
+}
 
 const RegisterPage = () => {
 
+    const history = useHistory();
+
     const { Register, loading, error } = useAuth();
 
-    const { form, handleChange } = useForm(initialState);
+    const { form,first_name, last_name, email, password, handleChange } = useForm(initialUser);
 
+    const [confirm, setConfirm] = useState("");
+    
     const [invalidPayload, setInvalidPayload] = useState(null);
     
     const handleSubmit = (e) => {
@@ -20,65 +32,81 @@ const RegisterPage = () => {
         
         setInvalidPayload(null);
 
-        if(!validators.isEmail(form.email)) {
+        if (!validators.onlyLetters(first_name) || !validators.onlyLetters(last_name)) {
+            setInvalidPayload('First and last name are required.');
+            return;
+        }
+
+        if (!validators.isEmail(email)) {
             setInvalidPayload('Your email is not valid.');
             return;
         }
 
-        if(!validators.password.Length(form.password)) {
-            setInvalidPayload('Your password must be at least 8 character length.');
+        if (!validators.password.Length(password)) {
+            setInvalidPayload('Your password must have at least 8 characters.');
+            return;
+        }
+
+        if (confirm !== password) {
+            setInvalidPayload("Password and confirmation password doesn't match.");
             return;
         }
 
         
-        Register(form);
+        Register(form).finally(() => {
+            history.push(LOGIN);
+        });
 
     }
 
     return ( 
-        <div className="flex items-center justify-center min-h-screen">
-            <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-
-                <h1 className="text-base text-2xl text-center">Register</h1>
-
-                <p className="mb-5 text-center text-gray-600">Join now and start creating content</p>
-
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="text" name="avatar" placeholder="Avatar URL" className="w-full px-5 py-2 text-base bg-gray-200"/>
-                    <span className="text-sm text-red-300"></span>
+        <div className="max-w-sm mx-auto mt-10 md:mt-20">
+            <div className="p-5 bg-white rounded shadow-md">
+                <div className="mb-4 text-center">
+                    <h1 className="mb-2 text-3xl font-bold text-black">Register</h1>
+                    <p className="text-gray-500">Start tracking your tasks</p>
                 </div>
+                <div className="text-left">
+                    <div className="mb-4">
+                        <label htmlFor="first_name">First name</label>
+                        <input className="field-control" type="text" name="first_name" onChange={handleChange} disabled={loading}/>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="last_name">Last name</label>
+                        <input className="field-control" type="text" name="last_name" onChange={handleChange} disabled={loading}/>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="email">Email</label>
+                        <input className="field-control" type="email" name="email" onChange={handleChange} disabled={loading}/>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password">Password</label>
+                        <input className="field-control" type="password" name="password" onChange={handleChange} disabled={loading}/>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password">Confirm password</label>
+                        <input className="field-control" type="password" name="confirm" onChange={e => setConfirm(e.target.value)} disabled={loading}/>
+                    </div>
+                    {
+                        error && <div className="text-red-500 bg-red-100 alert">{error}</div>
+                    }
+                    {
+                        invalidPayload && <div className="text-red-500 bg-red-100 alert">{invalidPayload}</div>
+                    }
 
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="text" name="first_name" placeholder="First Name" className="w-full px-5 py-2 text-base bg-gray-200"/>
-                    <span className="text-sm text-red-300"></span>
+                    <div className="mb-4">
+                        <button onClick={handleSubmit} type="button" 
+                        className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block'}`}
+                        disabled={loading}>
+                            { loading && <SpinnerI/>}
+                            {loading ? 'Loading...':'Join now!'}
+                        </button>
+                    </div>
+                    <div className="text-center">
+                        <Link className="font-semibold text-indigo-500" to={LOGIN}>Already a member?</Link>
+                    </div>
                 </div>
-
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="text" name="last_name" placeholder="Last Name" className="w-full px-5 py-2 text-base bg-gray-200"/>
-                    <span className="text-sm text-red-300"></span>
-                </div>
-
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="email" name="email" placeholder="Email" className="w-full px-5 py-2 text-base bg-gray-200"/>
-                    <span className="text-sm text-red-300"></span>
-                </div>
-
-                <div className="relative mb-4">
-                    <input disabled={loading} onChange={handleChange} type="password" name="password" placeholder="Password" className="w-full px-5 py-2 text-base bg-gray-200"/>
-                </div>
-
-                {
-                    error && <div className="alert-danger">{error}</div>
-                }
-                {
-                    invalidPayload && <div className="alert-danger">{invalidPayload}</div>
-                }
-                        
-                <div className="text-center">
-                    <button disabled={loading} type="submit" className="py-2 bg-blue-600 button hover:bg-blue-700 focus:outline-none">{loading ?'Loading...' : 'Register'}</button>
-                </div>
-
-            </form>
+            </div>
         </div>
      );
 }
