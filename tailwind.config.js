@@ -1,15 +1,11 @@
 module.exports = {
-  important: true,
-  //Purging for Production is configured in PostCSS Config
-  purge:{    
-    content: ["./src/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
-  },
-  theme: {
-    extend: {},
-  },
-  variants: {
-    animation: ['responsive', 'motion-safe', 'motion-reduce', 'hover']
-  },
-  plugins: [
-  ],
-};
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+   darkMode: false, // or 'media' or 'class'
+   theme: {
+     extend: {},
+   },
+   variants: {
+     extend: {},
+   },
+   plugins: [],
+ }
