@@ -26,7 +26,7 @@ const ChangeAvatar = () => {
                 </span>
                 <div className="relative w-64 mt-4 mb-4 overflow-hidden">
                     <button  disabled={uploading} type="button" className="relative inline-flex items-center px-3 py-2 ml-5 overflow-hidden text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        { uploading ? <><SpinnerI className="mr-2 text-gray-500"/> Subiendo... </> : 'Cambiar' }
+                        { uploading ? <><SpinnerI className="mr-2 text-gray-500"/> Uploading... </> : 'Change' }
                             <input disabled={uploading} className="absolute z-10 block opacity-0 cursor-pointer pin-r pin-t" type="file" name="vacancyImageFiles" onChange={handleChange}/>
                     </button>
                 </div>

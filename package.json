@@ -21,9 +21,6 @@
     "toastmejs": "^1.2.3"
   },
   "scripts": {
-    "purge:css": "cross-env NODE_ENV=production postcss src/tailwind.css -o src/index.css",
-    "build:css": "postcss src/tailwind.css -o src/index.css",
-    "watch:css": "postcss src/tailwind.css -o src/index.css -w",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",

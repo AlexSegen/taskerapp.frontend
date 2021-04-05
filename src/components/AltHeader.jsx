@@ -100,7 +100,7 @@ const Altheader = () => {
               --> */}
               <div className={` ${showDrop ? 'block':'hidden'} absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                 <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={PROFILE}>Your Profile</Link>
-                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={CHANGE_PASSWORD}>Settings</Link>
+                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={CHANGE_PASSWORD}>Change password</Link>
                 <button onClick={() => Logout()} type="button" className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</button>
               </div>
             </div>

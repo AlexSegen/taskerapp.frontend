@@ -35,5 +35,21 @@ export default {
             return this.password.Length(str) && this.password.HasNumericCharacter(str) && this.password.HasAlphabeticalCharacter(str) && this.password.HasSpecialCharacter(str)
         }
 
+    },
+    validatePassword(str) {
+        if(!this.password.Length(str)) {
+            return { passed: false, message: "Must contain at least 8 character length" }
+        }
+        if(!this.password.HasNumericCharacter(str)) {
+            return { passed: false, message: "Must contain at least 1 numeric character" }
+        }
+        if(!this.password.HasAlphabeticalCharacter(str)) {
+            return { passed: false, message: "Must contain at least 1 alphabetical character" }
+        }
+        if(!this.password.HasSpecialCharacter(str)) {
+            return { passed: false, message: "Must contain at least 1 special character" }
+        }
+
+        return { passed: true }
     }
 }

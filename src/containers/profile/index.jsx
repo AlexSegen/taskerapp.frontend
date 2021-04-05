@@ -23,13 +23,15 @@ const Profile = () => {
 
     return ( 
         <Layout>
-            <div className="container max-w-xl mx-auto">
-                <div className="mt-5 md:mt-0">
-
-                    { user && <ProfileForm user={user} onSubmit={handleSubmit} /> }
-
+            <div className="flex justify-between p-2 border-b-2 border-gray-100">
+                <div className="p-2">
+                    <h1 className="m-0 text-base text-2xl">Profile</h1>
                 </div>
-
+                <div className="p-2">
+                </div>
+            </div>
+            <div className="container mx-auto mt-5 md:mt-2" style={{maxWidth: "80%"}}>
+                { user && <ProfileForm user={user} onSubmit={handleSubmit} /> }
             </div>
         </Layout>
      );
@@ -49,7 +51,7 @@ function ProfileForm({user, onSubmit}) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="overflow-hidden shadow sm:rounded-md">
+            <div className="overflow-hidden">
                 {
                     error && <div className="text-red-500 bg-red-100 alert">{error}</div>
                 }
@@ -59,67 +61,70 @@ function ProfileForm({user, onSubmit}) {
                 }
 
 
-                <div className="px-4 py-5 bg-white rounded sm:p-6">
+                <div className="px-4 py-5 sm:p-6">
                     
                     <ChangeAvatar/>
 
                     <div className="grid grid-cols-6 gap-6">
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">Nombre</label>
+                            <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First name</label>
                             { loading ? <InputLoader/> : 
                                 (<input onChange={handleChange} value={form.first_name} type="text" name="first_name" id="first_name" autoComplete="given-name" className="field-control"/>)
                             }
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Apellido</label>
+                            <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last name</label>
                             { loading ? <InputLoader/> : 
                                 (<input onChange={handleChange} value={form.last_name} type="text" name="last_name" id="last_name" autoComplete="family-name" className="field-control"/>)
                             }
                         </div>
 
                         <div className="col-span-6 sm:col-span-6">
-                            <label htmlFor="about" className="block text-sm font-medium text-gray-700">Acerca de ti</label>
+                            <label htmlFor="about" className="block text-sm font-medium text-gray-700">About you</label>
                             <div className="mt-1">
                                 { loading ? <InputLoader className="h-20"/> : 
                                     <textarea onChange={handleChange} value={form.about} id="about" name="about" rows="3" className="field-control" placeholder=""></textarea>
                                 }
                             </div>
-                            <p className="mt-2 text-sm text-gray-500">Descríbete brevemente.</p>
+                            <p className="mt-2 text-sm text-gray-500">Describe yourself.</p>
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="email_address" className="block text-sm font-medium text-gray-700">Correo electrónico</label>
+                            <label htmlFor="email_address" className="block text-sm font-medium text-gray-700">Email address</label>
                             { loading ? <InputLoader/> : 
                                 (<input readOnly value={form.email} type="text" name="email" id="email_address" autoComplete="email" className="field-control"/>)
                             }
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Teléfono</label>
+                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
                             { loading ? <InputLoader/> :   
                                 <input onChange={handleChange} value={form.phone} type="number" name="phone" id="phone" autoComplete="phone" className="field-control"/>
                             }
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="country" className="block text-sm font-medium text-gray-700">País / Región</label>
+                            <label htmlFor="country" className="font-medium text-gray-700 ">Country / Region</label>
                             { loading ? <InputLoader/> : 
-                                <select  onChange={handleChange} formgroup="address" value={form.address.country} id="country" name="country" autoComplete="country" className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <select  onChange={handleChange} formgroup="address" value={form.address.country} id="country" name="country" autoComplete="country" className="field-control">
                                     <option value="">--</option>
                                     <option value="AR">Argentina</option>
                                     <option value="CAN">Canada</option>
+                                    <option value="COL">Colombia</option>
                                     <option value="CL">Chile</option>
                                     <option value="FR">France</option>
                                     <option value="ES">Spain</option>
                                     <option value="MEX">Mexico</option>
                                     <option value="US">United States</option>
+                                    <option value="VE">Venezuela</option>
+                                    <option value="OTHER">Other</option>
                                 </select>
                             }
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="state" className="block text-sm font-medium text-gray-700">Estado / Provincia</label>
+                            <label htmlFor="state" className="block text-sm font-medium text-gray-700">State / Province</label>
                             { loading ? <InputLoader/> : 
                                 <input onChange={handleChange} formgroup="address"  value={form.address.state} type="text" name="state" id="state" className="field-control"/>
                             }
@@ -127,14 +132,14 @@ function ProfileForm({user, onSubmit}) {
 
 
                         <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                            <label htmlFor="city" className="block text-sm font-medium text-gray-700">Ciudad</label>
+                            <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
                             { loading ? <InputLoader/> : 
                                 <input onChange={handleChange} formgroup="address" value={form.address.city} type="text" name="city" id="city" className="field-control"/>
                             }
                         </div>
 
                         <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                            <label htmlFor="suburb" className="block text-sm font-medium text-gray-700">Suburbio</label>
+                            <label htmlFor="suburb" className="block text-sm font-medium text-gray-700">Suburb</label>
                             { loading ? <InputLoader/> : 
                                 <input onChange={handleChange} formgroup="address" value={form.address.suburb} type="text" name="suburb" id="suburb" className="field-control"/>
                             }
@@ -143,7 +148,7 @@ function ProfileForm({user, onSubmit}) {
 
 
                         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                            <label htmlFor="postal_code" className="block text-sm font-medium text-gray-700">Código postal</label>
+                            <label htmlFor="postal_code" className="block text-sm font-medium text-gray-700">Zip code</label>
                             { loading ? <InputLoader/> : 
                                 <input onChange={handleChange}  formgroup="address"  value={form.address.zipcode} type="number" name="zipcode" id="postal_code" autoComplete="postal-code" className="field-control"/>
                             }
@@ -151,7 +156,7 @@ function ProfileForm({user, onSubmit}) {
 
                         
                         <div className="col-span-6">
-                            <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">Calle y número</label>
+                            <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">Street</label>
                             { loading ? <InputLoader/> :   
                                 <input onChange={handleChange} formgroup="address" value={form.address.street} type="text" name="street" id="street_address" autoComplete="street-address" className="field-control"/>
                             }
@@ -161,10 +166,10 @@ function ProfileForm({user, onSubmit}) {
                 </div>
                 <div className="flex items-center justify-end px-4 py-3 bg-gray-50 sm:px-6">
                     <button onClick={handleSubmit} type="button" 
-                        className={`btn is-primary ${loading ? 'flex space-between justify-center':''}`}
+                        className={`button is-primary ${loading ? 'flex space-between justify-center':''}`}
                         disabled={loading}>
                             { loading && <SpinnerI/>}
-                            {loading ? 'Cargando...':'Guardar cambios'}
+                            {loading ? 'Saving...':'Save changes'}
                     </button>
                 </div>
             </div>

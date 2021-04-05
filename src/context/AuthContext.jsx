@@ -63,7 +63,7 @@ const AuthContextProvider = ({ children }) => {
         dispatch({ type: "AUTH_REQUEST" });
         return authService.updateProfile(payload).then(data => {
             dispatch({ type: "SET_PROFILE", payload: data });
-            toastSuccess("Perfil actualizado");
+            toastSuccess("Profile updated");
         }).catch(error => {
             dispatch({ type: "AUTH_FAILED", payload: error.message });
         });
@@ -73,10 +73,10 @@ const AuthContextProvider = ({ children }) => {
         dispatch({ type: "UPLOAD_REQUEST" });
         return authService.updateAvatar(avatar).then(data => {
             dispatch({ type: "SET_PROFILE", payload: data });
-            toastSuccess("Avatar actualizado");
+            toastSuccess("Avatar updated");
         }).catch(error => {
             dispatch({ type: "UPLOAD_FAILED", payload: error.message });
-            toastError("Error al actualizar avatar");
+            toastError("Error updating your avatar");
         });
     }
 
@@ -84,10 +84,9 @@ const AuthContextProvider = ({ children }) => {
         dispatch({ type: "AUTH_REQUEST" });
         return authService.updateProfilePassword(password).then(() => {
             dispatch({ type: "SUCCESS_REQUEST" });
-            toastSuccess("Contraseña actualizada");
         }).catch(error => {
             dispatch({ type: "AUTH_FAILED", payload: error.message });
-            toastError("Error al actualizar contraseña");
+            toastError("Error updating your password");
         });
     }
 
