@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 
 import { useAuth } from '../hooks/useAuth';
-import { TasksContext } from '../context/TasksContext';
 import { MenuIcon, BellOutlineIcon } from './Icons';
+import { TasksContext } from '../context/TasksContext';
+import { ADD_TASK, CHANGE_PASSWORD, HOME, PROFILE, PROJECTS, TASKS, TEAM } from '../constants/paths';
 
 const Altheader = () => {
   const { user, Logout } = useAuth();
@@ -15,7 +16,7 @@ const Altheader = () => {
 
   const handleAddTask = () => {
       setSelected(TaskInitialState);
-      history.push("/task/new")
+      history.push(ADD_TASK)
   }
 
   const isActiveLink = route => {
@@ -60,10 +61,10 @@ const Altheader = () => {
             <div className="flex items-baseline ml-10 space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
 
-              <Link className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/">Dashboard</Link>
-              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/task")}`} to="/tasks">Tasks</Link>
-              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/projects")}`} to="/projects">Projects</Link>
-              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/team")}`} to="/team">Team</Link>
+              <Link className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to={HOME}>Dashboard</Link>
+              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/task")}`} to={TASKS}>Tasks</Link>
+              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/projects")}`} to={PROJECTS}>Projects</Link>
+              <Link className={`nav-item hover:bg-gray-700 hover:text-white ${isActiveLink("/team")}`} to={TEAM}>Team</Link>
             </div>
           </div>
         </div>
@@ -135,13 +136,13 @@ const Altheader = () => {
     <div  className={` ${toggled ? '':'hidden'} md:hidden mobile-menu`} id="mobile-menu">
       <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
        {/*  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-       <Link className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/">Dashboard</Link>
+       <Link className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to={HOME}>Dashboard</Link>
 
-       <Link className="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md" to="/tasks">Tasks</Link>
+       <Link className="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md" to={TASKS}>Tasks</Link>
 
-       <Link className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/projects">Projects</Link>
+       <Link className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to={PROJECTS}>Projects</Link>
 
-       <Link className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to="/Team">Team</Link>
+       <Link className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" to={TEAM}>Team</Link>
       </div>
       <div className="pt-4 pb-3 border-t border-gray-700">
         <div className="flex items-center px-5">
@@ -161,8 +162,8 @@ const Altheader = () => {
           </button>
         </div>
         <div className="px-2 mt-3 space-y-1">
-          <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700" to="/profile">Your Profile</Link>
-          <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700" to="/settings">Settings</Link>
+          <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700" to={PROFILE}>Your Profile</Link>
+          <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700" to={CHANGE_PASSWORD}>Change password</Link>
           <button onClick={() => Logout()} className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700" type="button">Sign out</button>
         </div>
       </div>

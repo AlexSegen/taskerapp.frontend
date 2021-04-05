@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Toastme } from 'toastmejs';
 
 const config = {

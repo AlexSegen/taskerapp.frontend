@@ -1,27 +1,23 @@
 export const ABOUT = "/about";
 
-
-export const NOTES = "/notes";
-
-// SCHEDULES
+// TASK
 export const HOME = "/";
-export const ADD_SCHEDULE = "/citas/crear"
-export const EDIT_SCHEDULE = (id) => `/citas/${id}/editar`
+export const TASKS = "/tasks";
+export const ADD_TASK = "/task/new"
+
+export const DETAILS_TASK = (id) => `/tasks/${id}`
+export const EDIT_TASK = (id) => `/tasks/${id}/edit`
 
 // USERS
-export const USERS = "/usuarios"
-export const ADD_USER = "/usuarios/crear"
-export const EDIT_USER = (id) => `/usuarios/${id}/editar`
+export const TEAM = "/team"
 
-// SERVICES
-export const SERVICES = "/servicios"
-export const ADD_SERVICE = "/servicios/crear"
-export const EDIT_SERVICE = (id) => `/servicios/${id}/editar`
+// PROJECTS
+export const PROJECTS = "/projects"
 
 // AUTH
-export const PROFILE = "/perfil";
-export const LOGIN = "/iniciar-sesion";
-export const REGISTER = "/registrarse";
-export const FORGOT_PASSWORD = "/recuperar-cuenta";
-export const RESET_PASSWORD = "/resetear-contrasena";
-export const CHANGE_PASSWORD = "/perfil/actualizar-contrasena";
+export const PROFILE = "/profile";
+export const LOGIN = "/login";
+export const REGISTER = "/register";
+export const FORGOT_PASSWORD = "/forgot-password";
+export const RESET_PASSWORD = "/reset-password";
+export const CHANGE_PASSWORD = "/profile/update-password";

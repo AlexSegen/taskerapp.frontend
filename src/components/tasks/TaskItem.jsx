@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { CheckIcon } from '../Icons';
 import { formatDate } from '../../helpers/utils'
 import { TasksContext } from '../../context/TasksContext';
+import { DETAILS_TASK } from '../../constants/paths';
 
 
 const TaskItem = ({task}) => {
@@ -25,7 +26,7 @@ const TaskItem = ({task}) => {
                 </button>
             </div>
             <div className="w-full p-2 ">
-                <button onClick={() => history.push("/tasks/" + task._id)} type="button" className="block w-full font-semibold text-left text-gray-700 hover:text-gray-600 focus:outline-none">
+                <button onClick={() => history.push(DETAILS_TASK(task._id))} type="button" className="block w-full font-semibold text-left text-gray-700 hover:text-gray-600 focus:outline-none">
                     {task.title}
                     <span className="block text-sm font-normal text-gray-500">{formatDate(task.createdAt, 'MMMM Do, h:mm:ss a')}</span>
                 </button>

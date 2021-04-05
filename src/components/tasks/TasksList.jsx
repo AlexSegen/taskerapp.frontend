@@ -1,6 +1,7 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { ADD_TASK } from '../../constants/paths';
 import { TasksContext } from '../../context/TasksContext'
 import { TaskItemLoader } from '../loaders/TaskLoaders';
 
@@ -8,19 +9,14 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { getTasks, TaskInitialState, tasks, loadingTasks, setComposing, setSelected, errorTasks } = useContext(TasksContext)
+    const { TaskInitialState, tasks, loadingTasks, setSelected, errorTasks } = useContext(TasksContext)
 
     const history = useHistory()
 
     const handleAddTask = () => {
         setSelected(TaskInitialState);
-        setComposing(true);;
-        history.push("/task/new")
+        history.push(ADD_TASK)
     }
-
-/*     useEffect(() => {
-        getTasks();
-    }, []) */
 
     return (
         <div className="relative bg-white">

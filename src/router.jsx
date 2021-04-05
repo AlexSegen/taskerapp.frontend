@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
+
 import { useAuth } from './hooks/useAuth';
 
 import Login from './containers/auth/Login';
@@ -17,36 +18,53 @@ import TaskEdit from './containers/tasks/TaskEdit';
 import Projects from './containers/projects/Projects';
 import Team from './containers/team/Team';
 
+import {
+  HOME,
+  ABOUT,
+  PROFILE,
+  TASKS,
+  LOGIN,
+  REGISTER,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD,
+  CHANGE_PASSWORD,
+  ADD_TASK,
+  EDIT_TASK,
+  DETAILS_TASK,
+  TEAM,
+  PROJECTS
+} from './constants/paths';
+
 const RouterRoot = () => {
 
     return (
         <Router>
             <Switch>
-                <PrivateRoute exact path="/">
+                <PrivateRoute exact path={HOME}>
                     <Tasks />
                 </PrivateRoute>
-                <PrivateRoute exact path="/tasks">
+                <PrivateRoute exact path={TASKS}>
                     <Tasks />
                 </PrivateRoute>
-                <PrivateRoute exact path="/tasks/:id">
+                <PrivateRoute exact path={DETAILS_TASK(":id")}>
                     <TaskDetails />
                 </PrivateRoute>
-                <PrivateRoute path="/task/new">
+                <PrivateRoute path={ADD_TASK}>
                     <TaskEdit />
                 </PrivateRoute>
-                <PrivateRoute  path="/tasks/:id/edit">
+                <PrivateRoute  path={EDIT_TASK(":id")}>
                     <TaskEdit />
                 </PrivateRoute>
-                <PrivateRoute  path="/projects">
+                <PrivateRoute  path={PROJECTS}>
                     <Projects />
                 </PrivateRoute>
-                <PrivateRoute exact path="/team">
+                <PrivateRoute exact path={TEAM}>
                     <Team />
                 </PrivateRoute>
-                <NoAuthOnlyRoute path="/login">
+                <NoAuthOnlyRoute path={LOGIN}>
                     <Login />
                 </NoAuthOnlyRoute>
-                <NoAuthOnlyRoute path="/register">
+                <NoAuthOnlyRoute path={REGISTER}>
                     <Register />
                 </NoAuthOnlyRoute>
             </Switch>
