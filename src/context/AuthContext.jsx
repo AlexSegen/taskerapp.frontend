@@ -20,7 +20,7 @@ const AuthContextProvider = ({ children }) => {
         setLoading(true);
         setError(false);
 
-        authService.login(email, password).then(data => {
+        return authService.login(email, password).then(data => {
             setLoading(false);
             setUser(data.user);
             setToken(data.token);
@@ -45,7 +45,7 @@ const AuthContextProvider = ({ children }) => {
         setLoading(true)
         setError(false)
 
-        authService.register({ first_name, last_name, email, password }).then(() => {
+        return authService.register({ first_name, last_name, email, password }).then(() => {
             setLoading(false)
 
         }).catch(error => {
@@ -73,7 +73,7 @@ const AuthContextProvider = ({ children }) => {
         setLoading(true);
         setError(false);
 
-        authService.getProfile().then(data => {
+        return authService.getProfile().then(data => {
             setLoading(false);
             setUser(data);
 
