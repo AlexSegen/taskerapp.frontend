@@ -42,6 +42,9 @@ const Altheader = () => {
     useEffect(() => {
 
       handleMobileMenu();
+      return () => {
+        document.removeEventListener('click', () => {});
+      }
 
     }, [])
 
