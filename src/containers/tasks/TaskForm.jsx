@@ -81,7 +81,7 @@ const TaskForm = () => {
 
                     <div className="relative mb-5">
                         <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Title</label>
-                        <input disabled={loadingTask} value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a title"/>
+                        <input disabled={loadingTask} value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 field-control" type="text" placeholder="Write a title"/>
                         <span className="block px-4 text-sm text-red-400"></span>
                     </div>
 
@@ -101,7 +101,7 @@ const TaskForm = () => {
                         form.project && (
                             <div className="relative mb-5">
                                 <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Select project</label>
-                                <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="block w-full h-16 px-10 py-4 tracking-wide text-gray-700 bg-gray-100 cursor-pointer focus:outline-none">
+                                <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="h-16 px-10 py-4 tracking-wide field-control">
                                     <option value="0">--</option>
                                     {
                                         projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
@@ -118,7 +118,7 @@ const TaskForm = () => {
                     <div className="relative mb-5">
                         <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Tags</label>
                         <div className="flex items-center max-w-md">
-                            <input onChange={e => setTag(e.target.value)} value={tag} name="title" className="w-full h-16 max-w-lg px-10 py-4 bg-gray-100 focus:outline-none" type="text" placeholder="Write a tag"/>
+                            <input onChange={e => setTag(e.target.value)} value={tag} name="title" className="max-w-lg px-10 py-4 field-control" type="text" placeholder="Write a tag"/>
                             <button disabled={loadingTask} onClick={() => handleTag()} type="button" className="h-16 px-10 py-3 text-white bg-green-500 focus:outline-none hover:bg-green-600">
                                 <PlusCircleOutlineIcon  className="w-6" />
                             </button>

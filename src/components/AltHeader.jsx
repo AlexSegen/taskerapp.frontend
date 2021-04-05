@@ -43,9 +43,9 @@ const Altheader = () => {
     useEffect(() => {
 
       handleMobileMenu();
-      return () => {
+      /* return () => {
         document.removeEventListener('click', () => {});
-      }
+      } */
 
     }, [])
 
@@ -99,8 +99,8 @@ const Altheader = () => {
                   To: "transform opacity-0 scale-95"
               --> */}
               <div className={` ${showDrop ? 'block':'hidden'} absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to="/profile">Your Profile</Link>
-                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to="/settings">Settings</Link>
+                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={PROFILE}>Your Profile</Link>
+                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={CHANGE_PASSWORD}>Settings</Link>
                 <button onClick={() => Logout()} type="button" className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</button>
               </div>
             </div>

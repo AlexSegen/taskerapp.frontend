@@ -34,13 +34,17 @@ const authService = {
 
         try {
             const response = await ApiService.customRequest(requestData)
-            
-            
+
             TokenService.saveToken(response.data.token);
             TokenService.saveRefreshToken(response.data.token)
             SetUser.saveUser(response.data.user);
+
             ApiService.setHeader()
-            
+
+            // NOTE: We haven't covered this yet in our ApiService 
+            //       but don't worry about this just yet - I'll come back to it later
+            //ApiService.mount401Interceptor();
+
             return response.data
         } catch (error) {
             if(error.response)
@@ -109,8 +113,8 @@ const authService = {
      **/
     updateProfile: async function (payload) {
         const requestData = {
-            method: 'put',
-            url: "/auth/profile",
+            method: 'patch',
+            url: "/auth/me",
             data: payload
         }
 
@@ -135,10 +139,10 @@ const authService = {
      * @returns image url
      * @throws AuthenticationError 
      **/
-    updateAvatar: async function (image, userId) {
+    updateAvatar: async function (image) {
         const requestData = {
             method: 'post',
-            url: "/upload/update-avatar/" + userId,
+            url: "/auth/me/avatar",
             data: image
         }
 
@@ -166,8 +170,8 @@ const authService = {
      **/
     updateProfilePassword: async function (payload) {
         const requestData = {
-            method: 'put',
-            url: "/auth/update-password/",
+            method: 'post',
+            url: "/auth/me/update-password",
             data: payload
         }
 
@@ -188,12 +192,12 @@ const authService = {
      * @returns message
      * @throws AuthenticationError 
      **/
-    recoverPassword: async function (payload) {
+    recoverPassword: async function ({ password }, token) {
         const requestData = {
             method: 'post',
-            url: "/auth/reset-password/",
+            url: "/auth/reset-password?token=" + token,
             data: {
-                email: payload
+                password
             }
         }
 
@@ -217,7 +221,7 @@ const authService = {
     sendRecoveryEmail: async function (payload) {
         const requestData = {
             method: 'post',
-            url: "/auth/recovery-email/",
+            url: "/auth/request-recovery",
             data: payload
         }
 
@@ -268,7 +272,7 @@ const authService = {
     checkToken: async function (payload) {
         const requestData = {
             method: 'get',
-            url: "/auth/check-token?token=" + payload,
+            url: "/auth/check-recovery-token?token=" + payload,
         }
         try {
             const response = await ApiService.customRequest(requestData)

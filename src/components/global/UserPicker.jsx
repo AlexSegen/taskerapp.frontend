@@ -42,7 +42,7 @@ const UserPicker = ({onSelect, selected, disabled }) => {
             {
                 toggle && (
                     <div className="absolute left-0 z-10 p-4 bg-white rounded-lg shadow-md top-20">
-                        <input className="w-full px-5 py-3 mb-4 text-sm bg-gray-100" placeholder="Search user..." type="text"/>
+                        <input className="px-5 py-3 mb-4 text-sm field-control" placeholder="Search user..." type="text"/>
                         <div className="overflow-y-auto" style={{maxHeight: "180px", minWidth: "170px"}}>
 
                             {

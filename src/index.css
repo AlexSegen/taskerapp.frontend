@@ -5,15 +5,15 @@
 /* General */
 
 .button {
-  @apply px-10 py-3 text-base font-medium font-semibold text-center text-black text-white bg-gray-200 rounded-full shadow-sm;
+  @apply px-5 py-2 text-base text-center text-black text-white bg-gray-200 rounded-full shadow-sm focus:bg-gray-300 hover:bg-gray-100 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-opacity-50;
 }
 
 .button.is-primary {
-  @apply bg-blue-500 border-blue-500;
+  @apply text-white bg-blue-500 border-blue-500;
 }
 
 .field-control {
-  @apply block w-full px-5 py-2 text-base bg-gray-200 shadow-sm;
+  @apply block w-full rounded-none shadow-sm border-blue-50 bg-blue-50 focus:border-blue-300 focus:ring-blue-300 focus:ring-1;
 }
 
 .alert {

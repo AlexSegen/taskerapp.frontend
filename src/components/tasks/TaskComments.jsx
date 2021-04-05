@@ -33,7 +33,7 @@ const TaskComments = () => {
                 disabled={loadingComment || loadingComments || editMode}
                 onChange={e => setContent(e.target.value)}
                 value={content}
-                className="w-full h-20 px-10 py-4 bg-gray-100 focus:outline-none focus:h-40" 
+                className="h-20 px-10 py-4 mb-4 field-control focus:h-40" 
                 type="text" 
                 placeholder="Write a comment..."/>
                 

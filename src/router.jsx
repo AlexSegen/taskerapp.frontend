@@ -11,6 +11,7 @@ import { useAuth } from './hooks/useAuth';
 
 import Login from './containers/auth/Login';
 import Register from './containers/auth/Register';
+import Profile from './containers/profile';
 
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
@@ -57,6 +58,9 @@ const RouterRoot = () => {
                 </PrivateRoute>
                 <PrivateRoute  path={PROJECTS}>
                     <Projects />
+                </PrivateRoute>
+                <PrivateRoute exact path={PROFILE}>
+                    <Profile />
                 </PrivateRoute>
                 <PrivateRoute exact path={TEAM}>
                     <Team />
