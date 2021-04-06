@@ -16,7 +16,7 @@ I have to say, I really love working with that so called "*Utility CSS Framework
 
 ### Demo
 
-https://mytasker.netlify.app/
+https://taskerapp.vercel.app
 
 
 ### Notes
