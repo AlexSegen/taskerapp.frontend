@@ -11,6 +11,10 @@ import { useAuth } from './hooks/useAuth';
 
 import Login from './containers/auth/Login';
 import Register from './containers/auth/Register';
+import ForgotPassword from './containers/auth/ForgotPassword';
+import ResetPassword from './containers/auth/ResetPassword';
+
+
 import Profile from './containers/profile';
 import ChangePassword from './containers/profile/ChangePassword';
 
@@ -71,6 +75,12 @@ const RouterRoot = () => {
                 </PrivateRoute>
                 <NoAuthOnlyRoute path={LOGIN}>
                     <Login />
+                </NoAuthOnlyRoute>
+                <NoAuthOnlyRoute path={FORGOT_PASSWORD}>
+                    <ForgotPassword />
+                </NoAuthOnlyRoute>
+                <NoAuthOnlyRoute path={RESET_PASSWORD}>
+                    <ResetPassword />
                 </NoAuthOnlyRoute>
                 <NoAuthOnlyRoute path={REGISTER}>
                     <Register />

@@ -15,8 +15,8 @@ export const TEAM = "/team"
 export const PROJECTS = "/projects"
 
 // AUTH
-export const PROFILE = "/profile";
 export const LOGIN = "/login";
+export const PROFILE = "/profile";
 export const REGISTER = "/register";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const RESET_PASSWORD = "/reset-password";
