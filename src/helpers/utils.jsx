@@ -32,3 +32,21 @@ export const shuffle = (arra1) => {
   }
   return arra1;
 }
+
+export const searchOption = (array, searchword, keyword) => {
+
+  if (searchword && searchword.toString().trim().length > 0) {
+      return [...array.filter(filter => {
+          return (
+          filter[keyword]
+              .toString()
+              .toLowerCase()
+              .indexOf(searchword.toString().toLowerCase()) > -1
+          )
+      })];
+
+  } else {
+
+      return [...array];
+  }
+}
