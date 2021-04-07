@@ -9,7 +9,7 @@ import TaskItem from './TaskItem';
 
 const TasksList = () => {
 
-    const { TaskInitialState, tasks, loadingTasks, setSelected, errorTasks } = useContext(TasksContext)
+    const { TaskInitialState, tasks, filtered, loadingTasks, setSelected, errorTasks } = useContext(TasksContext)
 
     const history = useHistory()
 
@@ -42,7 +42,7 @@ const TasksList = () => {
 
 
                 {
-                    tasks && tasks.map(task => <TaskItem key={task._id} task={task}/>)
+                    filtered && filtered.map(task => <TaskItem key={task._id} task={task}/>)
                 }
  
             </div>

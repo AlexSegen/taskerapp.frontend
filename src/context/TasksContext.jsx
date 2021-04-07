@@ -35,7 +35,8 @@ const TasksContextProvider = ({children}) => {
         errorProjects,
         users,
         loadingUsers,
-        errorUsers
+        errorUsers,
+        filtered
     }, dispatch] = useReducer(TasksReducer, initialState)
 
 
@@ -127,6 +128,10 @@ const TasksContextProvider = ({children}) => {
         })
     }
 
+    const setFiltered = projectId => {
+        dispatch({ type: "SET_FILTERED", payload: projectId })
+    }
+
 
     useEffect(() => {
         if(tasks.length > 0) {
@@ -136,6 +141,7 @@ const TasksContextProvider = ({children}) => {
             setDone([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
         }
     }, [tasks])
+    
 
     const values = {
 
@@ -143,6 +149,8 @@ const TasksContextProvider = ({children}) => {
         tasks, 
         loadingTasks,
         errorTasks,
+        filtered,
+        setFiltered,
 
         selected, 
         setSelected,

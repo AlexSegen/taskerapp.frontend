@@ -19,6 +19,7 @@ export const initialState = {
     loadingProjects: false,
     errorProjects: false,
     tasks: [],
+    filtered: [],
     selected: TaskInitialState,
     projects: [],
     users: [],
@@ -113,11 +114,16 @@ export const TasksReducer = (state, action) => {
                 tasks: [action.payload, ...state.tasks],
                 loadingTask: false
             }
-
+        case "SET_FILTERED":
+            return {
+                ...state,
+                filtered: state.tasks.filter(task => action.payload === "all" ? true : (task.project._id === action.payload)),
+            }
         case "SET_TASKS":
             return {
                 ...state,
                 tasks: action.payload,
+                filtered: action.payload,
                 loadingTasks: false
             }
         case "SET_TASK":
