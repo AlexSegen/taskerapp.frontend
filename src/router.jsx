@@ -20,13 +20,12 @@ import ChangePassword from './containers/profile/ChangePassword';
 
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
-import TaskEdit from './containers/tasks/TaskEdit';
+import TaskCreate from './containers/tasks/TaskCreate';
 import Projects from './containers/projects/Projects';
 import Team from './containers/team/Team';
 
 import {
   HOME,
-  ABOUT,
   PROFILE,
   TASKS,
   LOGIN,
@@ -35,7 +34,6 @@ import {
   RESET_PASSWORD,
   CHANGE_PASSWORD,
   ADD_TASK,
-  EDIT_TASK,
   DETAILS_TASK,
   TEAM,
   PROJECTS
@@ -56,10 +54,7 @@ const RouterRoot = () => {
                     <TaskDetails />
                 </PrivateRoute>
                 <PrivateRoute path={ADD_TASK}>
-                    <TaskEdit />
-                </PrivateRoute>
-                <PrivateRoute  path={EDIT_TASK(":id")}>
-                    <TaskEdit />
+                    <TaskCreate />
                 </PrivateRoute>
                 <PrivateRoute  path={PROJECTS}>
                     <Projects />

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill'; 
 import 'react-quill/dist/quill.snow.css';
 
@@ -9,11 +8,7 @@ import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
 import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon } from '../../components/Icons';
 
-const TaskForm = () => {
-
-    let { id } = useParams();
-    
-    const history = useHistory();
+const TaskForm = ({ onClose }) => {
 
     const { selected, setTask, editTask, loadingProjects, projects, errorProjects, loadingTask, errorTask } = useContext(TasksContext);
 
@@ -51,16 +46,11 @@ const TaskForm = () => {
 
     const submit = e => {
         e.preventDefault();
-        form._id !== 0 ? editTask(form) : setTask(form);
+        form._id === 0 ? setTask(form) : editTask(form)
     }
 
     const onSelect = data => {
         setForm({...form, assigned: data })
-    }
-
-    const handleClose = () => {
-        const target = id || "";
-        history.push("/tasks/" + target)
     }
 
     useEffect(() => {
@@ -71,7 +61,7 @@ const TaskForm = () => {
         <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
             <TaskToolbar task={form} onSelect={onSelect} disabled={loadingTask}>
                 <Tool disabled={loadingTask} onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
-                <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
+                <Tool disabled={loadingTask} onClick={onClose}><XOutlineIcon className="w-8"/></Tool>
             </TaskToolbar>
             <div className="max-w-screen-md px-10 py-10 mx-auto">
 

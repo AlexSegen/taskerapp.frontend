@@ -1,33 +1,25 @@
 import React,  { useContext, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Tasks from './Tasks'
 import TaskForm from './TaskForm';
 import Spinner from '../../components/Spinner'
 import { TasksContext } from '../../context/TasksContext';
+import { DETAILS_TASK, TASKS } from '../../constants/paths';
 
-const TaskEdit = () => {
+const TaskCreate = () => {
     
-    let { id } = useParams();
     let history = useHistory();
     
-    const { selected, getTask, loadingTask } = useContext(TasksContext);
+    const { TaskInitialState, setSelected, selected, loadingTask } = useContext(TasksContext);
+
+    const handleOnClose = () => history.push(TASKS);
 
     useEffect(() => {
-        if (id) {
-            getTask(id)
-        }
-    }, [id])
-
-    useEffect(() => {
-        if (selected && selected._id !== 0 && selected.isNew) {
-            history.push("/tasks/" + selected._id)
-        } else {
-            history.push("/task/new")
-        }
-        
+        setSelected(TaskInitialState)
+        if(selected._id !== 0)
+            history.push(DETAILS_TASK(selected._id))
     }, [selected])
-
 
     return ( 
         <Tasks>
@@ -35,7 +27,7 @@ const TaskEdit = () => {
                 loadingTask ? (
                     <Spinner loading={true}/>
                 ) : (
-                    <TaskForm/>
+                    <TaskForm onClose={handleOnClose}/>
                 )
             }
             
@@ -43,4 +35,4 @@ const TaskEdit = () => {
      );
 }
  
-export default TaskEdit;
+export default TaskCreate;

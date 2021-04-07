@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import renderHTML from 'react-render-html';
 
 import Tasks from './Tasks'
+import TaskForm from './TaskForm';
 import Spinner from '../../components/Spinner'
+import { TASKS } from '../../constants/paths';
 import { formatDate } from '../../helpers/utils'
 import TaskComments from '../../components/tasks/TaskComments';
 import { TasksContext } from '../../context/TasksContext';
@@ -14,19 +16,19 @@ const TaskDetails = () => {
     let { id } = useParams();
     let history = useHistory();
 
+    const [edit, setEdit] = useState(false);
+
     const { selected, setSelected, getTask, editTask, toggleTaskStatus, deleteTask, loadingTask } = useContext(TasksContext);
 
     const onSelect = (data) => {
       selected.assigned = data;
       editTask(selected);
     }
-    
-    const handleClose = () => {
-      history.push("/tasks")
-    }
 
     useEffect(() => {
+      
       if (id) { 
+        setEdit(false);
         getTask(id)
       }
     }, [id])
@@ -34,7 +36,7 @@ const TaskDetails = () => {
     useEffect(() => {
       if (selected && selected.redirect) {
         setSelected({...selected, redirect: false})
-        history.push("/tasks")
+        history.push(TASKS)
       }
   }, [selected])
 
@@ -44,23 +46,23 @@ const TaskDetails = () => {
         <Tasks>
         <div className="min-h-screen text-center bg-white">
           <p>Task not found</p>
-          <Link to="/tasks">Return</Link>
+          <Link to={TASKS}>Return</Link>
         </div>
         </Tasks>
       )
 
     return (
       <Tasks>
-        {
-          loadingTask ? (
-            <Spinner loading={true} height="400"/>
-          ) : (
+
+        { loadingTask && <Spinner loading={true} height="400"/> }
+        
+        { !loadingTask && !edit && (
               <div className="min-h-screen bg-white">
                 <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
                       <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
-                      <Tool disabled={selected.completed} onClick={() => history.push(`/tasks/${selected._id}/edit`)} ><PencilOutlineIcon className="w-8"/></Tool>
+                      <Tool disabled={selected.completed} onClick={() => setEdit(true)} ><PencilOutlineIcon className="w-8"/></Tool>
                       <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
-                      <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
+                      <Tool disabled={loadingTask} onClick={() => history.push(TASKS)}><XOutlineIcon className="w-8"/></Tool>
                 </TaskToolbar>
                 <div className="w-full px-10 py-10" >
                     <h1 className="text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
@@ -100,6 +102,9 @@ const TaskDetails = () => {
               </div>
           )
         }
+
+        { !loadingTask && edit && <TaskForm onClose={() => setEdit(false)} /> }
+
       </Tasks>
      );
 }
