@@ -42,7 +42,6 @@ const CommentsContextProvider = ({children}) => {
 
     
     const editComment = comment => {
-        dispatch({ type: "REQUEST_COMMENT" })
         updateComment(comment).then(data => {
             setEditMode(false);
             dispatch({ type: "UPDATE_COMMENT", payload: data })
@@ -52,7 +51,6 @@ const CommentsContextProvider = ({children}) => {
     }
 
     const deleteComment = id => {
-        dispatch({ type: "REQUEST_COMMENT"})
         removeComment(id).then(() => {
             dispatch({ type: "DELETE_COMMENT", payload: id})
         }).catch(error => {

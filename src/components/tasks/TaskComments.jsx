@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Spinner from '../Spinner';
+import { SpinnerI } from '../Icons'
 import Comment from '../global/Comment';
-import { ChevronRightIcon} from '../Icons'
 import { CommentsContext } from '../../context/CommentsContext';
 
 const TaskComments = () => {
@@ -27,7 +27,7 @@ const TaskComments = () => {
     return ( 
         <>
             <div className="">
-                <p className="mb-4 text-base text-gray-600">Comments</p>
+                <p className="mb-4 text-base text-gray-400">Comments</p>
                 
                 <textarea 
                 disabled={loadingComment || loadingComments || editMode}
@@ -35,13 +35,13 @@ const TaskComments = () => {
                 value={content}
                 className="h-20 px-10 py-4 mb-4 field-control focus:h-40" 
                 type="text" 
-                placeholder="Write a comment..."/>
+                placeholder="Leave comments..."/>
                 
-                <button 
-                onClick={() => handlePostComment()}
-                disabled={loadingComment || loadingComments || editMode}
-                type="button"  className="px-8 py-2 bg-blue-500 rounded button focus:outline-none hover:bg-blue-600">
-                    {loadingComment ? 'Loading...': 'Save'}
+                <button onClick={() => handlePostComment()} type="button" 
+                    className={`px-8 py-2 text-sm font-semibold text-blue-400 bg-white border-2 border-blue-400 rounded rounded-full hover:text-white hover:border-blue-500 focus:outline-none hover:bg-blue-500 ${loadingComment ? 'flex space-between justify-center border-blue-500 bg-blue-500 text-white':'block '}`}
+                    disabled={loadingComment || loadingComments || editMode}>
+                        { loadingComment && <SpinnerI/>}
+                        {loadingComment ? '':'Save'}
                 </button>
             </div>
 

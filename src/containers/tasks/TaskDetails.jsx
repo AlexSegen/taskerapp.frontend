@@ -54,9 +54,11 @@ const TaskDetails = () => {
     return (
       <Tasks>
 
-        { loadingTask && <Spinner loading={true} height="400"/> }
-        
-        { !loadingTask && !edit && (
+        { edit && <TaskForm onClose={() => setEdit(false)} /> }
+
+        { !edit && loadingTask && <Spinner height="400" loading={true}/> }
+
+        { !edit && !loadingTask && (
               <div className="min-h-screen bg-white">
                 <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
                       <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
@@ -114,7 +116,6 @@ const TaskDetails = () => {
           )
         }
 
-        { !loadingTask && edit && <TaskForm onClose={() => setEdit(false)} /> }
 
       </Tasks>
      );

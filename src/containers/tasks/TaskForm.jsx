@@ -6,7 +6,7 @@ import { useForm } from '../../hooks/useForm';
 import { TasksContext } from '../../context/TasksContext';
 import TaskToolbar, { Tool } from '../../components/tasks/TaskToolbar';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
-import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon } from '../../components/Icons';
+import { SaveOutlineIcon, PlusCircleOutlineIcon, XOutlineIcon, SpinnerI } from '../../components/Icons';
 
 const TaskForm = ({ onClose }) => {
 
@@ -71,32 +71,40 @@ const TaskForm = ({ onClose }) => {
 
                     <div className="relative mb-5">
                         <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Title</label>
-                        <input disabled={loadingTask} value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 field-control" type="text" placeholder="Write a title"/>
+                        {
+                            loadingTask ? <InputLoader/> : 
+                            <input disabled={loadingTask} value={title} name="title" onChange={handleChange} className="w-full h-16 px-10 py-4 field-control" type="text" placeholder="Write a title"/>
+                        }
                         <span className="block px-4 text-sm text-red-400"></span>
                     </div>
 
                     <div className="relative mb-5">
                         <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Content</label>
-
-                        <ReactQuill onChange={(value) => setForm({...form, content: value })}
-                        placeholder="Write your blog ♥"
-                        modules={ReactQuillModules}
-                        value={content}
-                        formats={ReactQuillFormats}/>
+                        {
+                            loadingTask ? <InputLoader className="h-40"/> : 
+                            <ReactQuill onChange={(value) => setForm({...form, content: value })}
+                            placeholder="Write your content ♥"
+                            modules={ReactQuillModules}
+                            value={content}
+                            formats={ReactQuillFormats}/>
+                        }
                         <span className="block px-4 text-sm text-red-400"></span>
                     </div>
 
 
                     {
                         form.project && (
-                            <div className="relative mb-5">
+                            <div className="relative max-w-md mb-5">
                                 <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Select project</label>
-                                <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="h-16 px-10 py-4 tracking-wide field-control">
-                                    <option value="0">--</option>
-                                    {
-                                        projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
-                                    }
-                                </select>
+                                {
+                                    loadingTask ? <InputLoader/> : 
+                                    <select disabled={loadingProjects || loadingTask } value={form.project._id} onChange={handleProject} className="h-16 px-10 py-4 tracking-wide field-control">
+                                        <option value="0">--</option>
+                                        {
+                                            projects.map(p => (<option key={p._id} value={p._id}>{p.title}</option>))
+                                        }
+                                    </select>
+                                }
                                 <span className="block px-4 text-sm text-red-400"></span>
                             </div>
                         )
@@ -105,14 +113,19 @@ const TaskForm = ({ onClose }) => {
                     { errorProjects && <div className="alert-danger">{ errorProjects }</div> }
 
 
-                    <div className="relative mb-5">
+                    <div className="relative max-w-md mb-5">
                         <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Tags</label>
-                        <div className="flex items-center max-w-md">
-                            <input onChange={e => setTag(e.target.value)} value={tag} name="title" className="max-w-lg px-10 py-4 field-control" type="text" placeholder="Write a tag"/>
-                            <button disabled={loadingTask} onClick={() => handleTag()} type="button" className="h-16 px-10 py-3 text-white bg-green-500 focus:outline-none hover:bg-green-600">
-                                <PlusCircleOutlineIcon  className="w-6" />
-                            </button>
-                        </div>
+
+                        {
+                            loadingTask ? <InputLoader/> : 
+                            <div className="flex items-center ">
+                                <input maxLength="15" onChange={e => setTag(e.target.value)} value={tag} name="title" className="px-10 py-4 field-control" type="text" placeholder="Write a tag"/>
+                                <button disabled={loadingTask} onClick={() => handleTag()} type="button" className="flex items-center justify-center w-20 h-16 p-2 text-white transform -translate-x-10 bg-green-500 rounded-full shadow focus:outline-none hover:bg-green-600">
+                                    <PlusCircleOutlineIcon  className="w-6" />
+                                </button>
+                            </div>
+                        }
+                        
                         {
                             form.tags && form.tags.length > 0 && (
 
@@ -129,9 +142,10 @@ const TaskForm = ({ onClose }) => {
 
                     { errorTask && <div className="alert-danger">{ errorTask }</div> }
 
-                    <div className="p-4 text-left">
-                        <button type="submit" className="px-10 py-3 text-white bg-blue-600 rounded-full focus:outline-none hover:bg-blue-700">
-                            { loadingTask ? 'Saving task...' : 'Save task'}
+                    <div className="flex justify-end p-4 text-left">
+                        <button type="submit" 
+                            className={`button is-primary px-10 py-3 ${loadingTask ? 'flex space-between justify-center':''}`}
+                            disabled={loadingTask}> { loadingTask && <SpinnerI/> } {loadingTask ? 'Loading':'Save task'}
                         </button>
                     </div>
 
@@ -144,3 +158,9 @@ const TaskForm = ({ onClose }) => {
 }
  
 export default TaskForm;
+
+function InputLoader({ className }) {
+    return (
+        <div className={`animate-pulse rounded-sm bg-gray-200 h-14 w-full px-10 py-4 ${className}`}></div>
+    )
+}

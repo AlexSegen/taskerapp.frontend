@@ -37,20 +37,15 @@ const Comment = ({comment}) => {
 
                         {
                             user._id === comment.author._id &&
-                            <>
-                                {/* <button
-                                onClick={() => setEditMode(comment)}
-                                 className="px-2" type="button"><PencilOutlineIcon className="w-4 mr-1 text-gray-500 hover:text-gray-700"/></button> */}
                                 <button
                                 onClick={() => deleteComment(comment._id)}
                                  className="px-2 text-gray-500 focus:outline-none hover:text-gray-700" type="button"><TrashIcon className="w-4"/></button>
-                            </> 
                         }
 
                         <button 
                         onClick={()=> likeComment(comment._id)}
-                        type="button" className="flex items-center justify-center px-2 text-gray-500 hover:text-gray-700 focus:outline-none">
-                            <ThumbUpIcon className="w-4 "/> <span className="ml-1 text-xs">{comment.likes}</span>
+                        type="button" className="flex items-center justify-center px-2 text-gray-400 hover:text-gray-700 focus:outline-none">
+                            <ThumbUpIcon className="w-5 "/> <span className="ml-1 text-xs">{comment.likes}</span>
                         </button>
                         
                     </div>

@@ -94,7 +94,6 @@ const TasksContextProvider = ({children}) => {
     }
 
     const deleteTask = id => {
-        dispatch({ type: "REQUEST_TASK" })
         removeTask(id).then(() => {
             dispatch({ type: "DELETE_TASK", payload: id })
             toastSuccess("Task deleted");
