@@ -1,19 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
 import Layout from '../../components/Layout';
 import Spinner from '../../components/Spinner';
-import { formatDate } from '../../helpers/utils'
+import { SearchIcon } from "../../components/Icons";
 import { TasksContext } from '../../context/TasksContext';
-
-
+import { formatDate, searchOption } from '../../helpers/utils'
 
 const Team = () => {
 
-
+    const [filtered, setFiltered] = useState([]);
     const { users, loadingUsers, tasks } = useContext(TasksContext);
 
     const calculate = (done, todo) => {
         const result = (done / todo) * 100
         return result + "%";
+    }
+
+    const searchItem = (e) => {
+        const { value } = e.target;
+        setFiltered([...searchOption(users.map(u => ({ ...u, name: `${u.first_name} ${u.last_name}` })), value, "name")])
     }
 
     const getStats = (userId) => {
@@ -34,6 +39,10 @@ const Team = () => {
 
     }
 
+    useEffect(() => {
+        setFiltered(users);
+    }, [users])
+
     return ( 
         <Layout>
             
@@ -42,6 +51,10 @@ const Team = () => {
                         <h1 className="m-0 text-base text-2xl">Team</h1>
                     </div>
                     <div className="p-2">
+                        <div className="flex items-center justify-start">
+                           <SearchIcon className="w-10 mr-2 text-gray-100 h-11 "/>
+                            <input onChange={searchItem} type="text" className="field-control" placeholder="Search member"/>
+                        </div>
                     </div>
                 </div>
 
@@ -49,7 +62,10 @@ const Team = () => {
                     <div className="flex justify-between px-8 mb-6">
                         <div className="w-full">
                             <p className="text-base text-xl font-semibold">Team Progress</p>
-                            <span className="text-sm text-gray-600">More than {tasks.length} tasks</span>
+                            {
+                                !loadingUsers && <span className="text-sm text-gray-600">There are {users.length} members</span>
+                            }
+                            
                         </div>
                         <div className="w-1/4 text-right">
                         </div>
@@ -65,8 +81,8 @@ const Team = () => {
                             <tbody>
 
                                 {
-                                    users.map(user => (
-                                        <tr key={user._id} className="hover:bg-blue-100">
+                                    filtered.map(user => (
+                                        <tr key={user._id} className="hover:bg-blue-50">
                                             <td className="px-8 py-4">
                                                 <div className="flex items-center justify-start">
                                                     <img src={user.avatar} className="w-10 h-10 mr-2 rounded-full" alt=""/>

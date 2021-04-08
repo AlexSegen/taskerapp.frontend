@@ -22,17 +22,13 @@ const UserPicker = ({onSelect, selected, disabled }) => {
     }
 
     const handleToggle = () => {
-
         document.addEventListener('click', e => {
-
             if(e.target.classList.contains('__userpicker')) {
                 setToggle(!toggle);
             } else {
                 setToggle(false);
             }
-
-        })
-
+        });
     }
 
     useEffect(() => {
