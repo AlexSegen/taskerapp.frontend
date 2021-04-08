@@ -26,7 +26,7 @@ const ProjectList = () => {
                 </ul>
                 { errorProjects && ( <div className="alert-danger"> {errorProjects} </div> ) }
             </div>
-            <hr className="my-8 border-gray-400"/>
+            <hr className="my-8 border-gray-100"/>
         </>
     );
 }

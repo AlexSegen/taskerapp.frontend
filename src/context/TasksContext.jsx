@@ -132,7 +132,6 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "SET_FILTERED", payload: projectId })
     }
 
-
     useEffect(() => {
         if(tasks.length > 0) {
             setCompleted([...tasks.filter(t => t.completed)]);

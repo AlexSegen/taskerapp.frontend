@@ -71,14 +71,25 @@ const TaskDetails = () => {
                         <ClockOutlineIcon className="inline w-5 mr-2 "/> {formatDate(selected.createdAt, 'MMMM Do, h:mm:ss a')}
                     </p>
                       
-                    <p className="mb-10 text-gray-600">
+                    <div className="flex justify-start mb-10 text-gray-600">
                       {
-                        selected.author && (<><span className="text-gray-500">Author:</span> {selected.author.first_name} {selected.author.last_name} / </>)
+                        selected.author && (
+                        <div className="mr-10">
+                          <div className="mb-2 text-gray-400">Author</div>
+                          <div className="flex items-center justify-start">
+                            <img src={selected.author.avatar} className="w-6 mr-2 rounded-full" alt=""/> 
+                            {selected.author.first_name} {selected.author.last_name}
+                          </div>
+                        </div>)
                       }
                       {
-                        selected.project && (<><span className="ml-2 text-gray-500">Project:</span> {selected.project.title}</>)
+                        selected.project && (
+                        <div>
+                          <div className="mb-2 text-gray-400">Project</div> 
+                          <div>{selected.project.title}</div>
+                        </div>)
                       }
-                    </p>
+                    </div>
 
                     <div className="mb-20 leading-9 text-gray-700 sm:text-base lg:text-lg __content">
                       {renderHTML(selected.content)}

@@ -58,16 +58,16 @@ const TaskForm = ({ onClose }) => {
     }, [selected])
 
     return ( 
-        <div className="max-h-screen min-h-screen overflow-y-auto bg-white">
+        <div className="min-h-screen overflow-y-auto bg-white">
             <TaskToolbar task={form} onSelect={onSelect} disabled={loadingTask}>
                 <Tool disabled={loadingTask} onClick={submit} ><SaveOutlineIcon className="w-8"/></Tool>
                 <Tool disabled={loadingTask} onClick={onClose}><XOutlineIcon className="w-8"/></Tool>
             </TaskToolbar>
-            <div className="max-w-screen-md px-10 py-10 mx-auto">
+            <div className="max-w-screen-xl px-10 py-10 mx-auto">
 
                 <h1 className="mb-5 text-2xl font-bold text-gray-700"> { selected && selected._id !== 0 ? 'Edit':'Create new' } task</h1>
 
-                <form className="w-full max-w-xl" onSubmit={submit}>
+                <form className="w-full my-6" onSubmit={submit}>
 
                     <div className="relative mb-5">
                         <label className="block mb-3 text-sm text-base font-bold" htmlFor="">Title</label>

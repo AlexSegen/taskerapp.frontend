@@ -36,7 +36,7 @@ const TeamList = () => {
             <div className="my-4 text-right">
                 <Link to="/team" className="btn">See all</Link>
             </div>
-            <hr className="my-8 border-gray-400"/>
+            <hr className="my-8 border-gray-100"/>
         </>
     );
 }

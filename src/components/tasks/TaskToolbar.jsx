@@ -15,7 +15,7 @@ export const Tool = ({children, onClick, disabled}) => {
 const TaskToolbar = ({task, children, onSelect, disabled}) => {
 
     return ( 
-        <div className="flex items-center justify-between px-5 py-4 bg-white border-b-2 border-gray-300">
+        <div className="flex items-center justify-between px-5 py-4 bg-white border-b-2 border-gray-100">
             <UserPicker onSelect={onSelect} selected={task.assigned} disabled={disabled} />
             <div className="flex items-center justify-end p-2 px-4">
                 {children}
