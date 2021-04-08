@@ -3,15 +3,14 @@ import { useAuth } from '../hooks/useAuth';
 import AltHeader from './AltHeader';
 import Sidebar from './Sidebar';
 
-
-const Layout = ({children}) => {
+const Layout = ({children, className}) => {
     const { isAuthenticated } = useAuth();
     return (  
         <>
             { isAuthenticated && <AltHeader/>}
             <div className="flex">
                 { isAuthenticated && <Sidebar/>}
-                <div className="w-full min-h-screen pt-16 bg-white">
+                <div className={`w-full min-h-screen pt-16 bg-white ${className}`}>
                     {children}
                 </div>
             </div>

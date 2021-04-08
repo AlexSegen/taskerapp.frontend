@@ -18,6 +18,7 @@ import ResetPassword from './containers/auth/ResetPassword';
 import Profile from './containers/profile';
 import ChangePassword from './containers/profile/ChangePassword';
 
+import Dashboard from './containers/dashboard';
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
 import TaskCreate from './containers/tasks/TaskCreate';
@@ -45,7 +46,7 @@ const RouterRoot = () => {
         <Router>
             <Switch>
                 <PrivateRoute exact path={HOME}>
-                    <Tasks />
+                    <Dashboard />
                 </PrivateRoute>
                 <PrivateRoute exact path={TASKS}>
                     <Tasks />

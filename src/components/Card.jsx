@@ -3,7 +3,7 @@ import React from 'react'
 
 const Card = ({children}) => {
     return ( 
-        <div className="card">
+        <div className="bg-white rounded shadow ">
             {children}
         </div>
      );
@@ -14,7 +14,7 @@ export default Card;
 
 Card.Header = ({children}) => {
     return (
-        <div className="card-header">
+        <div className="px-4 pt-4 font-semibold">
             {children}
         </div>
     )
@@ -22,7 +22,7 @@ Card.Header = ({children}) => {
 
 Card.Body = ({children}) => {
     return (
-        <div className="card-body">
+        <div className="p-4 text-gray-500">
             {children}
         </div>
     )
@@ -30,7 +30,7 @@ Card.Body = ({children}) => {
 
 Card.Footer = ({children}) => {
     return (
-        <div className="card-footer">
+        <div className="px-4 pb-4 text-gray-500">
             {children}
         </div>
     )
