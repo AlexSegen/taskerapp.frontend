@@ -37,12 +37,20 @@ const NewestTasks = () => {
             <Card.Body>
                 <div className="">
                     <table className="w-full text-sm">
+                        <thead>
+                            <tr>
+                                <td className="px-8 py-4">Task</td>
+                                <td className="px-8 py-4">Author</td>
+                                <td className="px-8 py-4">Assigned to</td>
+                                <td className="px-8 py-4">Created</td>
+                            </tr>
+                        </thead>
                         <tbody>
                             {
                                 filtered.map(task => (
                                     <tr key={task._id}>
-                                         <td className="px-8 py-4">
-                                            <p className="font-semibold whitespace-nowrap">{task.title}</p>
+                                         <td className="w-64 px-8 py-4">
+                                            <p className="font-normal">{task.title}</p>
                                         </td>
                                         <td className="px-8 py-4 text-center">
                                             <div className="flex items-center justify-start">
@@ -52,8 +60,17 @@ const NewestTasks = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-4">
-                                            <span className="block mb-1 text-sm text-gray-400">Created</span>
+                                        <td className="px-8 py-4 text-center">
+                                            <div className="flex items-center justify-start">
+                                                <img src={task.assigned ? task.assigned.avatar : '/avatar.jpg'} className="w-8 h-8 mr-2 rounded-full" alt=""/>
+                                                <div className="w-full">
+                                                    <p className="flex items-center mb-0 text-base font-semibold whitespace-nowrap">
+                                                        {task.assigned ? `${task.assigned.first_name} ${task.assigned.last_name}` : 'Unassigned'} 
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-8 py-4 whitespace-nowrap">
                                             <span className="text-sm">{formatDate(task.createdAt, "MMMM, DD")}</span>
                                         </td>
                                     </tr>
