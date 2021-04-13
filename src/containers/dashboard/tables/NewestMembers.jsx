@@ -24,7 +24,7 @@ const NewestMembers = () => {
             return 0;
         });
 
-        setFiltered([...tmp.splice(0,4)]);
+        setFiltered([...tmp].splice(0,4));
     }
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const NewestMembers = () => {
                                         </td>
                                         <td className="px-8 py-4">
                                             <span className="block mb-1 text-sm text-gray-400">Joined</span>
-                                            <span className="text-sm">{formatDate(user.createdAt, "MMMM, DD")}</span>
+                                            <span className="text-sm whitespace-nowrap">{formatDate(user.createdAt, "MMMM, DD")}</span>
                                         </td>
                                     </tr>
                                 ))

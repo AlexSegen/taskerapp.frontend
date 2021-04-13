@@ -24,7 +24,7 @@ const NewestTasks = () => {
             return 0;
         });
 
-        setFiltered([...tmp.splice(0,4)]);
+        setFiltered([...tmp].splice(0,4));
     }
 
     useEffect(() => {

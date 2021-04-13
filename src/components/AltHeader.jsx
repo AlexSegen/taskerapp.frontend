@@ -70,7 +70,7 @@ const Altheader = () => {
         <div className="hidden md:block">
           <div className="flex items-center ml-4 md:ml-6">
              <button onClick={() => handleAddTask()} type="button" className="px-3 py-2 mr-2 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 hover:text-white">
-               Add task
+               New task
              </button>
             <button className="p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span className="sr-only">View notifications</span>
