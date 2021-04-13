@@ -13,9 +13,9 @@ const TeamList = () => {
     }, [])
 
     useEffect(() => {
-        const randomize = shuffle(users);
-        const firstTen = randomize.splice(0, 10)
-        setTmp([...firstTen]);
+        const randomize = shuffle([...users]);
+        const firstTen = randomize
+        setTmp([...firstTen].splice(0, 10));
     }, [users])
 
     return ( 
