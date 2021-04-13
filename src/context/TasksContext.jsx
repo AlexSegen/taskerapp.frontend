@@ -136,7 +136,7 @@ const TasksContextProvider = ({children}) => {
             setCompleted([...tasks.filter(t => t.completed)]);
             setTodo([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
             setMyTasks([...tasks.filter(t => t.assigned && (t.assigned._id === user._id))]);
-            setDone([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
+            setDone([...tasks.filter(t => (t.assigned && (t.assigned._id === user._id) && t.completed) && (t.completedBy && (t.completedBy._id === user._id)))]);
         }
     }, [tasks])
     

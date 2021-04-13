@@ -39,7 +39,7 @@ const TopMembers = ({tasks}) => {
                 group.push({
                     _id: current.completedBy._id,
                     name: `${current.completedBy.first_name}`,
-                    count: 0
+                    count: 1
                 });
             }
         }, {});
