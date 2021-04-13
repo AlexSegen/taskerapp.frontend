@@ -8,7 +8,7 @@ const config = {
     distanceX: 20, // Integer value
     zIndex: 100, // Integer value
     theme: "dark", // default, ligh or  dark (leave empty for "default" theme)
-    duplicates: false // true or false - by default it's false
+    duplicates: true // true or false - by default it's false
 };
 
 export const notification = new Toastme(config);

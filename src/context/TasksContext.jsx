@@ -15,7 +15,7 @@ const TasksContextProvider = ({children}) => {
 
     const { user } = useAuth();
 
-    const { toastSuccess, toastError } = useNotification();
+    const { toastSuccess, toastError, toastInfo } = useNotification();
 
 
     const [completed, setCompleted] = useState([])
@@ -113,18 +113,25 @@ const TasksContextProvider = ({children}) => {
     }
 
     const toggleTaskStatus = (task, fromDetails) => {
-        dispatch({ type: "REQUEST_TASK" })
+        if ((task.assigned && task.assigned._id === user._id) || task.completed) {
 
-        toggleTask(task).then(data => {
-            
-            dispatch({ type: "UPDATE_TASK", payload: data })
+            dispatch({ type: "REQUEST_TASK" })
+    
+            toggleTask(task).then(data => {
+                
+                dispatch({ type: "UPDATE_TASK", payload: data })
+    
+                if (fromDetails)
+                    dispatch({ type: "SET_SELECTED", payload: data })
+    
+            }).catch(error => {
+                dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
+            });
 
-            if (fromDetails)
-                dispatch({ type: "SET_SELECTED", payload: data })
+        } else {
 
-        }).catch(error => {
-            dispatch({ type: "REQUEST_TASK_FAILURE", payload: error.message })
-        })
+            toastInfo("You are not assigned to this task");
+        }
     }
 
     const setFiltered = projectId => {
