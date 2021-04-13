@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 
+const  options = {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+}
+
 const dataset = {
     label: 'Completed tasks',
     data: [],
@@ -29,7 +37,7 @@ const TopMembers = ({tasks}) => {
     const getGroup = () => {
 
         let group = [];
-        const filtered = tasks.filter(task => task.completed && task.completedBy);
+        const filtered = tasks.filter(task => task.completedBy);
 
         filtered.reduce((_, current) => {
             const index = group.findIndex(m => m._id === current.completedBy._id);
@@ -85,7 +93,13 @@ const TopMembers = ({tasks}) => {
         getData();
     }, [tasks])
 
-    return <Bar data={data} />;
+    return <Bar data={data} options={{
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }}/>;
 }
  
 export default TopMembers;
