@@ -27,7 +27,7 @@ const ChartsContainer = () => {
             <Card>
                 <Card.Header>Completed</Card.Header>
                 <Card.Body>
-                    <p className="mb-2 text-gray-400">How many tasks where completed last months.</p>
+                    <p className="mb-2 text-gray-400">Tasks completed last months.</p>
                     { loadingTasks ? <Spinner height="200" loading={true}/> :  <LastDays tasks={tasks}/> }
                 </Card.Body>
             </Card>
@@ -36,7 +36,7 @@ const ChartsContainer = () => {
             <Card>
                 <Card.Header>Top Members</Card.Header>
                 <Card.Body>
-                <p className="mb-2 text-gray-400">Members with most tasks done.</p>
+                <p className="mb-2 text-gray-400">Members with the most tasks completed.</p>
                     { loadingTasks ? <Spinner height="200" loading={true}/> :  <TopMembers tasks={tasks}/> }
                 </Card.Body>
             </Card>

@@ -46,7 +46,7 @@ const TopMembers = ({tasks}) => {
             } else {
                 group.push({
                     _id: current.completedBy._id,
-                    name: `${current.completedBy.first_name}`,
+                    name: `${current.completedBy.first_name} ${current.completedBy.last_name}`,
                     count: 1
                 });
             }
@@ -95,9 +95,11 @@ const TopMembers = ({tasks}) => {
 
     return <Bar data={data} options={{
         scales: {
-          y: {
-            beginAtZero: true
-          }
+          yAxes: [{
+            ticks: {
+               min: 1
+             }
+           }]
         }
       }}/>;
 }

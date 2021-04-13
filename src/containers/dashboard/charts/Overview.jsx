@@ -5,8 +5,8 @@ const dataset = {
     label: 'Overview',
     data: [],
     backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)'
+        'rgba(59, 130, 246, 0.9)',
+        'rgba(59, 130, 246, 0.5)'
     ],
     hoverOffset: 4
   }

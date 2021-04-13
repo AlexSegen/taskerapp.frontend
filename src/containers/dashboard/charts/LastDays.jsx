@@ -6,7 +6,7 @@ const dataset = {
   label: 'Tasks',
   data: [],
   fill: false,
-  borderColor: 'rgb(75, 192, 192)',
+  borderColor: 'rgba(59, 130, 246, 0.9)',
   tension: 0.1
 }
 
