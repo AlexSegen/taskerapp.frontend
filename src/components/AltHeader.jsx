@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom'
+import { Menu } from '@headlessui/react';
 
 import { useAuth } from '../hooks/useAuth';
 import { MenuIcon, BellOutlineIcon } from './Icons';
@@ -7,10 +8,10 @@ import { TasksContext } from '../context/TasksContext';
 import { ADD_TASK, CHANGE_PASSWORD, HOME, PROFILE, PROJECTS, TASKS, TEAM } from '../constants/paths';
 
 const Altheader = () => {
+  
   const { user, Logout } = useAuth();
   const history = useHistory();
   const [toggled, setToggled] = useState(false);
-  const [showDrop, setShowDrop] = useState(false);
 
   const { TaskInitialState, setSelected } = useContext(TasksContext);
 
@@ -24,29 +25,17 @@ const Altheader = () => {
   }
 
   const handleMobileMenu = () => {
-      document.addEventListener('click', (e) => {
-        if(e.target.classList.contains("mobile-button")) {
-          setToggled(t => !t);
-        } else {
-          setToggled(false);
-        }
-
-        if(e.target.classList.contains("drowpdown-button")) {
-          setShowDrop(d => !d);
-        } else {
-          setShowDrop(false);
-        }
-
-      })
+    document.addEventListener('click', (e) => {
+      if(e.target.classList.contains("mobile-button")) {
+        setToggled(t => !t);
+      } else {
+        setToggled(false);
+      }
+    });
   }
 
     useEffect(() => {
-
       handleMobileMenu();
-      /* return () => {
-        document.removeEventListener('click', () => {});
-      } */
-
     }, [])
 
     return ( 
@@ -78,20 +67,32 @@ const Altheader = () => {
               <BellOutlineIcon className="w-6 h-6"/>
             </button>
 
-            <div className="relative ml-3">
+            <Menu className="relative ml-3" as="div">
               <div>
-                <button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full drowpdown-button focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full drowpdown-button focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                   <span className="sr-only">Open user menu</span>
                   <img className="w-8 h-8 rounded-full drowpdown-button" src={user.avatar} alt={user.first_name}/>
-                </button>
+                </Menu.Button>
               </div>
 
-              <div className={` ${showDrop ? 'block':'hidden'} absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={PROFILE}>Your Profile</Link>
-                <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" to={CHANGE_PASSWORD}>Change password</Link>
-                <button onClick={() => Logout()} type="button" className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</button>
-              </div>
-            </div>
+              <Menu.Items className={`focus:outline-none block absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5`}>
+                <Menu.Item>
+                  {({active}) => (
+                    <Link className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100':'text-gray-700'}`} role="menuitem" to={PROFILE}>Your Profile</Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({active}) => (
+                    <Link className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100':'text-gray-700'}`} role="menuitem" to={CHANGE_PASSWORD}>Change password</Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({active}) => (
+                   <button onClick={() => Logout()} type="button" className={`block w-full px-4 py-2 text-sm text-left ${active ? 'bg-gray-100':'text-gray-700'}`} role="menuitem">Sign out</button>
+                  )}
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
           </div>
         </div>
         <div className="flex -mr-2 md:hidden">
