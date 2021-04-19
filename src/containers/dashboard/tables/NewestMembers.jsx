@@ -33,7 +33,7 @@ const NewestMembers = () => {
 
     return ( 
         <Card>
-            <Card.Header>Newest members</Card.Header>
+            <Card.Header>Recent members</Card.Header>
             <Card.Body>
                 <div className="">
                     <table className="w-full text-sm">
