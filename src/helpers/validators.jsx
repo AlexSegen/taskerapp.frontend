@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
     onlyLetters(str) {
         const regex = /[A-Za-z]/;
@@ -8,7 +9,7 @@ export default {
         return regex.test(String(str).toLowerCase());
     },
     isEmpty(str) {
-        return str & str.toString().trim().length == 0;
+        return str.toString().trim().length === 0;
     },
     password: {
         Length(str) {

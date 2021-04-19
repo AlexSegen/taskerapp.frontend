@@ -37,13 +37,13 @@ const ForgotPassword = () => {
         submit();
     }
     return ( 
-        <div className="max-w-sm mx-auto mt-10 md:mt-20">
-            <div className="p-5 bg-white rounded shadow-md">
+        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+            <div className="w-full max-w-sm p-5 mx-auto bg-white rounded shadow-md">
                 <div className="mb-4 text-center">
                     <h1 className="mb-2 text-3xl font-bold text-black">Recover account</h1>
                     <p className="text-gray-500">We will send you a <u>recovery link</u>.</p>
                 </div>
-                <div className="text-left">
+                <form onSubmit={handleSubmit} className="text-left">
                     <div className="mb-4">
                         <input placeholder="Your email address" className="field-control" type="email" name="email" 
                         onChange={e => setEmail(e.target.value)}
@@ -60,7 +60,7 @@ const ForgotPassword = () => {
                         invalidPayload && <div className="text-red-500 bg-red-100 alert">{invalidPayload}</div>
                     }
                     <div className="mb-4">
-                        <button onClick={handleSubmit} type="button" 
+                        <button type="submit" 
                         className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block '}`}
                         disabled={loading || success}>
                             { loading && <SpinnerI/>}
@@ -68,9 +68,9 @@ const ForgotPassword = () => {
                         </button>
                     </div>
                     <div className="mb-4 text-right text-gray-500">
-                        <Link className="font-semibold text-indigo-500" to={HOME}>Go back</Link>
+                        <Link className="font-normal text-indigo-500" to={HOME}>Go back</Link>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
      );

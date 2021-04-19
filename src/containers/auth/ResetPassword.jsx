@@ -68,81 +68,79 @@ const ResetPassword = () => {
         checkToken();
     }, [])
     return ( 
-        <Layout>
-            {
-                <div className="max-w-sm mx-auto mt-10 md:mt-20">
-                    <div className="p-5 bg-white rounded shadow-md">
-                        <div className="mb-4 text-center">
-                            <h1 className="mb-2 text-3xl font-bold text-black">Password Recovery</h1>
-                            <p className="text-gray-500">Enter your <u>new password</u> to recover your account.</p>
-                        </div>
 
-                        {
-                            validToken === "valid" && (
+        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+            <div className="w-full max-w-sm p-5 mx-auto bg-white rounded shadow-md">
+                <div className="mb-4 text-center">
+                    <h1 className="mb-2 text-3xl font-bold text-black">Password Recovery</h1>
+                    <p className="text-gray-500">Enter your <u>new password</u> to recover your account.</p>
+                </div>
 
-                                <>
-                                    {
-                                        !success && (
+                {
+                    validToken === "valid" && (
 
-                                            <>
-                                            <div className="mb-4">
-                                                <label htmlFor="password">New Password</label>
-                                                <input className="field-control" type="password" name="password" onChange={e => setPassword(e.target.value)} disabled={loading}/>
-                                            </div>
-                                            <div className="mb-4">
-                                                <label htmlFor="password">Confirm Password</label>
-                                                <input className="field-control" type="password" name="confirm" onChange={e => setConfirm(e.target.value)} disabled={loading}/>
-                                            </div>
-                                            </>
+                        <>
+                            {
+                                !success && (
 
-                                        )
-                                    }
-                                    
-                                    {
-                                        success && <div className="text-green-500 bg-green-100 alert">Done! You can <Link className="font-semibold underline" to={LOGIN}>Sign In</Link> now.</div>
-                                    }
-                                    {
-                                        error && <div className="text-red-500 bg-red-100 alert">{error}</div>
-                                    }
-                                    {
-                                        invalidPayload && <div className="text-red-500 bg-red-100 alert">{invalidPayload}</div>
-                                    }
+                                    <>
                                     <div className="mb-4">
-                                        <button onClick={handleSubmit} type="button" 
-                                        className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block '}`}
-                                        disabled={loading || success}>
-                                            { loading && <SpinnerI/>}
-                                            {loading ? 'Loading...':'Reset password'}
-                                        </button>
+                                        <label htmlFor="password">New Password</label>
+                                        <input className="field-control" type="password" name="password" onChange={e => setPassword(e.target.value)} disabled={loading}/>
                                     </div>
-                                </>
-
-                            )
-                        }
-
-                        {
-                            validToken === "invalid" && (
-                                <div className="text-red-500 bg-red-100 alert">
-                                    <div className="mb-2">
-                                        {error}
+                                    <div className="mb-4">
+                                        <label htmlFor="password">Confirm Password</label>
+                                        <input className="field-control" type="password" name="confirm" onChange={e => setConfirm(e.target.value)} disabled={loading}/>
                                     </div>
-                                    <div>
-                                        <Link className="font-semibold underline" to={FORGOT_PASSWORD}>Request new recovery link</Link>.
-                                    </div>
-                                </div>
-                            )
-                        }
-                        
-                        <div className="text-left">
+                                    </>
 
-                            <div className="mb-4 text-right text-gray-500">
-                                <Link className="font-semibold text-indigo-500" to={HOME}>Go back</Link>
+                                )
+                            }
+                            
+                            {
+                                success && <div className="text-green-500 bg-green-100 alert">Done! You can <Link className="font-semibold underline" to={LOGIN}>Sign In</Link> now.</div>
+                            }
+                            {
+                                error && <div className="text-red-500 bg-red-100 alert">{error}</div>
+                            }
+                            {
+                                invalidPayload && <div className="text-red-500 bg-red-100 alert">{invalidPayload}</div>
+                            }
+                            <div className="mb-4">
+                                <button onClick={handleSubmit} type="button" 
+                                className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block '}`}
+                                disabled={loading || success}>
+                                    { loading && <SpinnerI/>}
+                                    {loading ? 'Loading...':'Reset password'}
+                                </button>
+                            </div>
+                        </>
+
+                    )
+                }
+
+                {
+                    validToken === "invalid" && (
+                        <div className="text-red-500 bg-red-100 alert">
+                            <div className="mb-2">
+                                {error}
+                            </div>
+                            <div>
+                                <Link className="font-semibold underline" to={FORGOT_PASSWORD}>Request new recovery link</Link>.
                             </div>
                         </div>
+                    )
+                }
+                
+                <div className="text-left">
+
+                    <div className="mb-4 text-right text-gray-500">
+                        <Link className="font-normal text-indigo-500" to={HOME}>Go back</Link>
                     </div>
                 </div>
-            }
-        </Layout>
+            </div>
+        </div>
+
      );
 }
 
