@@ -15,8 +15,8 @@ export class RequestError extends Error {
 
 axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
     if (err.response && err.response.status === 401 && err.response.data.code === "TOKEN_EXPIRED") {
-        //authService.logout();
-        //window.location.href = `//${window.location.host}${LOGIN}?redirect=expired`;
+        authService.logout();
+        window.location.href = `//${window.location.host}${LOGIN}?redirect=expired`;
     }
     return Promise.reject(err);
 })
