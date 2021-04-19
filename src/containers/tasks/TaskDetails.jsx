@@ -67,7 +67,7 @@ const TaskDetails = () => {
                       <Tool disabled={loadingTask} onClick={() => history.push(TASKS)}><XOutlineIcon className="w-8"/></Tool>
                 </TaskToolbar>
                 <div className="w-full px-10 py-10" >
-                    <h1 className="text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
+                    <h1 className="mb-4 text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
                     
                     <p className="flex items-center mb-5 text-gray-600">
                         <ClockOutlineIcon className="inline w-5 mr-2 "/> {formatDate(selected.createdAt, 'MMMM Do, h:mm:ss a')}
