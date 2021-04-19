@@ -52,10 +52,10 @@ const LoginPage = () => {
                 </div>
                 <form onSubmit={handleSubmit} className="text-left">
                     <div className="mb-4">
-                        <input placeholder="Correo electrónico" className="field-control" type="email" name="email" onChange={handleChange} disabled={loading}/>
+                        <input placeholder="Email address" className="field-control" type="email" name="email" onChange={handleChange} disabled={loading}/>
                     </div>
                     <div className="mb-4">
-                        <input placeholder="Contraseña" className="field-control" type="password" name="password" onChange={handleChange} disabled={loading}/>
+                        <input placeholder="Password" className="field-control" type="password" name="password" onChange={handleChange} disabled={loading}/>
                     </div>
                     {
                         error && <div className="text-red-500 bg-red-100 alert">{error}</div>
