@@ -59,14 +59,14 @@ const TaskDetails = () => {
         { !edit && loadingTask && <Spinner height="400" loading={true}/> }
 
         { !edit && !loadingTask && (
-              <div className="min-h-screen bg-white">
+              <div className="bg-white">
                 <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
                       <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
                       <Tool disabled={selected.completed} onClick={() => setEdit(true)} ><PencilOutlineIcon className="w-8"/></Tool>
                       <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
                       <Tool disabled={loadingTask} onClick={() => history.push(TASKS)}><XOutlineIcon className="w-8"/></Tool>
                 </TaskToolbar>
-                <div className="w-full px-10 py-10" >
+                <div className="w-full max-h-screen px-10 py-10 overflow-y-auto" >
                     <h1 className="mb-4 text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
                     
                     <p className="flex items-center mb-5 text-gray-600">

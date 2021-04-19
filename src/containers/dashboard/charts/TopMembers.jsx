@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const  options = {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-}
-
 const dataset = {
     label: 'Completed tasks',
     data: [],

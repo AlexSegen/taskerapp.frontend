@@ -128,6 +128,7 @@
 
 /* width */
 ::-webkit-scrollbar {
+  @apply p-2;
   width: 15px;
 }
 
@@ -141,6 +142,9 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-400;
   border-radius: 2px;
+  margin: 0 auto;
+  width: 90%;
+
 }
 
 /* Handle on hover */

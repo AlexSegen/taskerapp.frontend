@@ -15,20 +15,16 @@ const Sidebar = () => {
 
     const { first_name, last_name, email, avatar } = user;
 
-    const isOpen = false;
-
-    const css = "transform fixed top-0 left-0 bottom-0 z-10"
-
     useEffect(() => {
         getTasks();
     }, [])
 
     return ( 
-        <aside className={`${css} ${isOpen ? '-translate-x-0':'-translate-x-full'} lg:static md:w-7/12 sm:w-10/12 lg:w-1/4 min-h-screen px-10 py-10  bg-white border-r-2 border-gray-100  lg:px-4 lg:transform-none`}>
+        <aside className={`col-span-3 w-full px-10 py-5  bg-white border-r-2 border-gray-100 lg:px-4`}>
 
-            <div className="mt-10">
+            <div className="mt-2">
                 <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
-                <span className="block text-base text-xl font-bold text-center">{first_name} {last_name}</span>
+                <span className="block text-xl font-bold text-center">{first_name} {last_name}</span>
                 <span className="block text-sm text-center text-gray-600">{email}</span>
 
                 <div className="flex items-center justify-center mt-4">

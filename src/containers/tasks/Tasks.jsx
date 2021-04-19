@@ -15,12 +15,12 @@ const Tasks = ({children}) => {
 
     return ( 
         <Layout>
-            <div className="flex">  
-                <div className={`w-full lg:w-3/6 lg:block`}>
+            <div className="grid grid-cols-12">  
+                <div className={`col-span-4`}>
                     <TasksFilter/>
                     <TasksList/>
                 </div>
-                <div className={`w-full bg-white lg:w-full`}>
+                <div className={`col-span-8`}>
 
                     {children}
                     

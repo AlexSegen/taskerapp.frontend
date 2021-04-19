@@ -15,13 +15,13 @@ const TeamList = () => {
     useEffect(() => {
         const randomize = shuffle([...users]);
         const firstTen = randomize
-        setTmp([...firstTen].splice(0, 10));
+        setTmp([...firstTen].splice(0, 6));
     }, [users])
 
     return ( 
         <>
             <div className="px-10 lg:px-4">
-                <p className="mb-6 text-base text-xl font-bold uppercase sm:tracking-wide">Team</p>
+                <p className="mb-6 text-base font-bold uppercase sm:tracking-wide">Team</p>
                 <div className="text-center">
                 {
                     tmp.map(user => (
