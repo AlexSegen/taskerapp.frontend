@@ -14,7 +14,7 @@ const MyTasks = () => {
     
     const { myTasks, loadingTasks } = useContext(TasksContext);
 
-    const pageLimit = 6;
+    const pageLimit = 8;
     const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
@@ -39,7 +39,7 @@ const MyTasks = () => {
 
                     {
                         !loadingTasks && currentData.map(task => (
-                        <Link key={task._id} to={DETAILS_TASK(task._id)} className="block w-full p-2 text-sm text-gray-400 rounded hover:bg-blue-50 focus:outline-none ">
+                        <Link key={task._id} to={DETAILS_TASK(task._id)} className="block w-full p-2 text-sm text-gray-500 rounded hover:bg-blue-50 focus:outline-none ">
                             <span className="flex items-center w-full overflow-hidden whitespace-nowrap">
                                 {
                                     task.completed ? <CheckCircleIcon className="w-6 mr-2 text-blue-500" /> : <CheckIcon  className="w-6 mr-2 text-gray-300 border border-gray-300 rounded-full"/>
@@ -47,7 +47,7 @@ const MyTasks = () => {
                                 {task.title}
                             </span>
 
-                            <span className="pl-8 text-gray-300">Created at {formatDate(task.createdAt, "MMMM, DD")}</span>
+                            <span className="pl-8 text-gray-400">Created at {formatDate(task.createdAt, "MMMM, DD")}</span>
 
                         </Link>))
                     }
