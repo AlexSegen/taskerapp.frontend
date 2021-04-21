@@ -14,7 +14,7 @@ export default Card;
 
 Card.Header = ({children}) => {
     return (
-        <div className="px-4 pt-4 font-semibold">
+        <div className="px-4 pt-4 font-semibold text-gray-600">
             {children}
         </div>
     )

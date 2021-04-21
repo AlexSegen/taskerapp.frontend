@@ -26,7 +26,7 @@ const TasksList = () => {
 
             <div className="flex items-center justify-between p-4 text-gray-400 border-2 border-gray-100 border-dashed bg-gray-50">
                 <p><PlusIcon className="inline w-6 mr-2 text-green-500"/> Start creating content</p>
-                <button onClick={() => handleAddTask()} type="button" className="bg-blue-600 button focus:outline-none hover:bg-blue-700">New task</button>
+                <button onClick={() => handleAddTask()} type="button" className="bg-blue-600 button focus:outline-none hover:bg-blue-700 whitespace-nowrap">New task</button>
             </div>
   
             <div className="w-full max-h-screen overflow-y-auto ">

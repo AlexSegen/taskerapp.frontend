@@ -57,7 +57,7 @@ const Altheader = () => {
         </div>
         <div className="hidden md:block">
           <div className="flex items-center ml-4 md:ml-6">
-             <button onClick={() => handleAddTask()} type="button" className="px-3 py-2 mr-2 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 hover:text-white">
+             <button onClick={() => handleAddTask()} type="button" className="px-3 py-2 mr-2 text-sm font-medium text-white bg-blue-600 rounded-full whitespace-nowrap hover:bg-blue-700 hover:text-white">
                New task
              </button>
             

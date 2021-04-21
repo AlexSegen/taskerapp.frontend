@@ -13,11 +13,11 @@ const Dashboard = () => {
 
     const { loadingTasks, loadingUsers } = useContext(TasksContext)
     return ( 
-        <Layout className="bg-blue-50">
+        <Layout className="bg-gradient-to-b from-green-400 to-blue-500">
 
-            <div className="flex justify-between p-2 border-b border-gray-100">
+            <div className="flex justify-between p-2 border-b border-gray-100 border-opacity-50">
                 <div className="p-2">
-                    <h1 className="m-0 text-2xl font-bold text-gray-400">Dashboard</h1>
+                    <h1 className="m-0 text-2xl font-bold text-white">Dashboard</h1>
                 </div>
                 <div className="p-2">
                 </div>

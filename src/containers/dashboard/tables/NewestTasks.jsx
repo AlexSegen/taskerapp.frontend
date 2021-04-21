@@ -45,7 +45,6 @@ const NewestTasks = () => {
                             <tr>
                                 <td className="px-8 py-4">Task</td>
                                 <td className="px-8 py-4">Author</td>
-                                <td className="px-8 py-4">Assigned to</td>
                                 <td className="px-8 py-4">Created</td>
                             </tr>
                         </thead>
@@ -61,16 +60,6 @@ const NewestTasks = () => {
                                                 <img src={task.author.avatar} className="w-8 h-8 mr-2 rounded-full" alt=""/>
                                                 <div className="w-full">
                                                     <p className="flex items-center mb-0 text-base font-normal whitespace-nowrap">{task.author.first_name} {task.author.last_name}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-4 text-center">
-                                            <div className="flex items-center justify-start">
-                                                <img src={task.assigned ? task.assigned.avatar : '/avatar.jpg'} className="w-8 h-8 mr-2 rounded-full" alt=""/>
-                                                <div className="w-full">
-                                                    <p className="flex items-center mb-0 text-base font-normal whitespace-nowrap">
-                                                        {task.assigned ? `${task.assigned.first_name} ${task.assigned.last_name}` : 'Unassigned'} 
-                                                    </p>
                                                 </div>
                                             </div>
                                         </td>

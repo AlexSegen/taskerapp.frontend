@@ -14,13 +14,13 @@ const SelectTask = () => {
 const Tasks = ({children}) => {
 
     return ( 
-        <Layout>
+        <Layout >
             <div className="grid grid-cols-12">  
                 <div className={`col-span-4`}>
                     <TasksFilter/>
                     <TasksList/>
                 </div>
-                <div className={`col-span-8`}>
+                <div className={`col-span-8 `}>
 
                     {children}
                     
