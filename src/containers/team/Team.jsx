@@ -58,9 +58,9 @@ const Team = () => {
     return ( 
         <Layout>
             
-            <div className="flex justify-between p-2 border-b-2 border-gray-100">
+            <div className="flex justify-between p-2 border-b border-gray-100">
                 <div className="p-2">
-                    <h1 className="m-0 text-base text-2xl">Team</h1>
+                    <h1 className="m-0 text-2xl font-bold text-gray-400">Team</h1>
                 </div>
                 <div className="p-2">
                     <div className="flex items-center justify-start">

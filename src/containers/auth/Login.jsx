@@ -42,7 +42,7 @@ const LoginPage = () => {
         <div className="grid w-full max-w-2xl grid-cols-8 mx-auto overflow-hidden bg-white rounded shadow-md">
             
             <div className="col-span-4 overflow-hidden">
-                <img className="w-full h-full" src="https://windmill-dashboard-react.vercel.app/static/media/login-office.72742c2e.jpeg" alt=""/>
+                <img className="object-cover w-full h-full" src="https://windmill-dashboard-react.vercel.app/static/media/login-office.72742c2e.jpeg" alt=""/>
             </div>
 
             <div className="col-span-4 p-5">

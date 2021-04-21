@@ -67,10 +67,13 @@ const UserPicker = ({onSelect, selected, disabled }) => {
 
                                 {
                                     filtered.map(u => (
-                                        <div key={u._id} className="flex items-center justify-start mb-2 cursor-pointer" onClick={() => handleSelect(u)}>
+                                        <button key={u._id}
+                                        className={`flex items-center justify-start p-2 w-full focus:outline-none hover:bg-blue-50 cursor-pointer ${u._id === (user ? user._id : null) ? 'bg-blue-100':''}`}
+                                        disabled={u._id === (user ? user._id : null)} 
+                                        onClick={() => handleSelect(u)}>
                                             <img className="block w-6 mr-3 rounded-full" src={u.avatar} alt=""/> 
                                             <span className="flex items-center justify-start text-sm text-gray-600"> {u.first_name} {u.last_name} </span>
-                                        </div>
+                                        </button>
                                     ))
                                 }
 

@@ -22,19 +22,23 @@ const TeamList = () => {
         <>
             <div className="px-10 lg:px-4">
                 <p className="mb-6 text-base font-bold uppercase sm:tracking-wide">Team</p>
-                <div className="text-center">
-                {
-                    tmp.map(user => (
-                        <div key={user._id} className="inline-block w-16 h-16 p-3 lg:p-2" title={`${user.first_name} ${user.last_name}`}>
-                            <img className="block w-full mx-auto rounded-full" src={user.avatar} alt={`${user.first_name} ${user.last_name}`}/>
-                        </div>
-                    ))
-                }
+
+                <div className="flex flex-row-reverse justify-center mt-10">
+                    <div className="relative flex items-center justify-center w-10 h-10 m-1 mr-2 -ml-3 text-sm text-white bg-gray-500 border-r-2 border-white rounded-full">
+                        +{users.length}
+                    </div>
+                    {
+                        tmp.map(user => (
+                            <div key={user._id} className="relative flex items-center justify-center w-10 h-10 m-1 mr-2 -ml-3 border-r-2 border-white rounded-full">
+                                <img className="rounded-full" src={user.avatar} alt={`${user.first_name} ${user.last_name}`} title={`${user.first_name} ${user.last_name}`}/>
+                            </div>
+                        ))
+                    }
                 </div>
                 { errorUsers && ( <div className="alert-danger"> {errorUsers} </div> ) }
             </div>
             <div className="my-4 text-right">
-                <Link to="/team" className="btn">See all</Link>
+                <Link to="/team" className="text-gray-400 underline btn">See all</Link>
             </div>
             <hr className="my-8 border-gray-100"/>
         </>

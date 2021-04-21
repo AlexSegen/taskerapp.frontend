@@ -45,15 +45,9 @@ const NewestMembers = () => {
                                             <div className="flex items-center justify-start">
                                                 <img src={user.avatar} className="w-8 h-8 mr-2 rounded-full" alt=""/>
                                                 <div className="w-full">
-                                                    <p className="flex items-center mb-0 text-base font-semibold">{user.first_name} {user.last_name}</p>
-                                                    <span className="text-sm text-gray-400">{user.email}</span>
+                                                    <p className="flex items-center mb-0 text-base font-semibold whitespace-nowrap">{user.first_name} {user.last_name}</p>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td className="px-8 py-4 text-center">
-                                            <span className={`${user.role ==='admin' ? 'text-yellow-600 bg-yellow-200': 'text-blue-600 bg-blue-200'} px-4 py-1 text-sm font-semibold  rounded`}>
-                                                {user.role}
-                                            </span>
                                         </td>
                                         <td className="px-8 py-4">
                                             <span className="block mb-1 text-sm text-gray-400">Joined</span>
