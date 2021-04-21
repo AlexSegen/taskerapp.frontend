@@ -12,7 +12,7 @@ import Spinner from '../../../components/Spinner';
 
 const MyTasks = () => {
     
-    const { myTasks, loadingTasks } = useContext(TasksContext)
+    const { myTasks, loadingTasks } = useContext(TasksContext);
 
     const pageLimit = 6;
     const [offset, setOffset] = useState(0);
