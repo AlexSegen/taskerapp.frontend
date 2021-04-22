@@ -25,7 +25,9 @@ const ForgotPassword = () => {
         });
     }
     
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
         
         setInvalidPayload(null);
 
@@ -45,7 +47,7 @@ const ForgotPassword = () => {
                 </div>
                 <form onSubmit={handleSubmit} className="text-left">
                     <div className="mb-4">
-                        <input placeholder="Your email address" className="field-control" type="email" name="email" 
+                        <input value={email} placeholder="Your email address" className="field-control" type="email" name="email" 
                         onChange={e => setEmail(e.target.value)}
                         disabled={loading}/>
                     </div>

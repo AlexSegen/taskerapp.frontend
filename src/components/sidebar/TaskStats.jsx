@@ -21,7 +21,7 @@ const TaskStats = () => {
 
     return ( 
         <>
-            <div className="my-4">
+            <div className="mb-4">
                 <span className="block mb-1 text-sm text-right text-gray-600">{done.length}/{myTasks.length}</span>
                 <div className="relative block h-2">
                     <div className="absolute top-0 left-0 w-full h-2 bg-gray-300 rounded"></div>

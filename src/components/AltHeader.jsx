@@ -35,7 +35,8 @@ const Altheader = () => {
       }
 
       if(e.target.classList.contains("mobile-sidebar")) {
-        setOpenSidebar(true);
+        // setOpenSidebar(true);
+        setOpenSidebar(s => !s);
       } else {
         setOpenSidebar(false);
       }
@@ -53,18 +54,26 @@ const Altheader = () => {
       <div className="flex -mr-2 md:hidden">
           <button type="button"
           id="mobile-sidebar" 
-          className="inline-flex items-center justify-center p-2 text-white bg-indigo-500 rounded-md mobile-sidebar hover:text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" 
+          className={`inline-flex items-center justify-center p-3 text-white ${openSidebar ? 'bg-indigo-500 hover:text-white': 'bg-gray-300 text-gray-500 hover:bg-indigo-700 '} rounded-md mobile-sidebar  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-white`} 
           aria-controls="mobile-sidebar" aria-expanded="false">
             <span className="sr-only">Open main menu</span>
-            <MenuIcon className="block w-6 h-6 mobile-sidebar"/>
-            <svg className="hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            {
+              openSidebar ? (
+                <svg className="block w-6 h-6 mobile-sidebar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="block w-6 h-6 mobile-sidebar" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" /></svg>
+              )
+            }
+            
           </button>
         </div>
         <div className="flex items-center">
           <div className="flex-shrink-0">
-            <img className="w-8 h-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow"/>
+            <Link to={HOME}>
+              <img className="w-8 h-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow"/>
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="flex items-baseline ml-10 space-x-4">
@@ -132,37 +141,19 @@ const Altheader = () => {
           </div>
         </div>
         <div className="flex -mr-2 md:hidden">
-          <button type="button"
-          id="mobile-button" 
-          className="inline-flex items-center justify-center p-2 text-white bg-indigo-500 rounded-md mobile-button hover:text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" 
-          aria-controls="mobile-menu" aria-expanded="false">
-            <span className="sr-only">Open main menu</span>
-            <MenuIcon className="block w-6 h-6 mobile-button"/>
-            <svg className="hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <img className={`w-12 h-12 rounded-full mobile-button border ${toggled ? 'border-indigo-300':'border-gray-300'}`} src={user.avatar} alt={user.first_name}/>
         </div>
       </div>
     </div>
 
     <div  className={` ${toggled ? '':'hidden'} md:hidden mobile-menu`} id="mobile-menu">
-      <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-       <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-gray-700" to={HOME}>Dashboard</Link>
-
-       <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md" to={TASKS}>Tasks</Link>
-
-       <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-gray-700" to={PROJECTS}>Projects</Link>
-
-       <Link className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-gray-700" to={TEAM}>Team</Link>
-      </div>
-      <div className="pt-4 pb-3 border-t border-gray-700">
+      <div className="pt-4 pb-3 border-t border-gray-300">
         <div className="flex items-center px-5">
           <div className="flex-shrink-0">
             <img className="w-10 h-10 rounded-full" src={user.avatar} alt={user.first_name}/>
           </div>
           <div className="ml-3">
-            <div className="text-base font-medium leading-none text-white">{user.first_name}</div>
+            <div className="mb-2 text-base font-medium leading-none text-gray-500">{user.first_name}</div>
             <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
           </div>
           <button className="flex-shrink-0 p-1 ml-auto text-gray-400 rounded-full bg-gray-50 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">

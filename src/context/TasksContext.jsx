@@ -138,7 +138,7 @@ const TasksContextProvider = ({children}) => {
     }
 
     useEffect(() => {
-        if(tasks.length > 0) {
+        if(tasks.length > 0 && user) {
             setCompleted([...tasks.filter(t => t.completed)]);
             setTodo([...tasks.filter(t => t.assigned && (t.assigned._id === user._id) && t.completed)]);
             setMyTasks([...tasks.filter(t => t.assigned && (t.assigned._id === user._id))]);

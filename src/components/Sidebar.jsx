@@ -7,7 +7,9 @@ import { TasksContext } from '../context/TasksContext';
 import TeamList from './sidebar/TeamList';
 import TaskStats from './sidebar/TaskStats';
 import ProjectList from './sidebar/ProjectList';
-import { BellIcon, SettingsIcon, EnvelopeIcon } from './Icons';
+import { BellIcon, SettingsIcon, EnvelopeIcon, ChevronRightIcon } from './Icons';
+import { HOME, PROJECTS, TASKS, TEAM } from '../constants/paths';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -29,11 +31,15 @@ const Sidebar = () => {
         <aside className={`${css} ${openSidebar ? '-translate-x-0':'-translate-x-full'}`}>
 
             <div className="mt-2">
-                <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
-                <span className="block text-xl font-bold text-center">{first_name} {last_name}</span>
-                <span className="block text-sm text-center text-gray-600">{email}</span>
+                <div className="flex items-center justify-center mb-6 lg:block">
+                    <img src={avatar} className="block mx-3 rounded-full lg:mx-auto w-14 lg:w-20 lg:mb-4" alt=""/>
+                    <div>
+                        <span className="block text-lg font-bold text-center lg:text-xl">{first_name} {last_name}</span>
+                        <span className="block text-sm text-center text-gray-600">{email}</span>
+                    </div>
+                </div>
 
-                <div className="flex items-center justify-center mt-4">
+                <div className="flex items-center justify-center mb-4">
                     <button type="button" className="button-sidebar hover:bg-gray-200 focus:outline-none">
                         <SettingsIcon className="w-6 text-blue-600"/>
                     </button>
@@ -49,6 +55,26 @@ const Sidebar = () => {
 
 
                 <TaskStats/>
+
+                <div className="px-10 lg:hidden">
+                    <p className="mb-6 text-xl font-bold uppercase sm:tracking-wide">Menu</p>
+                    <ul>
+                        <li className="mb-4">
+                            <Link to={HOME} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Home</Link>
+                        </li>
+                        <li className="mb-4">
+                            <Link to={TASKS} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Task</Link>
+                        </li>
+                        <li className="mb-4">
+                            <Link to={PROJECTS} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Projects</Link>
+                        </li>
+                        <li className="mb-4">
+                            <Link to={TEAM} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Equipo</Link>
+                        </li>
+  
+                    </ul>
+                </div>
+                <hr className="my-8 border-gray-100"/>
 
                 <ProjectList/>
 
