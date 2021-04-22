@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import moment from 'moment';
 
 import Card from '../../../components/Card';
 import { formatDate } from '../../../helpers/utils';
 import { TasksContext } from '../../../context/TasksContext';
+import { HOME } from '../../../constants/paths';
 
 const NewestMembers = () => {
 
@@ -35,31 +37,27 @@ const NewestMembers = () => {
         <Card>
             <Card.Header>Recent members</Card.Header>
             <Card.Body>
-                <div className="">
-                    <table className="w-full text-sm">
-                        <tbody>
-                            {
-                                filtered.map(user => (
-                                    <tr key={user._id}>
-                                         <td className="px-8 py-4">
-                                            <div className="flex items-center justify-start">
-                                                <img src={user.avatar} className="w-8 h-8 mr-2 rounded-full" alt=""/>
-                                                <div className="w-full">
-                                                    <p className="flex items-center mb-0 text-base font-semibold whitespace-nowrap">{user.first_name} {user.last_name}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-4">
-                                            <span className="block mb-1 text-sm text-gray-400">Joined</span>
-                                            <span className="text-sm whitespace-nowrap">{formatDate(user.createdAt, "MMMM, DD")}</span>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-
+                <div>
+                {
+                    filtered.map(user => (
+                        <Link to={HOME} key={user._id} className="flex items-center justify-between py-2 text-sm text-gray-400 rounded hover:bg-blue-50 focus:outline-none ">
+                            <div className="flex items-center justify-start w-full p-2">
+                                <img src={user.avatar} className="w-6 h-6 mr-2 rounded-full" alt=""/>
+                                <div className="w-full ">
+                                    <div className="mb-0 font-normal text-gray-500 whitespace-nowrap ">
+                                        {user.first_name} {user.last_name}
+                                    </div>
+                                    {user.email}
+                                </div>
+                            </div>
+                            <div   className="flex items-center w-3/6 p-2 ">
+                                <div>{formatDate(user.createdAt, "MMMM, DD")}</div>
+                            </div>
+                        </Link>
+                    ))
+                }
                 </div>
+                
             </Card.Body>
         </Card>
      );

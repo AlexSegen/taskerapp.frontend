@@ -6,6 +6,7 @@ import Card from '../../../components/Card';
 import { formatDate } from '../../../helpers/utils';
 import { DETAILS_TASK } from '../../../constants/paths';
 import { TasksContext } from '../../../context/TasksContext';
+import { CheckCircleIcon, CheckIcon } from '../../../components/Icons';
 
 const NewestTasks = () => {
 
@@ -26,56 +27,51 @@ const NewestTasks = () => {
             return 0;
         });
 
-        const undone = tmp.filter(t => !t.completed);
-
-        setFiltered([...undone].splice(0,4));
+        setFiltered([...tmp].splice(0,5));
     }
 
     useEffect(() => {
        getNewest()
     }, [tasks])
 
-    return ( 
+    return (
         <Card>
             <Card.Header>Recent tasks</Card.Header>
             <Card.Body>
-                <div className="">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr>
-                                <td className="px-8 py-4">Task</td>
-                                <td className="px-8 py-4">Author</td>
-                                <td className="px-8 py-4">Created</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                filtered.map(task => (
-                                    <tr key={task._id} >
-                                         <td className="w-64 px-8 py-4">
-                                             <Link className="text-black hover:underline" to={DETAILS_TASK(task._id)}>{task.title}</Link>
-                                        </td>
-                                        <td className="px-8 py-4 text-center">
-                                            <div className="flex items-center justify-start">
-                                                <img src={task.author.avatar} className="w-8 h-8 mr-2 rounded-full" alt=""/>
-                                                <div className="w-full">
-                                                    <p className="flex items-center mb-0 text-base font-normal whitespace-nowrap">{task.author.first_name} {task.author.last_name}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-4 whitespace-nowrap">
-                                            <span className="text-sm">{formatDate(task.createdAt, "MMMM, DD")}</span>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-
+                <div>
+                {
+                    filtered.map(task => (
+                        <Link to={DETAILS_TASK(task._id)} className="flex items-center justify-between text-sm text-gray-500 rounded hover:bg-blue-50 focus:outline-none ">
+                            <div key={task._id}  className="flex items-center w-full p-2 ">
+                                {
+                                    task.completed ? <CheckCircleIcon className="w-6 mr-2 text-blue-500" /> : <CheckIcon  className="w-6 mr-2 text-gray-300 border border-gray-300 rounded-full"/>
+                                }
+                                <div className="w-full pr-4 overflow-hidden whitespace-nowrap">
+                                    {task.title}
+                                    <div className="text-gray-400 ">{formatDate(task.createdAt, "MMMM DD, hh:mm a")}</div>
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-start w-3/6 p-2">
+                                {task.project ? task.project.title : ""}
+                            </div>
+                            <div className="flex items-center justify-start w-3/6 p-2">
+                                <img src={task.assigned ? task.assigned.avatar : "/avatar.jpg"} className="w-5 h-5 mr-2 rounded-full" alt=""/>
+                                <div className="w-full">
+                                    <span className="flex items-center mb-0 font-normal whitespace-nowrap">
+                                        {
+                                            task.assigned ? `${task.assigned.first_name} ${task.assigned.last_name}` : "Unassigned"
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+                        </Link>
+                    ))
+                }
                 </div>
+
             </Card.Body>
         </Card>
-     );
+    )
 }
  
 export default NewestTasks;
