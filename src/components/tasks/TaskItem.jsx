@@ -13,16 +13,16 @@ const TaskItem = ({task}) => {
 
     const { selected, toggleTaskStatus } = useContext(TasksContext);
 
-    const baseButton = "button p-2 border-2 w-full focus:outline-none";
+    const baseButton = "button p-2 border w-full focus:outline-none";
     const baseItem = "flex items-center px-2 py-2 justify-stretch"
     return ( 
         <div className={`${baseItem} ${selected && selected._id === task._id ? 'bg-gray-200' : 'bg-white'}`}>
-            <div className="hidden w-auto p-2 lg:block">
+            <div className="w-auto p-2">
                 <button 
                     onClick={() => toggleTaskStatus(task)}
                     type="button" 
                     className={`${baseButton} ${task.completed ? 'bg-blue-600 border-blue-600 hover:bg-blue-700  hover:border-blue-700' : 'border-gray-500 text-gray-500 hover:text-blue-500 hover:border-blue-500'}`}>
-                    <CheckIcon className="w-6"/>
+                    <CheckIcon className="w-4 md:w-6"/>
                 </button>
             </div>
             <div className="w-full p-2 ">

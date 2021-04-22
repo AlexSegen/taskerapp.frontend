@@ -13,7 +13,10 @@ const TaskCreate = () => {
     
     const { TaskInitialState, setSelected, selected, loadingTask } = useContext(TasksContext);
 
-    const handleOnClose = () => history.push(TASKS);
+    const handleOnClose = () => {
+        setSelected(null);
+        history.push(TASKS);
+    }
 
     useEffect(() => {
         setSelected(TaskInitialState)

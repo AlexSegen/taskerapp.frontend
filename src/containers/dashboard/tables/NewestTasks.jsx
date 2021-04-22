@@ -41,8 +41,8 @@ const NewestTasks = () => {
                 <div>
                 {
                     filtered.map(task => (
-                        <Link to={DETAILS_TASK(task._id)} className="flex items-center justify-between text-sm text-gray-500 rounded hover:bg-blue-50 focus:outline-none ">
-                            <div key={task._id}  className="flex items-center w-full p-2 ">
+                        <Link to={DETAILS_TASK(task._id)}  key={task._id} className="flex items-center justify-between text-sm text-gray-500 rounded hover:bg-blue-50 focus:outline-none ">
+                            <div  className="flex items-center w-full p-2 ">
                                 {
                                     task.completed ? <CheckCircleIcon className="w-6 mr-2 text-blue-500" /> : <CheckIcon  className="w-6 mr-2 text-gray-300 border border-gray-300 rounded-full"/>
                                 }

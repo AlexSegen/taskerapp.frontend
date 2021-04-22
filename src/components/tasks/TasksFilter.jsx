@@ -11,10 +11,10 @@ const TasksFilter = () => {
     }, [tasks])
 
     return (
-        <div className="bg-white border-b-2 border-gray-100">
+        <div className="bg-white border-b border-gray-100">
             {
                 projects.length > 0 && (
-                    <select ref={filter} onChange={e => setFiltered(e.target.value)} className="block w-full px-8 py-8 font-bold tracking-wide uppercase border-2 border-white cursor-pointer border-b-gray-100 focus:border-white text-1xl focus:outline-none">
+                    <select ref={filter} onChange={e => setFiltered(e.target.value)} className="block w-full p-4 font-bold tracking-wide uppercase border-2 border-white cursor-pointer md:p-8 border-b-gray-100 focus:border-white text-1xl focus:outline-none">
                         <option value="all">All projects</option>
                         {
                             projects.map(p => (

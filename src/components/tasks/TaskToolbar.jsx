@@ -3,7 +3,7 @@ import UserPicker from '../global/UserPicker';
 
 export const Tool = ({children, onClick, disabled}) => {
 
-    const css = "p-2 mr-3 rounded-full focus:outline-none";
+    const css = "p-2 mx-1 rounded-full focus:outline-none";
     return (
         <button type="button"
          disabled={disabled}
@@ -15,9 +15,9 @@ export const Tool = ({children, onClick, disabled}) => {
 const TaskToolbar = ({task, children, onSelect, disabled}) => {
 
     return ( 
-        <div className="flex items-center justify-between px-5 py-4 bg-white border-b-2 border-gray-100">
+        <div className="flex items-center justify-between w-full px-2 py-2 bg-white border-b-2 border-gray-100  md:px-5 md:py-4">
             <UserPicker onSelect={onSelect} selected={task.assigned} disabled={disabled} />
-            <div className="flex items-center justify-end p-2 px-4">
+            <div className="flex items-center p-2 px-2 md:px-4 justify-items-start md:justify-end">
                 {children}
             </div>
         </div>

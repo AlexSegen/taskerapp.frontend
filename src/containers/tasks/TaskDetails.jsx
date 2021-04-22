@@ -25,6 +25,18 @@ const TaskDetails = () => {
       editTask(selected);
     }
 
+    const handleClose = () => {
+      setEdit(false);
+      setSelected(null);
+      history.push(TASKS)
+    }
+
+    const handleDeleteTask = () => {
+      deleteTask(selected._id).then(() => {
+        handleClose();
+      })
+    }
+
     useEffect(() => {
       
       if (id) { 
@@ -54,7 +66,7 @@ const TaskDetails = () => {
     return (
       <Tasks>
 
-        { edit && <TaskForm onClose={() => setEdit(false)} /> }
+        { edit && <TaskForm onClose={handleClose} /> }
 
         { !edit && loadingTask && <Spinner height="400" loading={true}/> }
 
@@ -63,10 +75,10 @@ const TaskDetails = () => {
                 <TaskToolbar task={selected} onSelect={onSelect} disabled={selected.completed}>
                       <Tool onClick={() => toggleTaskStatus(selected, true)} ><CheckIcon className="w-8"/></Tool>
                       <Tool disabled={selected.completed} onClick={() => setEdit(true)} ><PencilOutlineIcon className="w-8"/></Tool>
-                      <Tool onClick={() => deleteTask(selected._id)} ><TrashOutlineIcon className="w-8"/></Tool>
-                      <Tool disabled={loadingTask} onClick={() => history.push(TASKS)}><XOutlineIcon className="w-8"/></Tool>
+                      <Tool onClick={handleDeleteTask} ><TrashOutlineIcon className="w-8"/></Tool>
+                      <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
                 </TaskToolbar>
-                <div className="w-full max-h-screen px-10 py-10 overflow-y-auto" >
+                <div className="w-full px-10 py-10 md:max-h-screen md:overflow-y-auto" >
                     <h1 className="mb-4 text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
                     
                     <p className="flex items-center mb-5 text-gray-600">

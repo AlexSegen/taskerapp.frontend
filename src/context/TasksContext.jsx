@@ -15,8 +15,7 @@ const TasksContextProvider = ({children}) => {
 
     const { user } = useAuth();
 
-    const { toastSuccess, toastError, toastInfo } = useNotification();
-
+    const { toastSuccess, toastInfo } = useNotification();
 
     const [completed, setCompleted] = useState([])
     const [todo, setTodo] = useState([])
@@ -66,7 +65,7 @@ const TasksContextProvider = ({children}) => {
         dispatch({ type: "SET_TASKS", payload: [] })
         dispatch({ type: "REQUEST_TASKS" })
         
-        getAll().then(data => {
+        return getAll().then(data => {
             dispatch({ type: "SET_TASKS", payload: data })
         }).catch(error => {
             dispatch({ type: "REQUEST_TASKS_FAILURE", payload: error.message })
@@ -75,7 +74,7 @@ const TasksContextProvider = ({children}) => {
     
     const setTask = task => {
         dispatch({ type: "REQUEST_TASK" })
-        createTask(task).then(data => {
+        return createTask(task).then(data => {
             dispatch({ type: "ADD_TASK", payload: data })
             toastSuccess("Task added");
 
@@ -94,7 +93,7 @@ const TasksContextProvider = ({children}) => {
     }
 
     const deleteTask = id => {
-        removeTask(id).then(() => {
+        return removeTask(id).then(() => {
             dispatch({ type: "DELETE_TASK", payload: id })
             toastSuccess("Task deleted");
         }).catch(error => {
@@ -104,7 +103,7 @@ const TasksContextProvider = ({children}) => {
 
     const editTask = task => {
         dispatch({ type: "REQUEST_TASK" })
-        updateTask(task).then(data => {
+        return updateTask(task).then(data => {
             dispatch({ type: "UPDATE_TASK", payload: data })
             toastSuccess("Task updated");
         }).catch(error => {
@@ -117,7 +116,7 @@ const TasksContextProvider = ({children}) => {
 
             dispatch({ type: "REQUEST_TASK" })
     
-            toggleTask(task).then(data => {
+            return toggleTask(task).then(data => {
                 
                 dispatch({ type: "UPDATE_TASK", payload: data })
     
@@ -146,7 +145,7 @@ const TasksContextProvider = ({children}) => {
             setDone([...tasks.filter(t => (t.assigned && (t.assigned._id === user._id)) && (t.completedBy && (t.completedBy._id === user._id)))]);
         }
     }, [tasks])
-    
+
 
     const values = {
 

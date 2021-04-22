@@ -29,7 +29,7 @@ const TasksList = () => {
                 <button onClick={() => handleAddTask()} type="button" className="bg-blue-600 button focus:outline-none hover:bg-blue-700 whitespace-nowrap">New task</button>
             </div>
   
-            <div className="w-full max-h-screen overflow-y-auto ">
+            <div className="w-full max-h-screen overflow-y-auto">
 
                 {
                     loadingTasks && (

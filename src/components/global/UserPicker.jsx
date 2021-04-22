@@ -35,19 +35,19 @@ const UserPicker = ({onSelect, selected, disabled }) => {
                 <>
 
                     <Menu.Button disabled={disabled} type="button"
-                    className={`relative rounded flex items-center justify-start px-5 py-2 text-base font-semibold text-gray-600 focus:text-gray-700 focus:outline-non focus:bg-blue-100 hover:text-gray-700 ${open ? 'bg-blue-100':''} ${disabled ? '':'hover:bg-blue-100'}`}>
+                    className={`relative rounded flex items-center justify-start px-2 md:px-5 py-2 text-base font-semibold text-gray-600 focus:text-gray-700 focus:outline-non focus:bg-blue-100 hover:text-gray-700 ${open ? 'bg-blue-100':''} ${disabled ? '':'hover:bg-blue-100'}`}>
                         {
                             user ? 
                                 (
                                     <>
                                     <img className="block w-8 mr-3 rounded-full" src={user.avatar} alt=""/> 
-                                    <span> {user.first_name} {user.last_name} </span> 
+                                    <span className="hidden md:block"> {user.first_name} {user.last_name} </span> 
                                     { !disabled && <span onClick={() => handleSelect(null)} role="button" className="relative z-20 ml-2 text-sm font-normal text-gray-500">(remove)</span> }
                                     </>
                                 ) : (
                                     <>
                                     <img className="block w-8 mr-3 rounded-full" src="/avatar.jpg" alt=""/>
-                                    <span>Unassigned</span>
+                                    <span className="hidden md:block">Unassigned</span>
                                     </>
                                 )
                         }

@@ -20,7 +20,7 @@ export const initialState = {
     errorProjects: false,
     tasks: [],
     filtered: [],
-    selected: TaskInitialState,
+    selected: null,
     projects: [],
     users: [],
     loadingUsers: false,
