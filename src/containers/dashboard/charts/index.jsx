@@ -13,8 +13,8 @@ const ChartsContainer = () => {
     const { tasks, loadingTasks } = useContext(TasksContext)
 
     return (
-        <div className="grid grid-cols-12 gap-6 mb-10">
-        <div className="col-span-4">
+    <div className="block grid-cols-12 gap-6 md:grid">
+        <div className="md:col-span-6 lg:col-span-4">
             <Card>
                 <Card.Header>General overview</Card.Header>
                 <Card.Body>
@@ -23,7 +23,7 @@ const ChartsContainer = () => {
                 </Card.Body>
             </Card>
         </div>
-        <div className="col-span-4">
+        <div className="md:col-span-6 lg:col-span-4">
             <Card>
                 <Card.Header>Completed</Card.Header>
                 <Card.Body>
@@ -32,7 +32,7 @@ const ChartsContainer = () => {
                 </Card.Body>
             </Card>
         </div>
-        <div className="col-span-4">
+        <div className="md:col-span-12 lg:col-span-4">
             <Card>
                 <Card.Header>Top Members</Card.Header>
                 <Card.Body>

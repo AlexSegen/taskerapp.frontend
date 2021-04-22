@@ -8,7 +8,7 @@ const Layout = ({children, className}) => {
     return (  
         <>
             { isAuthenticated && <AltHeader/>}
-            <div className="grid w-full min-h-screen grid-cols-12 pt-16">
+            <div className="w-full min-h-screen grid-cols-12 pt-16 lg:grid">
                 { isAuthenticated && <Sidebar/>}
                 <div className={`w-full min-h-screen bg-white col-span-9 ${className}`}>
                     {children}

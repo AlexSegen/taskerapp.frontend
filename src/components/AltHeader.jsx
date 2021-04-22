@@ -5,6 +5,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { useAuth } from '../hooks/useAuth';
 import { MenuIcon, BellOutlineIcon } from './Icons';
 import { TasksContext } from '../context/TasksContext';
+import { AppContext } from '../context/AppContext';
 import { ADD_TASK, CHANGE_PASSWORD, HOME, PROFILE, PROJECTS, TASKS, TEAM } from '../constants/paths';
 
 const Altheader = () => {
@@ -14,6 +15,7 @@ const Altheader = () => {
   const [toggled, setToggled] = useState(false);
 
   const { TaskInitialState, setSelected } = useContext(TasksContext);
+  const { setOpenSidebar, openSidebar } = useContext(AppContext);
 
   const handleAddTask = () => {
       setSelected(TaskInitialState);
@@ -27,9 +29,15 @@ const Altheader = () => {
   const handleMobileMenu = () => {
     document.addEventListener('click', (e) => {
       if(e.target.classList.contains("mobile-button")) {
-        setToggled(t => !t);
+        setToggled(s => !s);
       } else {
         setToggled(false);
+      }
+
+      if(e.target.classList.contains("mobile-sidebar")) {
+        setOpenSidebar(true);
+      } else {
+        setOpenSidebar(false);
       }
     });
   }
@@ -42,6 +50,18 @@ const Altheader = () => {
   <nav className="fixed top-0 z-20 w-full shadow-sm bg-gray-50">
     <div className="w-full px-4 mx-auto sm:px-6 lg:px-8">
       <div className="flex items-center justify-between h-16">
+      <div className="flex -mr-2 md:hidden">
+          <button type="button"
+          id="mobile-sidebar" 
+          className="inline-flex items-center justify-center p-2 text-white bg-indigo-500 rounded-md mobile-sidebar hover:text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" 
+          aria-controls="mobile-sidebar" aria-expanded="false">
+            <span className="sr-only">Open main menu</span>
+            <MenuIcon className="block w-6 h-6 mobile-sidebar"/>
+            <svg className="hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
         <div className="flex items-center">
           <div className="flex-shrink-0">
             <img className="w-8 h-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow"/>

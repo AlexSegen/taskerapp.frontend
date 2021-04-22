@@ -24,13 +24,14 @@ const Dashboard = () => {
             </div>
 
             <div className="p-4">
-                <div className="grid grid-cols-12 gap-6">
+                <div className="grid-cols-12 gap-6 lg:grid">
                     <div className="col-span-9">
                         <ChartsContainer/>
 
-                        <div className="grid grid-cols-10 gap-6 mb-10">
+                        <div className="grid-cols-10 gap-6 mb-4 lg:grid">
                             <div className="col-span-4">
-                                { loadingUsers ? <Spinner height="200" loading={true} /> :  <NewestMembers/> }
+                            { loadingUsers ? <Spinner height="200" loading={true} /> :  <NewestMembers/> }
+
                             </div>
                             <div className="col-span-6">
                                 { loadingTasks ? <Spinner height="200" loading={true} /> :  <NewestTasks/> }

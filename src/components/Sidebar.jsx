@@ -1,17 +1,20 @@
 import React, { useContext, useEffect } from 'react';
-import { TasksContext } from '../context/TasksContext';
 
 import { useAuth } from '../hooks/useAuth';
-import { BellIcon, SettingsIcon, EnvelopeIcon } from './Icons';
-import ProjectList from './sidebar/ProjectList';
-import TaskStats from './sidebar/TaskStats';
+import { AppContext } from '../context/AppContext';
+import { TasksContext } from '../context/TasksContext';
+
 import TeamList from './sidebar/TeamList';
+import TaskStats from './sidebar/TaskStats';
+import ProjectList from './sidebar/ProjectList';
+import { BellIcon, SettingsIcon, EnvelopeIcon } from './Icons';
 
 const Sidebar = () => {
 
+    const { user } = useAuth();
+    
     const { getTasks } = useContext(TasksContext);
-
-    const { user } = useAuth()
+    const { openSidebar } = useContext(AppContext);
 
     const { first_name, last_name, email, avatar } = user;
 
@@ -19,8 +22,11 @@ const Sidebar = () => {
         getTasks();
     }, [])
 
+
+    const css = "col-span-3 w-full  px-10 py-5 bg-white border-r-2 border-gray-100 lg:px-4 z-10 transform absolute lg:relative";
+
     return ( 
-        <aside className={`col-span-3 w-full px-10 py-5  bg-white border-r-2 border-gray-100 lg:px-4`}>
+        <aside className={`${css} ${openSidebar ? 'transform -translate-x-0':'transform -translate-x-full'}`}>
 
             <div className="mt-2">
                 <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
