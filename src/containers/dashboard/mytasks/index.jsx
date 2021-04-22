@@ -4,7 +4,7 @@ import Paginator from 'react-hooks-paginator';
 
 import Card from '../../../components/Card';
 import { formatDate } from '../../../helpers/utils';
-import { DETAILS_TASK } from '../../../constants/paths';
+import { ADD_TASK, DETAILS_TASK } from '../../../constants/paths';
 import { TasksContext } from '../../../context/TasksContext';
 import { CheckCircleIcon, CheckIcon } from '../../../components/Icons';
 import Spinner from '../../../components/Spinner';
@@ -18,20 +18,30 @@ const MyTasks = () => {
     const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
+    const [filtered, setFiltered] = useState([]);
+    const [filter, setFilter] = useState("all");
 
     useEffect(() => {
-        setCurrentData(myTasks.slice(offset, offset + pageLimit));
-    }, [offset, myTasks]);
+        if(filter === "all"){
+            setFiltered([...myTasks]);
+        } else {
+            setFiltered([...myTasks.filter(item => item.completed === (filter == "true"))]);
+        }
+    }, [myTasks, filter]);
+
+    useEffect(() => {
+        setCurrentData(filtered.slice(offset, offset + pageLimit));
+    }, [offset, filtered]);
 
     return ( 
         <Card>
             <Card.Header>My Tasks</Card.Header>
             <Card.Body>
 
-                <select disabled={loadingTasks} className="field-control">
+                <select onChange={e => setFilter(e.target.value)} value={filter} disabled={loadingTasks} className="field-control">
                     <option value="all">All tasks</option>
-                    <option value="1">Completed</option>
-                    <option value="0">Pending</option>
+                    <option value="true">Completed</option>
+                    <option value="false">Pending</option>
                 </select>
 
                 <div className="py-4">
@@ -52,7 +62,22 @@ const MyTasks = () => {
                         </Link>))
                     }
 
+                    {
+                        !loadingTasks && !filtered.length && (
+                            <div className="flex items-center justify-center border border-gray-300 border-opacity-50 border-dashed rounded">
+                                <div className="w-full p-4 text-sm text-center text-gray-400">
+                                    <div >There are no tasks</div>
+                                    {
+                                        filter === "all" && <div className="my-2"><Link className="button is-primary" to={ADD_TASK}>Add new</Link></div>
+                                    }
+                                </div>
+                            </div>
+                        )
+                    }
+
                 </div>
+
+
                 
                 {!loadingTasks && (
                     <Paginator
