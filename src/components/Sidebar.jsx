@@ -23,10 +23,10 @@ const Sidebar = () => {
     }, [])
 
 
-    const css = "col-span-3 w-full  px-10 py-5 bg-white border-r-2 border-gray-100 lg:px-4 z-10 transform absolute lg:relative";
+    const css = "col-span-3 w-full px-10 py-5 bg-white border-r-2 border-gray-100 lg:px-4 z-10 transform fixed top-16 bottom-0 lg:static min-h-screen lg:min-h-auto lg:overflow-y-auto overflow-y-scroll transform lg:transform-none";
 
     return ( 
-        <aside className={`${css} ${openSidebar ? 'transform -translate-x-0':'transform -translate-x-full'}`}>
+        <aside className={`${css} ${openSidebar ? '-translate-x-0':'-translate-x-full'}`}>
 
             <div className="mt-2">
                 <img src={avatar} className="block w-20 mx-auto mb-4 rounded-full" alt=""/>
