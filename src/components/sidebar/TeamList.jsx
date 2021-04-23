@@ -5,6 +5,8 @@ import { shuffle } from '../../helpers/utils';
 import { TasksContext } from '../../context/TasksContext';
 
 const TeamList = () => {
+    const userCount = 6;
+    
     const [tmp, setTmp] = useState([]);
 
     const { getUsers, users,  errorUsers } = useContext(TasksContext);
@@ -15,7 +17,7 @@ const TeamList = () => {
     useEffect(() => {
         const randomize = shuffle([...users]);
         const firstTen = randomize
-        setTmp([...firstTen].splice(0, 6));
+        setTmp([...firstTen].splice(0, userCount));
     }, [users])
 
     return ( 
@@ -25,7 +27,7 @@ const TeamList = () => {
 
                 <div className="flex flex-row-reverse justify-center mt-10">
                     <div className="relative flex items-center justify-center w-10 h-10 m-1 mr-2 -ml-3 text-sm text-white bg-gray-500 border-r-2 border-white rounded-full">
-                        +{users.length}
+                        +{users.length - userCount}
                     </div>
                     {
                         tmp.map(user => (
