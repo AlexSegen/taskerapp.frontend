@@ -73,7 +73,7 @@ const Team = () => {
             <div className="p-4">
                 <div className="flex justify-between px-8 mb-6">
                     <div className="w-full">
-                        <p className="text-base text-xl font-semibold">Team Progress</p>
+                        <p className="text-xl font-semibold ">Team Progress</p>
                         {
                             !loadingUsers && <span className="text-sm text-gray-600">There are {users.length} members</span>
                         }
@@ -87,7 +87,7 @@ const Team = () => {
                         
                 {
                     !loadingUsers && (
-                        <div>
+                        <div className="w-full overflow-x-auto">
 
                             <table className="w-full bg-white">
                                 <tbody>
@@ -126,9 +126,10 @@ const Team = () => {
                                                         {user.status ? 'active':'blocked'}
                                                     </span>
                                                 </td>
-                                                <td className="text-gray-600">
-                                                    <span className="block text-sm text-gray-400">Joined</span>
-                                                    {formatDate(user.createdAt, "MMM Do YY")}
+                                                <td className="text-gray-400" >
+                                                    <span className="block text-sm">Joined</span>
+                                                    <span className="whitespace-nowrap">{formatDate(user.createdAt, "MMM Do, YY")}</span>
+                                                    
                                                 </td>
                                             </tr>
                                         ))

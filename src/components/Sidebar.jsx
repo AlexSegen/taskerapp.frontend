@@ -69,9 +69,8 @@ const Sidebar = () => {
                             <Link to={PROJECTS} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Projects</Link>
                         </li>
                         <li className="mb-4">
-                            <Link to={TEAM} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Equipo</Link>
+                            <Link to={TEAM} className="text-gray-500 hover:text-gray-600 focus:outline-none"><ChevronRightIcon className={`inline w-6 mr-1`}/> Team</Link>
                         </li>
-  
                     </ul>
                 </div>
                 <hr className="my-8 border-gray-100"/>
