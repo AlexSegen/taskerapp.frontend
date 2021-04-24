@@ -18,12 +18,14 @@ import ResetPassword from './containers/auth/ResetPassword';
 import Profile from './containers/profile';
 import ChangePassword from './containers/profile/ChangePassword';
 
-import Dashboard from './containers/dashboard';
+import Home from './containers/home';
 import Tasks from './containers/tasks/Tasks';
 import TaskDetails from './containers/tasks/TaskDetails';
 import TaskCreate from './containers/tasks/TaskCreate';
 import Projects from './containers/projects/Projects';
 import Team from './containers/team/Team';
+
+import Landing from "./landing";
 
 import {
   HOME,
@@ -40,14 +42,15 @@ import {
   PROJECTS
 } from './constants/paths';
 
+
 const RouterRoot = () => {
 
     return (
         <Router>
             <Switch>
-                <PrivateRoute exact path={HOME}>
-                    <Dashboard />
-                </PrivateRoute>
+                <Route exact path={HOME}>
+                    <Home />
+                </Route>
                 <PrivateRoute exact path={TASKS}>
                     <Tasks />
                 </PrivateRoute>

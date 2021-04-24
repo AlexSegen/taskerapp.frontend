@@ -63,7 +63,7 @@ const RegisterPage = () => {
         <div className="flex items-center justify-center min-h-screen px-5 bg-gray-50">
             <div className="grid w-full max-w-3xl grid-cols-8 mx-auto overflow-hidden bg-white rounded shadow-md">
                 <div className="col-span-2 overflow-hidden md:col-span-4">
-                    <img className="object-cover w-full h-full" src="https://windmill-dashboard-react.vercel.app/static/media/login-office.72742c2e.jpeg" alt=""/>
+                    <img className="object-cover w-full h-full" src="/auth-2.jpg" alt=""/>
                 </div>
 
                 <form onSubmit={handleSubmit} className="col-span-6 p-5 md:col-span-4">
