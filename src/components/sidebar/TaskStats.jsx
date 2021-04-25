@@ -31,17 +31,14 @@ const TaskStats = () => {
                     <div className="w-full p-3">
                         <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{completed.length}</div>
                         <div className="font-semibold text-gray-600">Done</div>
-                        <div className="text-gray-500">tasks</div>
                     </div>
                     <div className="w-full p-3">
                         <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{tasks.filter(t => !t.completed).length}</div>
                         <div className="font-semibold text-gray-600">To do</div>
-                        <div className="text-gray-500">tasks</div>
                     </div>
                     <div className="w-full p-3">
                         <div className={`mb-1 text-2xl font-bold text-gray-900 ${loadingTasks ? 'w-10 animate-pulse h-8 rounded bg-blue-200  mx-auto text-blue-200':''}`}>{tasks.length }</div>
                         <div className="font-semibold text-gray-600">Total</div>
-                        <div className="text-gray-500">tasks</div>
                     </div>
                 </div>
             </div>

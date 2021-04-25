@@ -4,6 +4,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { formatDate } from '../../helpers/utils'
 import { TrashIcon, ThumbUpIcon } from '../Icons';
 import { CommentsContext } from '../../context/CommentsContext';
+import { Link } from 'react-router-dom';
+import { DETAILS_MEMBER } from '../../constants/paths';
 
 const Comment = ({comment}) => {
 
@@ -28,12 +30,15 @@ const Comment = ({comment}) => {
     return ( 
         <div className="flex items-start mb-6">
             <div className="w-full">
-                <div className="flex items-center space-between">
-                    <img className="w-8 mr-2 rounded-full" src={comment.author.avatar} alt=""/>
-                    <div className="w-full p-2 text-base font-semibold">{comment.author.first_name} {comment.author.last_name} 
-                        <span className="ml-2 text-sm font-normal text-gray-600">{formatDate(comment.createdAt, 'MMMM Do, h:mm:ss a')}</span>
-                    </div>
-                    <div className="flex items-center justify-end w-1/3 p-2">
+                <div className="grid grid-cols-12">
+                    <Link className="col-span-8 flex items-center justify-start p-2" to={DETAILS_MEMBER(comment.author._id)}>
+                        <img className="w-8 mr-2 rounded-full" src={comment.author.avatar} alt=""/>
+                        <div className="text-base font-semibold">
+                            {comment.author.first_name} {comment.author.last_name} 
+                        </div>
+                        <span className="p-2 text-sm font-normal text-gray-400">{formatDate(comment.createdAt, 'MMMM Do, h:mm:ss a')}</span>
+                    </Link>
+                    <div className="col-span-4 flex items-center justify-end p-2">
 
                         {
                             user._id === comment.author._id &&
@@ -53,7 +58,7 @@ const Comment = ({comment}) => {
 
                 {
                     !editMode || editMode._id !== comment._id ? (
-                        <div onClick={() => handleEditMode(comment)} className="mt-2 text-gray-700">
+                        <div onClick={() => handleEditMode(comment)} className="mt-2 text-gray-500">
                             {comment.content}
                         </div>
                     ) : (<></>)

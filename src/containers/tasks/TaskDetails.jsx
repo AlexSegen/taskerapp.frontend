@@ -5,7 +5,7 @@ import renderHTML from 'react-render-html';
 import Tasks from './Tasks'
 import TaskForm from './TaskForm';
 import Spinner from '../../components/Spinner'
-import { TASKS } from '../../constants/paths';
+import { DETAILS_MEMBER, TASKS } from '../../constants/paths';
 import { formatDate } from '../../helpers/utils'
 import TaskComments from '../../components/tasks/TaskComments';
 import { TasksContext } from '../../context/TasksContext';
@@ -90,10 +90,10 @@ const TaskDetails = () => {
                         selected.author && (
                         <div className="mr-10">
                           <div className="mb-2 text-gray-400">Author</div>
-                          <div className="flex items-center justify-start">
+                          <Link to={DETAILS_MEMBER(selected.author._id)} className="flex items-center justify-start">
                             <img src={selected.author.avatar} className="w-6 mr-2 rounded-full" alt=""/> 
                             {selected.author.first_name} {selected.author.last_name}
-                          </div>
+                          </Link>
                         </div>)
                       }
                       {

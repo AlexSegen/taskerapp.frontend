@@ -15,6 +15,7 @@ import ActivityChart from '../dashboard/charts/LastDays';
 import { MembersContext } from '../../context/MembersContext';
 import { TasksContext } from '../../context/TasksContext';
 import { CheckCircleIcon, CheckIcon } from '../../components/Icons';
+import Spinner from '../../components/Spinner';
 
 const Member = () => {
 
@@ -51,14 +52,17 @@ const Member = () => {
 
                         <div className="px-4  sm:p-2">
                             <Card>
-                                <Card.Header>{member.first_name}'s progress</Card.Header>
+                                { !error && <Card.Header>{member.first_name}'s progress</Card.Header> }
+                                
                                 <Card.Body>
                                     <div className="md:grid grid-cols-12 gap-6 mb-4">
                                         <div className="col-span-6">
-                                            <OverviewChart tasks={filtered}/>
+                                            <Spinner loading={loading} />
+                                            { !loading && <OverviewChart tasks={filtered}/> }
                                         </div>
                                         <div className="col-span-6">
-                                            <ActivityChart tasks={filtered}/>
+                                            <Spinner loading={loading} />
+                                            { !loading && <ActivityChart tasks={filtered}/> }
                                         </div>
                                     </div>
                                 </Card.Body>
@@ -76,7 +80,9 @@ const Member = () => {
                                         !loadingTasks && !created.length && (
                                             <div className="flex items-center justify-center border border-gray-300 border-opacity-50 border-dashed rounded">
                                                 <div className="w-full p-4 text-sm text-center text-gray-400">
-                                                    <div>{member.first_name} hasn't created any task</div>
+                                                    {
+                                                        error ? <></> : <div>{member.first_name} hasn't created any task</div>
+                                                    }
                                                 </div>
                                             </div>
                                         )
@@ -163,20 +169,36 @@ function ProfileForm({member, loading, error}) {
 
                             <div className="md:grid grid-cols-10 gap-5">
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">Email: </span>
-                                    <span className="text-gray-400">{user.email}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">Email: </span>
+                                            <span className="text-gray-400">{user.email}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">Phone: </span>
-                                    <span className="text-gray-400">{user.phone || "--"}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">Phone: </span>
+                                            <span className="text-gray-400">{user.phone || "--"}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">Status: </span>
-                                    <span className="bg-green-100 text-green-400 py-1 text-sm px-4 rounded">{user.status === 1 ? 'Active' : 'Blocked'}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">Status: </span>
+                                            <span className="bg-green-100 text-green-400 py-1 text-sm px-4 rounded">{user.status === 1 ? 'Active' : 'Blocked'}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">Joined: </span>
-                                    <span className="text-gray-400">{formatDate(user.createdAt, "MMMM DD, YY.")}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">Joined: </span>
+                                            <span className="text-gray-400">{formatDate(user.createdAt, "MMMM DD, YY.")}</span>
+                                        </>
+                                    )}
                                 </div>
                             </div>
 
@@ -184,20 +206,36 @@ function ProfileForm({member, loading, error}) {
 
                             <div className="md:grid grid-cols-10 gap-5">
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">Country/Region: </span>
-                                    <span className="text-gray-400">{user.address.country || "--"}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">Country/Region: </span>
+                                            <span className="text-gray-400">{user.address.country || "--"}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">State: </span>
-                                    <span className="text-gray-400">{user.address.state || "--"}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">State: </span>
+                                            <span className="text-gray-400">{user.address.state || "--"}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">City: </span>
-                                    <span className="text-gray-400">{user.address.city || "--"}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">City: </span>
+                                            <span className="text-gray-400">{user.address.city || "--"}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-span-5 md:flex items-center">
-                                    <span className="font-semibold mr-2">Street: </span>
-                                    <span className="text-gray-400">{user.address.street || "--"}</span>
+                                    {loading ? <InputLoader/> : (
+                                        <>
+                                            <span className="font-semibold mr-2">Street: </span>
+                                            <span className="text-gray-400">{user.address.street || "--"}</span>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </Card.Body>
