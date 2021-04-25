@@ -10,6 +10,7 @@ export const EDIT_TASK = (id) => `/tasks/${id}/edit`
 
 // USERS
 export const TEAM = "/team"
+export const DETAILS_MEMBER = (id) => `/user/${id}`
 
 // PROJECTS
 export const PROJECTS = "/projects"

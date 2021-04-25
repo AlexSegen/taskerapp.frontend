@@ -5,7 +5,7 @@ import moment from 'moment';
 import Card from '../../../components/Card';
 import { formatDate } from '../../../helpers/utils';
 import { TasksContext } from '../../../context/TasksContext';
-import { HOME } from '../../../constants/paths';
+import { DETAILS_MEMBER, HOME } from '../../../constants/paths';
 
 const NewestMembers = () => {
 
@@ -40,7 +40,7 @@ const NewestMembers = () => {
                 <div>
                 {
                     filtered.map(user => (
-                        <Link to={HOME} key={user._id} className="flex items-center justify-between py-2 text-sm text-gray-400 rounded hover:bg-blue-50 focus:outline-none ">
+                        <Link to={DETAILS_MEMBER(user._id)} key={user._id} className="flex items-center justify-between py-2 text-sm text-gray-400 rounded hover:bg-blue-50 focus:outline-none ">
                             <div className="flex items-center justify-start w-full p-2">
                                 <img src={user.avatar} className="w-6 h-6 mr-2 rounded-full" alt=""/>
                                 <div className="w-full ">

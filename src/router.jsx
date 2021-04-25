@@ -23,6 +23,7 @@ import TaskDetails from './containers/tasks/TaskDetails';
 import TaskCreate from './containers/tasks/TaskCreate';
 import Projects from './containers/projects/Projects';
 import Team from './containers/team/Team';
+import Member from './containers/team/Member';
 
 import {
   HOME,
@@ -36,6 +37,7 @@ import {
   ADD_TASK,
   DETAILS_TASK,
   TEAM,
+  DETAILS_MEMBER,
   PROJECTS
 } from './constants/paths';
 
@@ -68,6 +70,9 @@ const RouterRoot = () => {
                 </PrivateRoute>
                 <PrivateRoute exact path={TEAM}>
                     <Team />
+                </PrivateRoute>
+                <PrivateRoute path={DETAILS_MEMBER(":id")}>
+                    <Member />
                 </PrivateRoute>
                 <NoAuthOnlyRoute path={LOGIN}>
                     <Login />

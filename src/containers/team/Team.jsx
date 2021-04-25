@@ -6,6 +6,8 @@ import Spinner from '../../components/Spinner';
 import { SearchIcon } from "../../components/Icons";
 import { TasksContext } from '../../context/TasksContext';
 import { formatDate, searchOption } from '../../helpers/utils'
+import { DETAILS_MEMBER } from '../../constants/paths';
+import { Link } from 'react-router-dom';
 
 const Team = () => {
 
@@ -97,13 +99,13 @@ const Team = () => {
                                         currentData.map(user => (
                                             <tr key={user._id} className="hover:bg-blue-50">
                                                 <td className="w-64 px-8 py-4">
-                                                    <div className="flex items-center justify-start">
+                                                    <Link to={DETAILS_MEMBER(user._id)} className="flex items-center justify-start">
                                                         <img src={user.avatar} className="w-10 h-10 mr-2 rounded-full" alt=""/>
                                                         <div className="w-full">
                                                             <p className="text-base font-semibold">{user.first_name} {user.last_name}</p>
                                                             <span className="text-sm text-gray-400">{user.email}</span>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </td>
                                                 <td className="px-8 py-4 text-center">
                                                     <span className={`${user.role ==='admin' ? 'text-yellow-600 bg-yellow-200': 'text-blue-600 bg-blue-200'} px-4 py-1 text-sm font-semibold  rounded`}>

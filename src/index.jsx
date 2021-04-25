@@ -12,6 +12,7 @@ import './index.css';
 //Contexts
 import AuthContextProvider from './context/AuthContext';
 import TasksContextProvider from './context/TasksContext';
+import MembersContextProvider from './context/MembersContext';
 import CommentsContextProvider from './context/CommentsContext';
 
 
@@ -28,9 +29,11 @@ if (TokenService.getToken()) {
 ReactDOM.render(
   <AuthContextProvider>
     <TasksContextProvider>
+      <MembersContextProvider>
       <CommentsContextProvider>
         <App />
       </CommentsContextProvider>
+      </MembersContextProvider>
     </TasksContextProvider>
   </AuthContextProvider>,
   document.getElementById('root')

@@ -8,7 +8,7 @@ import { formatDate } from '../../helpers/utils';
 import { ADD_TASK, DETAILS_TASK } from '../../constants/paths';
 import { CheckCircleIcon, CheckIcon } from '../Icons';
 
-const UserTasks = ({tasks, loading}) => {
+const UserTasks = ({tasks, loading, title}) => {
     
     const pageLimit = 8;
     const [offset, setOffset] = useState(0);
@@ -31,7 +31,7 @@ const UserTasks = ({tasks, loading}) => {
 
     return ( 
         <Card>
-            <Card.Header>My Tasks</Card.Header>
+            <Card.Header> { title || "My Tasks" }</Card.Header>
             <Card.Body>
 
                 <select value={filter} onChange={e => setFilter(e.target.value)} value={filter} disabled={loading} className="field-control">
