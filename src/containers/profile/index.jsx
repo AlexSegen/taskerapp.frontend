@@ -1,17 +1,21 @@
-import React, {  useEffect } from 'react';
+import React, {  useEffect, useContext } from 'react';
 
 import { User } from '../../models/User';
-
 import { useAuth } from '../../hooks/useAuth';
 import { useForm } from '../../hooks/useForm';
+import { TasksContext } from '../../context/TasksContext';
 
 import Layout from '../../components/Layout';
 import { SpinnerI } from '../../components/Icons'
+import UserTasks from '../../components/global/UserTasks';
 import ChangeAvatar from '../../components/profile/ChangeAvatar';
+import { Link } from 'react-router-dom';
+import { CHANGE_PASSWORD } from '../../constants/paths';
 
 const Profile = () => {
 
     const { user, GetProfile, UpdateProfile } = useAuth();
+    const { myTasks, loadingTasks } = useContext(TasksContext)
 
     const handleSubmit = (payload) => {
         UpdateProfile(payload);
@@ -23,15 +27,27 @@ const Profile = () => {
 
     return ( 
         <Layout>
-            <div className="flex justify-between p-2 border-b-2 border-gray-100">
+            <div className="flex justify-between p-2 border-b border-gray-100">
                 <div className="p-2">
-                    <h1 className="m-0 text-base text-2xl">Profile</h1>
+                    <h1 className="m-0 text-2xl font-bold text-gray-400">Profile</h1>
                 </div>
                 <div className="p-2">
                 </div>
             </div>
-            <div className="container mx-auto mt-5 md:mt-2" style={{maxWidth: "80%"}}>
-                { user && <ProfileForm user={user} onSubmit={handleSubmit} /> }
+            <div className="container mx-auto mt-5 md:mt-2">
+                <div className="md:grid grid-cols-12 gap-6">
+                    <div className="col-span-8">
+                        { user && <ProfileForm user={user} onSubmit={handleSubmit} /> }
+                    </div>
+                    <div className="col-span-4">
+                        <div className="mb-4 shadow-sm p-2">
+                            <h4 className="mb-4 font-semibold text-gray-500">Settings</h4>
+                            <Link to={CHANGE_PASSWORD} className="button bg-transparent text-black shadow-none  rounded  block">Change Password</Link>
+                        </div>
+                        <UserTasks tasks={myTasks} loading={loadingTasks}/>
+                    </div>
+
+                </div>
             </div>
         </Layout>
      );
@@ -52,14 +68,14 @@ function ProfileForm({user, onSubmit}) {
     return (
         <form onSubmit={handleSubmit}>
             <div className="overflow-hidden">
+                
                 {
                     error && <div className="text-red-500 bg-red-100 alert">{error}</div>
                 }
 
                 {
-                    uploadingError && <div className="text-red-500 bg-red-100 alert">Hubo un problema actualizar tu avatar. <br/>{error}</div>
+                    uploadingError && <div className="text-red-500 bg-red-100 alert">There was a problem uploading your avatar. <br/>{error}</div>
                 }
-
 
                 <div className="px-4 py-5 sm:p-6">
                     
@@ -169,7 +185,7 @@ function ProfileForm({user, onSubmit}) {
                         className={`button is-primary ${loading ? 'flex space-between justify-center':''}`}
                         disabled={loading}>
                             { loading && <SpinnerI/>}
-                            {loading ? 'Saving...':'Save changes'}
+                            {loading ? 'Loading...':'Save changes'}
                     </button>
                 </div>
             </div>

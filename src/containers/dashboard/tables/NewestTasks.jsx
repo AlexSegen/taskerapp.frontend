@@ -46,17 +46,19 @@ const NewestTasks = () => {
                                 {
                                     task.completed ? <CheckCircleIcon className="w-6 mr-2 text-blue-500" /> : <CheckIcon  className="w-6 mr-2 text-gray-300 border border-gray-300 rounded-full"/>
                                 }
-                                <div className="w-full pr-4 overflow-hidden whitespace-nowrap">
+                                <div className="w-full pr-4 overflow-hidden whitespace-nowrap font-semibold text-black">
                                     {task.title}
-                                    <div className="text-gray-400 ">{formatDate(task.createdAt, "MMMM DD, hh:mm a")}</div>
+                                    <div className="text-gray-400 font-normal">{formatDate(task.createdAt, "MMMM DD, hh:mm a")}</div>
                                 </div>
                             </div>
                             <div className="items-center justify-start hidden w-3/6 p-2 md:flex">
                                 {task.project ? task.project.title : ""}
                             </div>
                             <div className="items-center justify-start hidden w-3/6 p-2 md:flex">
-                                <img src={task.assigned ? task.assigned.avatar : "/avatar.jpg"} className="w-5 h-5 mr-2 rounded-full" alt=""/>
+                                <img src={task.assigned ? task.assigned.avatar : "/avatar.jpg"} className="w-6 h-6 mr-2 rounded-full" alt=""/>
                                 <div className="w-full">
+                                    <span className="text-gray-400 mb-2">Assigned</span>
+                                    
                                     <span className="flex items-center mb-0 font-normal whitespace-nowrap">
                                         {
                                             task.assigned ? `${task.assigned.first_name} ${task.assigned.last_name}` : "Unassigned"

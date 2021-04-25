@@ -1,12 +1,12 @@
 import React from 'react'
-import Logo from '../../components/Logo'
-
+import { Link } from 'react-router-dom';
+import { LOGIN, HOME } from '../../constants/paths';
 
 const Footer = () => {
     return ( 
     <footer className="bg-white text-gray-600 py-12 xl:pb-24">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-8 xl:px-4 mb-12 lg:mb-16">
-          <Logo className="w-8"/>
+          <img src="/logo/default.png" className="h-12" alt="Tasker"/>
         </div>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-8 xl:px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-x-8">
           <div>
@@ -14,13 +14,13 @@ const Footer = () => {
             <nav className="mt-4">
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-base hover:text-gray-500">Landingpages</a>
+                  <Link to={HOME} className="text-base hover:text-gray-500">Landingpages</Link>
                 </li>
                 <li>
-                  <a href="#" className="text-base hover:text-gray-500">Features</a>
+                  <Link to={HOME} className="text-base hover:text-gray-500">Features</Link>
                 </li>
                 <li>
-                  <a href="#" className="text-base hover:text-gray-500">Showcase</a>
+                  <Link to={HOME} className="text-base hover:text-gray-500">Showcase</Link>
                 </li>
               </ul>
             </nav>
@@ -76,10 +76,10 @@ const Footer = () => {
         </div>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-8 xl:px-4 flex flex-col md:flex-row justify-between items-center space-y-4 mt-16 lg:mt-20">
           <div className="text-sm space-y-4 md:space-y-1 text-center md:text-left">
-            <p>&copy;2020 Company. All rights reserved. | All rights reserved</p>
+            <p>&copy;2021 Company. All rights reserved. | All rights reserved</p>
             <p>Wisdom is easily acquired when hiding under the bed with a saucepan on your head.</p>
           </div>
-          <a href="#" className="inline-block bg-gradient-to-br from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-700 font-semibold rounded-lg py-4 px-5 lg:px-8 text-white md:transform md:-translate-y-2">Start your free trial</a>
+          <Link to={LOGIN} className="inline-block bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-700 font-semibold rounded-lg py-4 px-5 lg:px-8 text-white md:transform md:-translate-y-2">Start your free trial</Link>
         </div>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-8 xl:px-4 flex flex-col md:flex-row justify-between items-center space-y-4 mt-8 lg:mt-12">
           <nav className="flex flex-wrap justify-center space-x-6"> 

@@ -38,11 +38,12 @@ const ChangePassword = () => {
     return ( 
         <Layout>
 
-            <div className="flex justify-between p-2 border-b-2 border-gray-100">
+            <div className="flex justify-between p-2 border-b border-gray-100">
                 <div className="p-2">
-                    <h1 className="m-0 text-base text-2xl">Change Password</h1>
+                    <h1 className="m-0 text-2xl font-bold text-gray-400">Change Password</h1>
                 </div>
                 <div className="p-2">
+
                 </div>
             </div>
 

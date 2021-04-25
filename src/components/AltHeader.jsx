@@ -72,15 +72,15 @@ const Altheader = () => {
         <div className="flex items-center">
           <div className="flex-shrink-0">
             <Link to={HOME}>
-              <img className="w-8 h-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow"/>
+              <img src="/logo/default.png" className="h-10" alt="Tasker"/>
             </Link>
           </div>
           <div className="hidden md:block">
             <div className="flex items-baseline ml-10 space-x-4">
-              <Link className={`px-3 py-2 text-sm font-medium text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("home")}`} to={HOME}>Dashboard</Link>
-              <Link className={`px-3 py-2 text-sm font-medium text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("/task")}`} to={TASKS}>Tasks</Link>
-              <Link className={`px-3 py-2 text-sm font-medium text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("/projects")}`} to={PROJECTS}>Projects</Link>
-              <Link className={`px-3 py-2 text-sm font-medium text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("/team")}`} to={TEAM}>Team</Link>
+              <Link className={`px-3 py-2 text-base font-semibold text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("home")}`} to={HOME}>Dashboard</Link>
+              <Link className={`px-3 py-2 text-base font-semibold text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("/task")}`} to={TASKS}>Tasks</Link>
+              <Link className={`px-3 py-2 text-base font-semibold text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("/projects")}`} to={PROJECTS}>Projects</Link>
+              <Link className={`px-3 py-2 text-base font-semibold text-gray-400 rounded-md hover:text-gray-700 ${isActiveLink("/team")}`} to={TEAM}>Team</Link>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@ const Altheader = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                       >
-                  <Menu.Items className={`focus:outline-none block absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5`}>
+                  <Menu.Items className={`focus:outline-none block absolute right-0 w-48 py-1 mt-4 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5`}>
                     <Menu.Item>
                       {({active}) => (
                         <Link className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100':'text-gray-700'}`} role="menuitem" to={PROFILE}>Your Profile</Link>

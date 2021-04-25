@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Layout from '../../components/Layout';
-import { FORGOT_PASSWORD, HOME, LOGIN } from '../../constants/paths';
+import Layout from '../layout';
 import { useQuery } from '../../hooks/useQuery';
 import validators from '../../helpers/validators';
 import { SpinnerI } from '../../components/Icons';
 import authService from '../../services/auth.service';
+import { FORGOT_PASSWORD, HOME, LOGIN } from '../../constants/paths';
 
 const ResetPassword = () => {
 
@@ -68,8 +68,8 @@ const ResetPassword = () => {
         checkToken();
     }, [])
     return ( 
-
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <Layout>
+        <div className="flex items-center justify-center py-20 lg:py-40 px-5 bg-gray-50">
             <div className="w-full max-w-sm p-5 mx-auto bg-white rounded shadow-md">
                 <div className="mb-4 text-center">
                     <h1 className="mb-2 text-3xl font-bold text-black">Password Recovery</h1>
@@ -108,7 +108,7 @@ const ResetPassword = () => {
                             }
                             <div className="mb-4">
                                 <button onClick={handleSubmit} type="button" 
-                                className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block '}`}
+                                className={`button is-primary w-full rounded-lg ${loading ? 'flex space-between justify-center':'block '}`}
                                 disabled={loading || success}>
                                     { loading && <SpinnerI/>}
                                     {loading ? 'Loading...':'Reset password'}
@@ -140,7 +140,7 @@ const ResetPassword = () => {
                 </div>
             </div>
         </div>
-
+    </Layout>
      );
 }
 

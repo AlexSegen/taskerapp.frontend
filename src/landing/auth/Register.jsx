@@ -7,6 +7,7 @@ import { LOGIN } from '../../constants/paths';
 import { useForm } from '../../hooks/useForm';
 import { SpinnerI } from '../../components/Icons';
 import validators from '../../helpers/validators';
+import Layout from '../layout';
 
 const initialUser = {
     first_name: "",
@@ -59,8 +60,9 @@ const RegisterPage = () => {
 
     }
 
-    return ( 
-        <div className="flex items-center justify-center min-h-screen px-5 bg-gray-50">
+    return (
+        <Layout>
+        <div className="flex items-center justify-center py-20 lg:py-30 px-5 bg-gray-50">
             <div className="grid w-full max-w-3xl grid-cols-8 mx-auto overflow-hidden bg-white rounded shadow-md">
                 <div className="col-span-2 overflow-hidden md:col-span-4">
                     <img className="object-cover w-full h-full" src="/auth-2.jpg" alt=""/>
@@ -101,7 +103,7 @@ const RegisterPage = () => {
 
                         <div className="mb-4">
                             <button type="submit" 
-                            className={`button is-primary w-full ${loading ? 'flex space-between justify-center':'block'}`}
+                            className={`button is-primary rounded-lg w-full ${loading ? 'flex space-between justify-center':'block'}`}
                             disabled={loading}>
                                 { loading && <SpinnerI/>}
                                 {loading ? 'Loading...':'Join now!'}
@@ -114,6 +116,7 @@ const RegisterPage = () => {
                 </form>
             </div>
         </div>
+    </Layout> 
      );
 }
  

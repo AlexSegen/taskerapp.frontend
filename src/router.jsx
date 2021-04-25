@@ -9,11 +9,10 @@ import {
 
 import { useAuth } from './hooks/useAuth';
 
-import Login from './containers/auth/Login';
-import Register from './containers/auth/Register';
-import ForgotPassword from './containers/auth/ForgotPassword';
-import ResetPassword from './containers/auth/ResetPassword';
-
+import Login from './landing/auth/Login';
+import Register from './landing/auth/Register';
+import ForgotPassword from './landing/auth/ForgotPassword';
+import ResetPassword from './landing/auth/ResetPassword';
 
 import Profile from './containers/profile';
 import ChangePassword from './containers/profile/ChangePassword';
@@ -24,8 +23,6 @@ import TaskDetails from './containers/tasks/TaskDetails';
 import TaskCreate from './containers/tasks/TaskCreate';
 import Projects from './containers/projects/Projects';
 import Team from './containers/team/Team';
-
-import Landing from "./landing";
 
 import {
   HOME,

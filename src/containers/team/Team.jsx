@@ -63,10 +63,7 @@ const Team = () => {
                     <h1 className="m-0 text-2xl font-bold text-gray-400">Team</h1>
                 </div>
                 <div className="p-2">
-                    <div className="flex items-center justify-start">
-                        <SearchIcon className="w-10 mr-2 text-gray-100 h-11 "/>
-                        <input onChange={searchItem} type="text" className="field-control" placeholder="Search member"/>
-                    </div>
+
                 </div>
             </div>
 
@@ -80,6 +77,10 @@ const Team = () => {
                         
                     </div>
                     <div className="w-1/4 text-right">
+                        <div className="flex items-center justify-start">
+                            <SearchIcon className="w-10 mr-2 text-gray-100 h-10 "/>
+                            <input onChange={searchItem} type="text" className="field-control" placeholder="Search member"/>
+                        </div>
                     </div>
                 </div>
 

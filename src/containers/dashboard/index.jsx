@@ -5,16 +5,16 @@ import ChartsContainer from './charts';
 import Layout from '../../components/Layout';
 import NewestTasks from './tables/NewestTasks';
 import Spinner from '../../components/Spinner';
-import NewestMembers from './tables/NewestMembers';
-
-import MyTasks from './mytasks';
-import { TasksContext } from '../../context/TasksContext';
-import { PlusIcon } from '../../components/Icons';
 import { ADD_TASK } from '../../constants/paths';
+import { PlusIcon } from '../../components/Icons';
+import NewestMembers from './tables/NewestMembers';
+import MyTasks from '../../components/global/UserTasks';
+
+import { TasksContext } from '../../context/TasksContext';
 
 const Dashboard = () => {
 
-    const { loadingTasks, loadingUsers, setSelected, TaskInitialState } = useContext(TasksContext)
+    const { myTasks, loadingTasks, loadingUsers, setSelected, TaskInitialState } = useContext(TasksContext)
     
     const history = useHistory()
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
     }
 
     return ( 
-        <Layout className="bg-gradient-to-b from-blue-500 lg:from-green-400 to-blue-500">
+        <Layout className="bg-gradient-to-b from-blue-500 lg:from-blue-400 to-blue-500">
 
             <div className="flex justify-between p-2 mb-4 border-b border-gray-50 border-opacity-30 lg:border-opacity-50">
                 <div className="p-2">
@@ -57,7 +57,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="col-span-3">
-                        <MyTasks/>
+                        <MyTasks tasks={myTasks} loading={loadingTasks} />
                     </div>
 
                 </div>

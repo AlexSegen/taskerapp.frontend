@@ -9,7 +9,7 @@
 }
 
 .button.is-primary {
-  @apply text-white bg-blue-500 border-blue-500;
+  @apply text-white bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-700;
 }
 
 .field-control {
@@ -129,7 +129,7 @@
 /* width */
 ::-webkit-scrollbar {
   @apply p-2;
-  width: 15px;
+  width: 10px;
 }
 
 /* Track */

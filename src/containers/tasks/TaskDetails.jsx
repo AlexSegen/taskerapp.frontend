@@ -78,10 +78,10 @@ const TaskDetails = () => {
                       <Tool onClick={handleDeleteTask} ><TrashOutlineIcon className="w-8"/></Tool>
                       <Tool disabled={loadingTask} onClick={handleClose}><XOutlineIcon className="w-8"/></Tool>
                 </TaskToolbar>
-                <div className="w-full px-10 py-10 md:max-h-screen md:overflow-y-auto" >
-                    <h1 className="mb-4 text-gray-900 sm:font-semibold lg:font-bold md:text-2xl sm:text-lg lg:text-3xl">{selected.title}</h1>
+                <div className="w-full px-6 md:px-10 py-10 md:max-h-screen md:overflow-y-auto" >
+                    <h1 className="mb-3 md:mb-4 text-gray-700 font-semibold lg:font-bold md:text-2xl text-xl lg:text-3xl">{selected.title}</h1>
                     
-                    <p className="flex items-center mb-5 text-gray-600">
+                    <p className="flex items-center mb-5 text-gray-400 text-sm md:text-base">
                         <ClockOutlineIcon className="inline w-5 mr-2 "/> {formatDate(selected.createdAt, 'MMMM Do, h:mm:ss a')}
                     </p>
                       
@@ -112,10 +112,12 @@ const TaskDetails = () => {
                     {
                       selected.completed && (
                       
-                        <div className="flex items-center py-8 my-5 border-t-2 border-b-2 border-gray-300">
+                        <div className="md:flex items-center py-8 my-5 border-t border-b border-gray-300">
+                          <div className="flex items-center mx-4 font-semibold text-blue-500">
                             <CheckCircleIcon className="w-10 text-blue-500"/>
-                            <span className="mx-4 font-semibold text-blue-500">{selected.completedBy.first_name} completed this task</span>
-                            <span className="text-gray-600">{formatDate(selected.completedAt, 'MMMM Do, h:mm:ss a')}</span>
+                            <span>{selected.completedBy.first_name} completed this task</span>
+                          </div>
+                          <span className="text-gray-400 md:text-base text-sm md:pl-0 pl-12">{formatDate(selected.completedAt, 'MMMM Do, h:mm:ss a')}</span>
                         </div>
 
                       )
