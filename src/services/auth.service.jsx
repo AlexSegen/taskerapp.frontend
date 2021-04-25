@@ -142,7 +142,7 @@ const authService = {
     updateAvatar: async function (image) {
         const requestData = {
             method: 'post',
-            url: "/auth/me/avatar",
+            url: "/auth/me/avatar/v2",
             data: image
         }
 

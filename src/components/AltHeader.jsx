@@ -3,9 +3,8 @@ import { Link, useHistory } from 'react-router-dom'
 import { Menu, Transition } from '@headlessui/react';
 
 import { useAuth } from '../hooks/useAuth';
-import { MenuIcon, BellOutlineIcon } from './Icons';
-import { TasksContext } from '../context/TasksContext';
 import { AppContext } from '../context/AppContext';
+import { TasksContext } from '../context/TasksContext';
 import { ADD_TASK, CHANGE_PASSWORD, HOME, PROFILE, PROJECTS, TASKS, TEAM } from '../constants/paths';
 
 const Altheader = () => {
